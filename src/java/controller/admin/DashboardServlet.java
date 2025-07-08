@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author asus
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/adminashboard"})
+@WebServlet(name = "DashboardServlet", urlPatterns = {"/admindashboard"})
 public class DashboardServlet extends HttpServlet {
 
     /**
