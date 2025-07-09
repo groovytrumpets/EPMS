@@ -5,6 +5,7 @@
 
 package controller.HR;
 
+
 import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
-
 /**
  *
  * @author nguye
