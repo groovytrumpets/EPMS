@@ -109,7 +109,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 if (a != null && a.getStatus().equalsIgnoreCase("active")) {
-
+                    
                     if (a.getRoleId() == 1) {
                         request.setAttribute("notify", "Admin can't login here");
                         request.getRequestDispatcher("login.jsp").forward(request, response);
