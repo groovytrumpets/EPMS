@@ -38,6 +38,7 @@ public class HRDAO extends DBContext {
                 can.setRoleId(rs.getInt("roleId"));
                 candidateList.add(can);
             }
+            System.out.println(candidateList.get(0).getFullName());
             return candidateList;
         } catch (SQLException e) {
             System.out.println(e);
