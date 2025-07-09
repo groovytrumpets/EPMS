@@ -12,7 +12,7 @@ public class DBContext {
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=EPMS";
             String username = "sa";
-            String password = "Khanh20041011";
+            String password = "Tanle2004";
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);

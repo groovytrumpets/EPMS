@@ -1,6 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller.common;
-
-
 
 import DAO.UserDAO;
 import java.io.IOException;
@@ -13,9 +15,23 @@ import jakarta.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import model.User;
 
-public class ResetChangePassword extends HttpServlet {
+/**
+ *
+ * @author Acer
+ */
+public class ChangePassword extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     // Encrypt password using MD5
     private String encrypt(String password) {
         String digest = null;
@@ -42,48 +58,61 @@ public class ResetChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("reset-changePassword.jsp").forward(request, response);
+        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
     }
 
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+
         UserDAO userDAO = new UserDAO();
+        String currentPass = request.getParameter("currentPassword");
         String newPass1 = request.getParameter("newPass1");
         String newPass2 = request.getParameter("newPass2");
-        String email = (String) session.getAttribute("email");
 
-        // Validate password strength
+        User currentUser = (User) session.getAttribute("acc");  // Đã đăng nhập
+        String email = currentUser.getEmail();  // Lấy email từ user hiện tại
+
+        // Check current password
+        String encryptedCurrent = encrypt(currentPass);
+        if (!encryptedCurrent.equals(currentUser.getPassword())) {
+            session.setAttribute("error", "Current password is incorrect.");
+            response.sendRedirect("changePassword");
+            return;
+        }
+
         if (!isStrongPassword(newPass1)) {
-            request.setAttribute("error", "Password must contain at least 8 characters including uppercase, lowercase, number, and special character.");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            session.setAttribute("error", "Password must be at least 8 characters long and contain uppercase, lowercase, number, and special character.");
+            response.sendRedirect("changePassword");
             return;
         }
 
-        // Validate password confirmation
         if (!newPass1.equals(newPass2)) {
-            request.setAttribute("error", "Passwords do not match!");
-            request.getRequestDispatcher("reset-changePassword.jsp").forward(request, response);
+            session.setAttribute("error", "Passwords do not match.");
+            response.sendRedirect("changePassword");
             return;
         }
 
-        // Encrypt password and update in DB
-        String encryptedPassword = encrypt(newPass1);
-        boolean success = userDAO.updatePasswordByEmail(email, encryptedPassword);
+        String encryptedNew = encrypt(newPass1);
+        boolean success = userDAO.updatePasswordByEmail(email, encryptedNew);
 
         if (success) {
-            request.setAttribute("message", "Password changed successfully. Please log in again.");
+            session.setAttribute("message", "Password changed successfully.");
+            response.sendRedirect("changePassword");
+
         } else {
-            request.setAttribute("error", "An error occurred while updating the password.");
+            session.setAttribute("error", "An error occurred while updating the password.");
         }
 
-        request.getRequestDispatcher("reset-changePassword.jsp").forward(request, response);
     }
 
     @Override
     public String getServletInfo() {
-        return "Handles password reset and update functionality after OTP verification.";
+        return "Change Password.";
     }
+
 }
