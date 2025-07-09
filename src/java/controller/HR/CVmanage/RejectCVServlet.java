@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.HR;
+package controller.HR.CVmanage;
 
-
-import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,18 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-import model.Document;
-import model.User;
-
-
 /**
  *
- * @author nguye
+ * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-@WebServlet(name="CandidateAccountManageServlet", urlPatterns={"/candiAccManage"})
-public class CandidateAccountManageServlet extends HttpServlet {
+@WebServlet(name="RejectCVServlet", urlPatterns={"/rejectCV"})
+public class RejectCVServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,10 +35,10 @@ public class CandidateAccountManageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CandidateAccountManageServlet</title>");  
+            out.println("<title>Servlet RejectCVServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CandidateAccountManageServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RejectCVServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,18 +55,9 @@ public class CandidateAccountManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
-        HRDAO hrd = new HRDAO();
-        List<User> CandidateList = hrd.getListOfCandidateUsers();
-        List<Document> CVList = hrd.getListOfCV();
-        request.setAttribute("candidateList", CandidateList);
-        request.setAttribute("CVList", CVList);
-        request.getRequestDispatcher("HRCandidateAccManage.jsp").forward(request, response);
-    }
-
-
- 
-
+        String cvId = request.getParameter("cvid");
+        System.out.println(cvId);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.

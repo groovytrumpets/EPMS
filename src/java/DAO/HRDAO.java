@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Document;
 import model.User;
 
 /**
@@ -43,5 +44,37 @@ public class HRDAO extends DBContext {
             System.out.println(e);
         }
         return null;
+    }
+
+    public List<Document> getListOfCV() {
+        List<Document> CVList = new ArrayList<>();
+        String sql = "select * from Document where Type='CV' and Status='submitted'";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Document CV = new Document();
+                CV.setDocumentId(rs.getInt("documentId"));
+                CV.setTitle(rs.getString("title"));
+                CV.setFileLink(rs.getString("fileLink"));
+                CV.setType(rs.getString("type"));
+                CV.setStatus(rs.getString("status"));
+                CV.setUploadDate(rs.getTimestamp("uploadDate").toLocalDateTime());
+                CV.setUserId(rs.getInt("userId"));
+                CVList.add(CV);
+            }
+            System.out.println(CVList.get(0).getDocumentId());
+            return CVList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public static void main(String[] args) {
+        HRDAO hrd = new HRDAO();
+        System.out.println(hrd.getListOfCV().get(0).getFileLink());
+
+        
+        
     }
 }
