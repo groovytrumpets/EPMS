@@ -3,26 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.HR;
+package controller.common;
 
-
-import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.User;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import utilities.CloudinaryUploader;
+
 /**
  *
- * @author nguye
+ * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-@WebServlet(name="CandidateAccountManageServlet", urlPatterns={"/candiAccManage"})
-public class CandidateAccountManageServlet extends HttpServlet {
+@MultipartConfig
+@WebServlet(name="UploadFileServlet", urlPatterns={"/upload"})
+public class UploadFileServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +44,10 @@ public class CandidateAccountManageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CandidateAccountManageServlet</title>");  
+            out.println("<title>Servlet UploadFileServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CandidateAccountManageServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UploadFileServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,11 +64,8 @@ public class CandidateAccountManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HRDAO hrd = new HRDAO();
-        List<User> CandidateList = hrd.getListOfCandidateUsers();
-        request.setAttribute("candidateList", CandidateList);
-        request.getRequestDispatcher("HRCandidateAccManage.jsp").forward(request, response);
-    }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -75,7 +77,17 @@ public class CandidateAccountManageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        Part filePart = request.getPart("file");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
+        File tempFile = File.createTempFile("upload-", fileName);
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        String uploadedUrl = CloudinaryUploader.uploadFile(tempFile);
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().println("Uploaded successfully: <a href='" + uploadedUrl + "'>" + uploadedUrl + "</a>");
     }
 
     /** 
