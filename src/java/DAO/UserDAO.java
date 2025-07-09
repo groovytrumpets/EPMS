@@ -77,23 +77,35 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
-    public static void main(String[] args) {
-    // Tạo DAO hoặc class chứa hàm
-    UserDAO dao = new UserDAO(); // Giả định class tên là UserDAO
 
-    // Gọi hàm kiểm tra đăng nhập
-    User user = dao.findUserPass("john.doe@example.com", "12345678");
-
-    if (user != null) {
-        System.out.println("✅ Đăng nhập thành công:");
-        System.out.println("Tên người dùng: " + user.getFullName());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Vai trò (RoleId): " + user.getRoleId());
-    } else {
-        System.out.println("❌ Đăng nhập thất bại. Sai email hoặc mật khẩu.");
+    public boolean updatePasswordByEmail(String email, String newPassword) {
+        String sql = "UPDATE [User] SET Password = ? WHERE Email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, newPassword);  // Lưu ý: nên đã mã hóa trước khi truyền vào
+            st.setString(2, email);
+            int rowsUpdated = st.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-}
 
+    public static void main(String[] args) {
+        // Tạo DAO hoặc class chứa hàm
+        UserDAO dao = new UserDAO(); // Giả định class tên là UserDAO
+
+        // Gọi hàm kiểm tra đăng nhập
+        User user = dao.findUserPass("john.doe@example.com", "12345678");
+
+        if (user != null) {
+            System.out.println("✅ Đăng nhập thành công:");
+            System.out.println("Tên người dùng: " + user.getFullName());
+            System.out.println("Email: " + user.getEmail());
+            System.out.println("Vai trò (RoleId): " + user.getRoleId());
+        } else {
+            System.out.println("❌ Đăng nhập thất bại. Sai email hoặc mật khẩu.");
+        }
+    }
 
 }

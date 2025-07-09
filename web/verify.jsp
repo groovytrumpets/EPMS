@@ -61,14 +61,15 @@
                             <h2 class="title-head">Forget <span>Password</span></h2>
                             <p>Login Your Account <a href="login">Click here</a></p>
                         </div>	
-                        <form class="contact-bx" action="forget-password" method="post">
+                        <form class="contact-bx" action="verify" method="post">
                             <div class="row placeani">
                                 <div class="col-lg-12">
                                     <small style="color:  red">${error}</small> 
                                     <div class="form-group">
+                                        <label>Your OTP</label>
                                         <div class="input-group">
-                                            <label>Your Email Address</label>
-                                            <input type="text" class="form-control"  required name="email" value="${email}" >
+
+                                            <input type="text" class="form-control"  required name="otp"  >
                                         </div>
                                     </div>
                                 </div>

@@ -88,10 +88,10 @@ public class ForgetPasswordServlet extends HttpServlet {
         } else {
             // No user found with the given email and account
             request.setAttribute("error", "No account found with the provided email and username.");
+            request.getRequestDispatcher("forget-password.jsp").forward(request, response);
         }
 
         // Forward back to the password reset request page
-        request.getRequestDispatcher("forget-password.jsp").forward(request, response);
     }
 
     /**

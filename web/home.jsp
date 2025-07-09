@@ -77,7 +77,7 @@
                                     <c:choose>
                                         <c:when test="${empty sessionScope.acc}">
                                             <li><a href="login">Login</a></li>
-                                            <li><a href="forgotPassword">Forgot Password</a></li>
+                                            <li><a href="forget-password">Forgot Password</a></li>
                                             </c:when>
                                             <c:otherwise>
                                             <li><a href="#">Welcome, ${sessionScope.acc.fullName}</a></li>

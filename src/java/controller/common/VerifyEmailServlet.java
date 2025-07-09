@@ -1,137 +1,88 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.common;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jakarta.mail.MessagingException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utilities.EmailSender;
 
-/**
- *
- * @author Acer
- */
+@WebServlet(name = "VerifyEmailServlet", urlPatterns = {"/verify"})
 public class VerifyEmailServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet VerifyEmailServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet VerifyEmailServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String otp = OTPGenerator.generateOTP();
-        HttpSession session = request.getSession();
-        session.setAttribute("otp", otp);  // lưu OTP vào session
-        session.setAttribute("email", email); // lưu lại email nếu cần đối chiếu
-
-        //System.out.println(email);
-        OTPGenerator.generateOTP();
-        try {
-            EmailSender.sendEmail(email, "Ngo", otp + "");
-            //ep kieu int to string otp+"" ez
-            request.getRequestDispatcher("verify.jsp").forward(request, response);
-        } catch (MessagingException ex) {
-            Logger.getLogger(VerifyEmailServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public class OTPGenerator {
+    // ====== Inner Class: Generate 6-digit OTP ======
+    public static class OTPGenerator {
 
         public static String generateOTP() {
             Random random = new Random();
-            int otp = 100000 + random.nextInt(900000); // 6 digits
+            int otp = 100000 + random.nextInt(900000); // 6-digit number
             return String.valueOf(otp);
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    // ====== Handle OTP Request (GET): Send email and save session ======
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String email = request.getParameter("email");
+        String otp = OTPGenerator.generateOTP();
+
+        HttpSession session = request.getSession();
+        session.setAttribute("otp", otp);
+        session.setAttribute("email", email);
+        session.setAttribute("otp_time", System.currentTimeMillis()); // ⏱ Save OTP generation time
+
+        try {
+            EmailSender.sendEmail(email, "Email Verification",
+                    "Your OTP is: " + otp + ". This code is valid for 5 minutes.");
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(VerifyEmailServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("error", "Failed to send email. Please try again later.");
+            request.getRequestDispatcher("forget-password.jsp").forward(request, response);
+        }
+    }
+
+    // ====== Handle OTP Verification (POST) ======
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String uOtp = request.getParameter("otp");
+
+        String userOtp = request.getParameter("otp");
         HttpSession session = request.getSession();
+
         String correctOtp = (String) session.getAttribute("otp");
         String email = (String) session.getAttribute("email");
+        Long otpTime = (Long) session.getAttribute("otp_time");
 
-        System.out.println(correctOtp + "and" + uOtp);
-        if ((correctOtp + "").equalsIgnoreCase(uOtp)) {
-            SignUpDAO sud = new SignUpDAO();
-            sud.changeUserStatusToVerifyByEmail(email);
-            response.sendRedirect("home");
-            //change user status to verified
+        // ✅ Check for OTP timeout (5 minutes)
+        long currentTime = System.currentTimeMillis();
+        if (otpTime == null || (currentTime - otpTime) > 5 * 60 * 1000) {
+            session.removeAttribute("otp");
+            session.removeAttribute("otp_time");
+            request.setAttribute("error", "OTP has expired. Please request a new one.");
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
+            return;
+        }
+
+        // ✅ Compare entered OTP with session
+        if (correctOtp != null && correctOtp.equals(userOtp)) {
+            response.sendRedirect("reset-changePassword?email=" + email);
         } else {
-            request.setAttribute("error", "OTP is wrong");
+            request.setAttribute("error", "Incorrect OTP.");
             request.getRequestDispatcher("verify.jsp").forward(request, response);
         }
-        processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Email OTP verification handler for user account recovery.";
+    }
 }
