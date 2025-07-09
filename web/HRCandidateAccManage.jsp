@@ -20,13 +20,13 @@
         <meta name="keywords" content="" />
         <meta name="author" content="" />
         <meta name="robots" content="" />
-
-         <!-- DESCRIPTION -->
-        <meta name="description" content="Happy Programing" />
+        <!-- DESCRIPTION -->
+        <meta name="description" content="EPMS" />
 
         <!-- OG -->
-        <meta property="og:title" content="Happy Programing" />
-        <meta property="og:description" content="Happy Programing" />
+        <meta property="og:title" content="EPMS" />
+        <meta property="og:description" content="EPMS" />
+
         <meta property="og:image" content="" />
         <meta name="format-detection" content="telephone=no">
 
@@ -35,7 +35,8 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/faviconV2.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
-        <title>Happy Programing </title>
+        <title>EPMS </title>
+
 
 
         <!-- MOBILE SPECIFIC ============================================= -->
@@ -104,41 +105,49 @@
                                 <table class="table-hover table-bordered">
 
                                     <tr>
-                                        <th>STT</th>
+
                                         <th>Full Name</th>
                                         <th>Account name</th>
                                         <th>Date of Birth</th>
                                         <th>Create Date</th>
                                         <th>CV</th>
+                                        <th>Status</th>
+                                        <th>Approve/Reject</th>
+
+
 
                                     </tr>
-                                    
-                                    <c:forEach items="${requestScope.candidateList}" var="c">
-                                            <tr>
-                                                <td>stt?</td>
-                                                <td>${c.fullName}</td>
-                                                <td>${c.userName}</td>
-                                                <td>${c.dob}</td>
-                                                <td>${c.createDate}</td>
-                                                <td>${c.phone}</td>
 
-                                            </tr>
+                                    <c:forEach items="${requestScope.candidateList}" var="c">
+                                        <tr>
+                                            <c:forEach items="${requestScope.CVList}" var="doc">
+                                                <c:if test="${c.userId==doc.userId}">
+
+                                                    <td>${c.fullName}</td>
+                                                    <td>${c.userName}</td>
+                                                    <td>${c.dob}</td>
+                                                    <td>${c.createDate}</td>
+
+                                                    <td><a href="${doc.fileLink}" target="_blank">View CV</a></td>
+                                                    <td> <a href="#" class="btn button-sm blue">Submitted</a></td>
+                                                    <td> <a href="approveCV?cvid=${doc.documentId}&uid=${c.userId}" class="btn button-sm green"><i class="ti-check"></i></a>
+                                                        <a href="rejectCV?cvid=${doc.documentId}&uid=${c.userId}" class="btn button-sm red"><i class="ti-close"></i></a>
+                                                    </td>
+
+
+
+
+                                                </c:if>
+                                            </c:forEach>
+
+                                        </tr>
                                     </c:forEach>
                                 </table>
-                                
-                                    
+
+
                                 <div class="pagination" style="display: flex">
                                     <div class="col-md-6" >
-                                        <div class="col-md-4">
-                                            <form action="menteeListAdmin" method="get">
-                                                <select name="numDis" id="numDis" onchange="this.form.submit()">
-                                                    <option value="10" ${numDis == 10 ? 'selected' : ''}>10</option>
-                                                    <option value="15" ${numDis == 15 ? 'selected' : ''}>15</option>
-                                                    <option value="20" ${numDis == 20 ? 'selected' : ''}>20</option>
-                                                </select>
-                                                <noscript><input type="submit" value="Submit"></noscript>
-                                            </form>
-                                        </div>
+
                                     </div>
                                     <div class="col-md-6" style="text-align: right">
                                         <%--<c:forEach begin="${1}" end="${requestScope.numOfPage}" var="i">
@@ -174,22 +183,22 @@
         <script src="assets/js/admin.js"></script>
         <script src='assets/vendors/switcher/switcher.js'></script>
         <script>
-                                                    // Pricing add
-                                                    function newMenuItem() {
-                                                        var newElem = $('tr.list-item').first().clone();
-                                                        newElem.find('input').val('');
-                                                        newElem.appendTo('table#item-add');
-                                                    }
-                                                    if ($("table#item-add").is('*')) {
-                                                        $('.add-item').on('click', function (e) {
-                                                            e.preventDefault();
-                                                            newMenuItem();
-                                                        });
-                                                        $(document).on("click", "#item-add .delete", function (e) {
-                                                            e.preventDefault();
-                                                            $(this).parent().parent().parent().parent().remove();
-                                                        });
-                                                    }
+            // Pricing add
+            function newMenuItem() {
+                var newElem = $('tr.list-item').first().clone();
+                newElem.find('input').val('');
+                newElem.appendTo('table#item-add');
+            }
+            if ($("table#item-add").is('*')) {
+                $('.add-item').on('click', function (e) {
+                    e.preventDefault();
+                    newMenuItem();
+                });
+                $(document).on("click", "#item-add .delete", function (e) {
+                    e.preventDefault();
+                    $(this).parent().parent().parent().parent().remove();
+                });
+            }
 
         </script>
 
