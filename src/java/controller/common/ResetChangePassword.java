@@ -58,7 +58,7 @@ public class ResetChangePassword extends HttpServlet {
         // Validate password strength
         if (!isStrongPassword(newPass1)) {
             request.setAttribute("error", "Password must contain at least 8 characters including uppercase, lowercase, number, and special character.");
-            request.getRequestDispatcher("reset-changePassword.jsp").forward(request, response);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
             return;
         }
 

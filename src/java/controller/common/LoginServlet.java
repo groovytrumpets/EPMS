@@ -142,6 +142,39 @@ public class LoginServlet extends HttpServlet {
                 } else if (a != null && a.getStatus().equalsIgnoreCase("unverified")) {
                     request.setAttribute("notify", "Your account is not active, please active by link in your email");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
+                } else if (a != null && a.getStatus().equalsIgnoreCase("verified")) {
+                    if (a.getRoleId() == 1) {
+                        request.setAttribute("notify", "Admin can't login here");
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    }
+
+                    if (rememberMe != null) {  // Checkbox was checked
+                        Cookie emailCookie = new Cookie("email", email);
+                        Cookie passwordCookie = new Cookie("pass", pass);
+
+                        // Set cookie age to one week (7 days)
+                        emailCookie.setMaxAge(7 * 24 * 60 * 60);
+                        passwordCookie.setMaxAge(7 * 24 * 60 * 60);
+
+                        // Add cookies to the response
+                        response.addCookie(emailCookie);
+                        response.addCookie(passwordCookie);
+                    } else {
+                        // Clear cookies if "Remember Me" is not checked
+                        Cookie emailCookie = new Cookie("email", null);
+                        Cookie passwordCookie = new Cookie("pass", null);
+
+                        // Invalidate the cookies by setting the max age to 0
+                        emailCookie.setMaxAge(0);
+                        passwordCookie.setMaxAge(0);
+
+                        response.addCookie(emailCookie);
+                        response.addCookie(passwordCookie);
+                    }
+                    u.updateStatusByEmail(email, "active");
+                    session.setAttribute("acc", a);
+
+                    response.sendRedirect("home");
                 }
             }
         } catch (Exception e) {
