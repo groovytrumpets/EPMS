@@ -5,6 +5,7 @@
 
 package controller.HR;
 
+
 import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,9 +14,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+
 
 /**
  *
@@ -59,11 +62,16 @@ public class CandidateAccountManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+
         HRDAO hrd = new HRDAO();
         List<User> CandidateList = hrd.getListOfCandidateUsers();
         request.setAttribute("candidateList", CandidateList);
         request.getRequestDispatcher("HRCandidateAccManage.jsp").forward(request, response);
     }
+
+
+ 
+
 
     /** 
      * Handles the HTTP <code>POST</code> method.
