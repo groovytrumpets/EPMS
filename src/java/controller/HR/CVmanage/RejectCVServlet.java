@@ -5,6 +5,7 @@
 
 package controller.HR.CVmanage;
 
+import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
+import utilities.EmailSender;
 
 /**
  *
@@ -55,8 +58,36 @@ public class RejectCVServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String cvId = request.getParameter("cvid");
-        System.out.println(cvId);
+        String cvId_raw = request.getParameter("cvid");
+        String userId_raw = request.getParameter("uid");
+        try {
+            int cvId=Integer.parseInt(cvId_raw);
+            int userId=Integer.parseInt(userId_raw);
+            
+            HRDAO hrd = new HRDAO();
+            hrd.changeCVStatusReject(cvId);
+            User rejectUser = hrd.getUserbyId(userId);
+            String title = """
+                           Subject: Application Status at PFTU-SWD391
+                           """;
+            String content ="""
+                           Dear %s,
+                    
+                           Thank you for your interest in the position at PFTU-SWD391.                           
+                           We have carefully reviewed your CV and, unfortunately, it does not meet our current requirements for this role. 
+                           We truly appreciate your time and effort, and we hope to consider you for other opportunities in the future.
+                           We wish you all the best in your career journey.
+                           Best regards,  
+                           HR Department – PFTU,SWD391
+                           """.formatted(rejectUser.getFullName());
+            
+            
+            EmailSender.sendNotificationEmail(rejectUser.getEmail(), title, content);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        response.sendRedirect("candiAccManage");
     } 
 
     /** 

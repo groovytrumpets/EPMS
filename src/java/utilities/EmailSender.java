@@ -48,6 +48,30 @@ public class EmailSender {
         Transport.send(message);
         return true;
     }
+    public static boolean sendNotificationEmail(String recipientEmail, String title, String content) throws AddressException, MessagingException {
+    Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+            new jakarta.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(senderEmail, senderPassword);
+                }
+            });
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(senderEmail));
+
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+        message.setSubject(title);
+
+        message.setText(content);
+
+        Transport.send(message);
+        return true;
+    }
     public static void main(String[] args) throws MessagingException {
         if (sendEmail("nguyennamkhanhnnk@gmail.com", "alo", "911")) {
       

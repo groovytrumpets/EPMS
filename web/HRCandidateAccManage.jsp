@@ -119,25 +119,24 @@
 
                                     <c:forEach items="${requestScope.candidateList}" var="c">
                                         <tr>
-
-                                            <td>${c.fullName}</td>
-                                            <td>${c.userName}</td>
-                                            <td>${c.dob}</td>
-                                            <td>${c.createDate}</td>
                                             <c:forEach items="${requestScope.CVList}" var="doc">
                                                 <c:if test="${c.userId==doc.userId}">
+
+                                                    <td>${c.fullName}</td>
+                                                    <td>${c.userName}</td>
+                                                    <td>${c.dob}</td>
+                                                    <td>${c.createDate}</td>
+
                                                     <td><a href="${doc.fileLink}" target="_blank">View CV</a></td>
                                                     <td> <a href="#" class="btn button-sm blue">Submitted</a></td>
-                                                    <td> <a href="approveCV?cvid=${doc.documentId}" class="btn button-sm green"><i class="ti-check"></i></a>
-                                                    <a href="rejectCV?cvid=${doc.documentId}&uid=${c.userId}" class="btn button-sm red"><i class="ti-close"></i></a>
+                                                    <td> <a href="approveCV?cvid=${doc.documentId}&uid=${c.userId}" class="btn button-sm green"><i class="ti-check"></i></a>
+                                                        <a href="rejectCV?cvid=${doc.documentId}&uid=${c.userId}" class="btn button-sm red"><i class="ti-close"></i></a>
                                                     </td>
+
+
+
+
                                                 </c:if>
-                                                <c:if test="${c.userId!=doc.userId}">
-                                                    <td><a href="#">Didn't Upload</a></td>
-                                                    <td> <a href="#" class="btn button-sm orange">Pending</a></td>
-                                                </c:if>
-                                                    
-                                                    
                                             </c:forEach>
 
                                         </tr>

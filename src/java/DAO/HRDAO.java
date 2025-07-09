@@ -70,10 +70,70 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
+    public void changeCVStatusReject(int cvId){
+        String sql ="update Document set Status = 'rejected' where Type='CV' and DocumentId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cvId);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void changeCVStatusApprove(int cvId){
+        String sql ="update Document set Status = 'approved' where Type='CV' and DocumentId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cvId);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void hrCreateAccount(int userId,String password){
+        String sql ="update [User] set Status ='verified',Password=? where UserId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, password);
+            st.setInt(2, userId);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public User getUserbyId(int userId){
+        String sql ="select * from [User] where UserId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, userId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User newUser = new User();
+                newUser.setUserId(rs.getInt("userId"));
+                newUser.setUserName(rs.getString("username"));
+                newUser.setPassword(rs.getString("password"));
+                newUser.setStatus(rs.getString("status"));
+                newUser.setFullName(rs.getString("fullName"));
+                newUser.setPhone(rs.getString("phone"));
+                newUser.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+                newUser.setDob(rs.getDate("dob"));
+                newUser.setEmail(rs.getString("email"));
+                newUser.setGender(rs.getString("gender"));
+                newUser.setRoleId(rs.getInt("roleId"));
+                return newUser;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
     public static void main(String[] args) {
         HRDAO hrd = new HRDAO();
-        System.out.println(hrd.getListOfCV().get(0).getFileLink());
-
+        hrd.hrCreateAccount(8, "123abc");
+        
         
         
     }
