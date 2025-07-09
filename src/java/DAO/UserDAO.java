@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+
 import model.User;
 
 /**
@@ -91,12 +92,48 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public boolean updateStatusByEmail(String email, String newStatus) {
+        String sql = "UPDATE [User] SET Status = ? WHERE Email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, newStatus);  // newStatus: e.g., "verified", "active", "banned"
+            st.setString(2, email);
+            int rowsUpdated = st.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateUserProfileByEmail(String email, String userName, String fullName,
+            String phone, java.util.Date dob, String gender) {
+        String sql = "UPDATE [User] SET Username = ?, FullName = ?, Phone = ?, Dob = ?, Gender = ? WHERE Email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, userName);
+            st.setString(2, fullName);
+            st.setString(3, phone);
+
+            // Convert util.Date to sql.Date
+            java.sql.Date sqlDob = new java.sql.Date(dob.getTime());
+            st.setDate(4, sqlDob);
+
+            st.setString(5, gender);
+            st.setString(6, email);
+
+            int rowsUpdated = st.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         // Tạo DAO hoặc class chứa hàm
         UserDAO dao = new UserDAO(); // Giả định class tên là UserDAO
 
         // Gọi hàm kiểm tra đăng nhập
-        User user = dao.findUserPass("john.doe@example.com", "12345678");
+        User user = dao.findUserPass("takashi.kato@example.com", "e10adc3949ba59abbe56e057f20f883e");
 
         if (user != null) {
             System.out.println("✅ Đăng nhập thành công:");

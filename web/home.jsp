@@ -80,7 +80,7 @@
                                             <li><a href="forget-password">Forgot Password</a></li>
                                             </c:when>
                                             <c:otherwise>
-                                            <li><a href="#">Welcome, ${sessionScope.acc.fullName}</a></li>
+                                            <li><a href="profile">Welcome, ${sessionScope.acc.fullName}</a></li>
                                             <li><a href="logout">Logout</a></li>
                                             </c:otherwise>
                                         </c:choose>
@@ -195,26 +195,18 @@
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="admin/index.html">Dashboard</a></li>
-                                            <li><a href="admin/add-listing.html">Add Listing</a></li>
-                                            <li><a href="admin/bookmark.html">Bookmark</a></li>
-                                            <li><a href="admin/courses.html">Courses</a></li>
-                                            <li><a href="admin/review.html">Review</a></li>
-                                            <li><a href="admin/teacher-profile.html">Teacher Profile</a></li>
-                                            <li><a href="admin/user-profile.html">User Profile</a></li>
-                                            <li><a href="javascript:;">Calendar<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="admin/basic-calendar.html">Basic Calendar</a></li>
-                                                    <li><a href="admin/list-view-calendar.html">List View Calendar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="javascript:;">Mailbox<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="admin/mailbox.html">Mailbox</a></li>
-                                                    <li><a href="admin/mailbox-compose.html">Compose</a></li>
-                                                    <li><a href="admin/mailbox-read.html">Mail Read</a></li>
-                                                </ul>
-                                            </li>
+                                            <c:choose>
+                                                <c:when test="${empty sessionScope.acc}">
+                                                    <li><a href="login">Login</a></li>
+                                                    <li><a href="forget-password">Forgot Password</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <li><a href="profile">User Profile</a></li>
+                                                    <li><a href="admin/user-profile.html">Change Password</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+
                                         </ul>
                                     </li>
                                 </ul>
