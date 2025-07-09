@@ -40,7 +40,7 @@ public class VerifyEmailServlet extends HttpServlet {
         session.setAttribute("otp_time", System.currentTimeMillis()); // ⏱ Save OTP generation time
 
         try {
-            EmailSender.sendEmail(email, "Email Verification",
+            EmailSender.sendNotificationEmail(email, "Email Verification",
                     "Your OTP is: " + otp + ". This code is valid for 5 minutes.");
             request.getRequestDispatcher("verify.jsp").forward(request, response);
         } catch (MessagingException ex) {
