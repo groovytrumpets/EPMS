@@ -1,659 +1,1224 @@
-<%-- 
-    Document   : home
-    Created on : 15 thg 4, 2025, 21:51:21
-    Author     : nguye
---%>
+<!DOCTYPE html><%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html lang="en">
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+    <head>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- META ============================================= -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />
 
+        <!-- DESCRIPTION -->
+        <meta name="description" content="EduChamp : Education HTML Template" />
 
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>Groovy Network</title>
+        <!-- OG -->
+        <meta property="og:title" content="EduChamp : Education HTML Template" />
+        <meta property="og:description" content="EduChamp : Education HTML Template" />
+        <meta property="og:image" content="" />
+        <meta name="format-detection" content="telephone=no">
 
+        <!-- FAVICONS ICON ============================================= -->
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
 
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
+        <!-- PAGE TITLE HERE ============================================= -->
+        <title>EduChamp : Education HTML Template </title>
 
+        <!-- MOBILE SPECIFIC ============================================= -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link href="assets/css/theme.css" rel="stylesheet" />
+        <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+        <![endif]-->
 
-  </head>
+        <!-- All PLUGINS CSS ============================================= -->
+        <link rel="stylesheet" type="text/css" href="assets/css/assets.css">
 
+        <!-- TYPOGRAPHY ============================================= -->
+        <link rel="stylesheet" type="text/css" href="assets/css/typography.css">
 
-  <body>
+        <!-- SHORTCODES ============================================= -->
+        <link rel="stylesheet" type="text/css" href="assets/css/shortcodes/shortcodes.css">
 
-    <!-- ===============================================-->
-    <!--    Main Content-->
-    <!-- ===============================================-->
-    <main class="main" id="top">
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-flex align-items-center fw-bold fs-2" href="home">
-           
-            <div class="text-1000">Groovy</div>
-          </a>
-          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-              <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
-              <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium" href="#features">Key Features</a></li>
-              <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium" href="#pricing">Pricing</a></li>
-              <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium" href="#testimonial">Testimonial</a></li>
-              <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium" href="#faq">FAQ</a></li>
-            </ul>
-              <form class="ps-lg-5">
-                  <a class="btn btn-lg btn-primary rounded-pill order-0" href="signin">Sign in</a>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <section class="py-0" id="home">
-        <div class="bg-holder" style="background-image:url(assets/img/illustrations/hero-bg.png);background-position:bottom;background-size:cover;">
-        </div>
-        <!--/.bg-holder-->
+        <!-- STYLESHEETS ============================================= -->
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
 
-        <div class="container position-relative">
-          <div class="row align-items-center py-8">
-            <div class="col-md-5 col-lg-6 order-md-1 text-center text-md-end"><img class="img-fluid" src="assets/img/illustrations/mobile.png" width="350" alt="" /></div>
-            <div class="col-md-7 col-lg-6 text-center text-md-start"><span class="badge bg-light rounded-pill text-dark align-items-center d-flex flex-row-reverse justify-content-end mx-auto mx-md-0 ps-0 w-75 w-sm-50 w-md-75 w-xl-50 mb-3">#1 Editiors Choice App of 2025<img class="img-fluid float-start me-3" src="assets/img/illustrations/arrow-right.png" alt=""/></span>
-                <h1 class="mb-4 display-3 fw-bold lh-sm">Explore the things <br class="d-block d-lg-none d-xl-block" /><div class="text-primary">you love</div></h1>
-              <p class="mt-3 mb-4 fs-1">Connect with friends, find other fans, and see what people around you are up to and into.<br class="d-none d-lg-block" /></p><a class="btn btn-lg btn-primary rounded-pill hover-top" href="signin" role="button">Sign in</a><a class="btn btn-link ps-md-4" href="register" role="button"> Create new account</a>
-            </div>
-          </div>
-        </div>
-      </section>
+        <!-- REVOLUTION SLIDER CSS ============================================= -->
+        <link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/layers.css">
+        <link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/settings.css">
+        <link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/navigation.css">
+        <!-- REVOLUTION SLIDER END -->	
+    </head>
+    <body id="bg">
+        <div class="page-wraper">
+            <div id="loading-icon-bx"></div>
+            <!-- Header Top ==== -->
+            <header class="header rs-nav header-transparent">
+                <div class="top-bar">
+                    <div class="container">
+                        <div class="row d-flex justify-content-between">
+                            <div class="topbar-left">
+                                <ul>
+                                    <li><a href="faq-1.html"><i class="fa fa-question-circle"></i>Ask a Question</a></li>
+                                    <li><a href="javascript:;"><i class="fa fa-envelope-o"></i>Support@website.com</a></li>
+                                </ul>
+                            </div>
 
+                            <div class="topbar-right">
 
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-7">
+                                <ul>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-12 mx-auto align-items-center text-center">
-              <p class="mb-4">Trusted by companies like</p>
-            </div>
-          </div>
-          <div class="row align-items-center justify-content-center justify-content-lg-around">
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 px-md-0 mb-5 mb-lg-0 text-center"><img src="assets/img/gallery/company-1.png" alt="" /></div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 px-md-0 mb-5 mb-lg-0 text-center"><img src="assets/img/gallery/company-2.png" alt="" /></div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 px-md-0 mb-5 mb-lg-0 text-center"><img src="assets/img/gallery/company-3.png" alt="" /></div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 px-md-0 mb-5 mb-lg-0 text-center"><img src="assets/img/gallery/company-4.png" alt="" /></div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 px-md-0 mb-5 mb-lg-0 text-center"><img src="assets/img/gallery/company-1.png" alt="" /></div>
-          </div>
-        </div>
-        <!-- end of .container-->
+                                    <c:choose>
+                                        <c:when test="${empty sessionScope.acc}">
+                                            <li><a href="login">Login</a></li>
+                                            <li><a href="forgotPassword">Forgot Password</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li><a href="#">Welcome, ${sessionScope.acc.fullName}</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
 
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-      <section class="py-5" id="features">
-        <div class="container-lg">
-          <div class="row align-items-center">
-            <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start"><img class="img-fluid" src="assets/img/illustrations/feature-bg.png" width="550" alt="" /></div>
-            <div class="col-md-7 col-lg-6 px-sm-5 px-md-0">
-              <h6 class="fw-bold fs-4 display-3 lh-sm">Awesome apps <br />features</h6>
-              <p class="my-4">Connect with friends, find other fans, and see what people around you are up to and into.<br class="d-none d-xl-block" /></p>
-              <div class="d-flex align-items-center mb-5">
-                <div><img class="img-fluid" src="assets/img/illustrations/fast-performance.png" width="90" alt="" /></div>
-                <div class="px-4">
-                  <h5 class="fw-bold text-danger">Fast performance</h5>
-                  <p>Get your blood tests delivered at <br class="d-none d-xl-block"> home collect a sample from the <br class="d-none d-xl-block"> news your blood tests</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-5">
-                <div><img class="img-fluid" src="assets/img/illustrations/prototype.png" width="90" alt="" /></div>
-                <div class="px-4">
-                  <h5 class="fw-bold text-primary">Prototyping</h5>
-                  <p>Get your blood tests delivered at <br class="d-none d-xl-block"> home collect a sample from the <br class="d-none d-xl-block"> news your blood tests</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-5">
-                <div><img class="img-fluid" src="assets/img/illustrations/vector.png" width="90" alt="" /></div>
-                <div class="px-4">
-                  <h5 class="fw-bold text-success">Vector Editing</h5>
-                  <p>Get your blood tests delivered at <br class="d-none d-xl-block"> home collect a sample from the <br class="d-none d-xl-block"> news your blood tests</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-5">
-
-        <div class="container">
-          <div class="row align-items-center mb-6">
-            <div class="col-md-5 col-lg-4 offset-lg-1">
-              <h1 class="fw-bold lh-base">Smart jackpots that you may love this anytime &amp; anywhere</h1>
-            </div>
-            <div class="col-md-6 col-lg-5 offset-lg-1 border-start py-5 ps-5">
-              <p class="mb-0">The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 col-lg-3 offset-lg-1 mb-4">
-              <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/automatic.png" width="90" alt="" /></div>
-              <h5 class="fw-bold text-danger">Fast performance</h5>
-              <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-            </div>
-            <div class="col-md-4 col-lg-3 offset-lg-1 mb-4">
-              <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/network.png" width="90" alt="" /></div>
-              <h5 class="fw-bold text-primary">Prototyping</h5>
-              <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-            </div>
-            <div class="col-md-4 col-lg-3 offset-lg-1 mb-4">
-              <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/rewards.png" width="90" alt="" /></div>
-              <h5 class="fw-bold text-success">Vector Editing</h5>
-              <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-6">
-
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-5 order-md-0 text-center text-md-start"><img class="img-fluid mb-4" src="assets/img/illustrations/call-to-action.png" width="550" alt="" /></div>
-            <div class="col-md-6 text-center text-md-start offset-md-1">
-              <h6 class="fw-bold fs-4 display-3 lh-sm">Designed &amp; built by<br />the latest code <br />integration</h6>
-              <p class="my-4 pe-xl-5"> The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p><a class="btn btn-lg btn-primary rounded-pill hover-top" href="#" role="button">Learn more</a>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-6">
-
-        <div class="container">
-          <div class="row justify-content-center mb-6">
-            <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
-              <h6 class="fw-bold fs-4 display-3 lh-sm">Why you should choose <br />our app </h6>
-              <p class="mb-0">The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/app.png" width="90" alt="" />
-                <h5 class="fw-bold">App Development</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/time-award.png" width="90" alt="" />
-                <h5 class="fw-bold">10 Times Award</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/cloud.png" width="90" alt="" />
-                <h5 class="fw-bold">Cloud Storage</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/customization.png" width="90" alt="" />
-                <h5 class="fw-bold">Customization</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/ux.png" width="90" alt="" />
-                <h5 class="fw-bold">UX Planning</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-            <div class="col-md-4 mb-6">
-              <div class="text-center px-lg-3"><img class="img-fluid mb-3" src="assets/img/illustrations/support.png" width="90" alt="" />
-                <h5 class="fw-bold">Customer Support</h5>
-                <p class="mb-md-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-6">
-
-        <div class="container">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-md-5 order-md-1 text-center text-md-start"><img class="img-fluid mb-4" src="assets/img/illustrations/ultimate-feature.png" alt="" /></div>
-              <div class="col-md-6 text-center text-md-start">
-                <h6 class="fw-bold fs-4 display-3 lh-sm">Ultimate features<br />that we built</h6>
-                <p class="my-4 pe-xl-5"> The rise of mobile devices transforms the way we consume information entirely.</p>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-4">
-                      <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/app.png" width="90" alt="" /></div>
-                      <h5 class="fw-bold text-undefined">App Development</h5>
-                      <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-4">
-                      <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/ux.png" width="90" alt="" /></div>
-                      <h5 class="fw-bold text-undefined">UX Planning</h5>
-                      <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-4">
-                      <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/cloud.png" width="90" alt="" /></div>
-                      <h5 class="fw-bold text-undefined">Cloud Storage</h5>
-                      <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-4">
-                      <div class="py-4"><img class="img-fluid" src="assets/img/illustrations/support.png" width="90" alt="" /></div>
-                      <h5 class="fw-bold text-undefined">Customer support</h5>
-                      <p class="mt-2 mb-0">Get your blood tests delivered at home collect a sample from the news your blood tests.</p>
-                    </div>
-                  </div>
-                </div><a class="btn btn-lg btn-primary rounded-pill hover-top" href="#" role="button">See all</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-8" id="pricing">
-
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xxl-5 text-center mb-3">
-              <h6 class="fw-bold fs-4 display-3 lh-sm mb-3">Get awesome features, without extra charges</h6>
-              <p class="mb-4">The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p>
-            </div>
-          </div>
-          <div class="row flex-center">
-            <div class="col-12 mb-3">
-              <div class="d-flex justify-content-center">
-                <label class="form-check-label me-2" for="customSwitch1">Monthly</label>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" id="customSwitch1" type="checkbox" checked="checked" />
-                  <label class="form-check-label align-top" for="customSwitch1">Yearly</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card shadow-lg mb-4 border-0">
-                <div class="card-header border-bottom-0 pt-7 pb-5">
-                  <div class="d-flex justify-content-center">
-                    <h1 class="fw-bold">$0</h1><span class="d-flex align-items-center">/month</span>
-                  </div>
-                  <h5 class="fw-bold text-center">Business Class</h5><span class="text-700 text-center d-block">For small teams or office</span>
-                </div>
-                <div class="card-body mx-auto">
-                  <ul class="list-unstyled mb-4">
-                    <li class="text-700 py-2 text-secondary">Darg &amp; Drop Builder</li>
-                    <li class="text-700 py-2 text-secondary">1,000's of Templates</li>
-                    <li class="text-700 py-2 text-secondary">Blog Support Tools</li>
-                    <li class="text-700 py-2 text-secondary">eCommerce Store </li>
-                  </ul><a class="btn btn-lg btn-primary rounded-pill mb-3" href="#">Start free trial</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card shadow-lg mb-4">
-                <div class="card-header border-bottom-0 pt-7 pb-5">
-                  <div class="d-flex justify-content-center">
-                    <h1 class="fw-bold">$99</h1><span class="d-flex align-items-center">/month</span>
-                  </div>
-                  <h5 class="fw-bold text-center">Pro Master</h5><span class="text-700 text-center d-block">For small teams or office</span>
-                </div>
-                <div class="card-body mx-auto">
-                  <ul class="list-unstyled mb-4">
-                    <li class="text-700 py-2 text-secondary">Darg &amp; Drop Builder</li>
-                    <li class="text-700 py-2 text-secondary">1,000's of Templates</li>
-                    <li class="text-700 py-2 text-secondary">Blog Support Tools</li>
-                    <li class="text-700 py-2 text-secondary">eCommerce Store </li>
-                  </ul>
-                  <div class="d-flex flex-column"> <a class="btn btn-lg btn-primary rounded-pill mb-3" href="#">Start free trial</a><a href="#">Or Start 14 days trail</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-      <section class="py-8" id="testimonial">
-        <div class="container-lg">
-          <div class="row flex-center">
-            <div class="col-sm-10 col-md-5 col-lg-5 order-md-0 text-center text-md-start"><img class="img-fluid mb-4" src="assets/img/illustrations/testimonial.png" alt="" /></div>
-            <div class="col-sm-10 col-md-6 col-lg-6 text-center text-md-start offset-md-1">
-              <h6 class="fw-bold fs-4 display-3 lh-sm"> Meet Client Satisfaction <br />by using product</h6>
-              <p class="my-4 pe-xl-5"> The rise of mobile devices transforms the way we consume.Elevant channels such as Facebook.</p>
-              <div class="carousel slide" id="carouselExampleDark" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <div class="row h-100">
-                      <div class="col-12">
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <h5 class="my-4 fw-bold lh-sm">User friendly &amp; Customizable</h5>
-                        <p class="mb-0 text-center text-md-start">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
-                      </div>
-                      <div class="col-xl-6 pt-4 d-flex d-sm-block flex-center">
-                        <div class="d-flex align-items-md-center"><img class="img-fluid me-4 me-md-3 me-lg-4" src="assets/img/gallery/user.png" width="100" alt="" />
-                          <div class="w-lg-50 my-3">
-                            <h5 class="mb-0 fw-bold">Zoltan Nemeth</h5>
-                            <p class="fw-normal mb-0">CEO of Pixer Lab</p>
-                          </div>
+                                </ul>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <div class="carousel-item" data-bs-interval="2000">
-                    <div class="row h-100">
-                      <div class="col-12">
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <h5 class="my-4 fw-bold lh-sm">User friendly &amp; Customizable</h5>
-                        <p class="mb-0 text-center text-md-start">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
-                      </div>
-                      <div class="col-xl-6 pt-4 d-flex d-sm-block flex-center">
-                        <div class="d-flex align-items-md-center"><img class="img-fluid me-4 me-md-3 me-lg-4" src="assets/img/gallery/user-1.png" width="100" alt="" />
-                          <div class="w-lg-50 my-3">
-                            <h5 class="mb-0 fw-bold">Jhon Doe</h5>
-                            <p class="fw-normal mb-0">Web Developer</p>
-                          </div>
+                </div>
+                <div class="sticky-header navbar-expand-lg">
+                    <div class="menu-bar clearfix">
+                        <div class="container clearfix">
+                            <!-- Header Logo ==== -->
+                            <div class="menu-logo">
+                                <a href="index.html"><img src="assets/images/logo-white.png" alt=""></a>
+                            </div>
+                            <!-- Mobile Nav Button ==== -->
+                            <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <!-- Author Nav ==== -->
+                            <div class="secondary-menu">
+                                <div class="secondary-inner">
+                                    <ul>
+                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
+                                        <!-- Search Button ==== -->
+                                        <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Search Box ==== -->
+                            <div class="nav-search-bar">
+                                <form action="#">
+                                    <input name="search" value="" type="text" class="form-control" placeholder="Type to search">
+                                    <span><i class="ti-search"></i></span>
+                                </form>
+                                <span id="search-remove"><i class="ti-close"></i></span>
+                            </div>
+                            <!-- Navigation Menu ==== -->
+                            <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
+                                <div class="menu-logo">
+                                    <a href="index.html"><img src="assets/images/logo.png" alt=""></a>
+                                </div>
+                                <ul class="nav navbar-nav">	
+                                    <li class="active"><a href="javascript:;">Home <i class="fa fa-chevron-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="index.html">Home 1</a></li>
+                                            <li><a href="index-2.html">Home 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="javascript:;">Pages <i class="fa fa-chevron-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="javascript:;">About<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="about-1.html">About 1</a></li>
+                                                    <li><a href="about-2.html">About 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="javascript:;">Event<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="event.html">Event</a></li>
+                                                    <li><a href="events-details.html">Events Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="javascript:;">FAQ's<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="faq-1.html">FAQ's 1</a></li>
+                                                    <li><a href="faq-2.html">FAQ's 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="javascript:;">Contact Us<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="contact-1.html">Contact Us 1</a></li>
+                                                    <li><a href="contact-2.html">Contact Us 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="portfolio.html">Portfolio</a></li>
+                                            <li><a href="profile.html">Profile</a></li>
+                                            <li><a href="membership.html">Membership</a></li>
+                                            <li><a href="error-404.html">404 Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>
+                                        <ul class="sub-menu add-menu">
+                                            <li class="add-menu-left">
+                                                <h5 class="menu-adv-title">Our Courses</h5>
+                                                <ul>
+                                                    <li><a href="courses.html">Courses </a></li>
+                                                    <li><a href="courses-details.html">Courses Details</a></li>
+                                                    <li><a href="profile.html">Instructor Profile</a></li>
+                                                    <li><a href="event.html">Upcoming Event</a></li>
+                                                    <li><a href="membership.html">Membership</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="add-menu-right">
+                                                <img src="assets/images/adv/adv.jpg" alt=""/>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="javascript:;">Blog <i class="fa fa-chevron-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="blog-classic-grid.html">Blog Classic</a></li>
+                                            <li><a href="blog-classic-sidebar.html">Blog Classic Sidebar</a></li>
+                                            <li><a href="blog-list-sidebar.html">Blog List Sidebar</a></li>
+                                            <li><a href="blog-standard-sidebar.html">Blog Standard Sidebar</a></li>
+                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="admin/index.html">Dashboard</a></li>
+                                            <li><a href="admin/add-listing.html">Add Listing</a></li>
+                                            <li><a href="admin/bookmark.html">Bookmark</a></li>
+                                            <li><a href="admin/courses.html">Courses</a></li>
+                                            <li><a href="admin/review.html">Review</a></li>
+                                            <li><a href="admin/teacher-profile.html">Teacher Profile</a></li>
+                                            <li><a href="admin/user-profile.html">User Profile</a></li>
+                                            <li><a href="javascript:;">Calendar<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="admin/basic-calendar.html">Basic Calendar</a></li>
+                                                    <li><a href="admin/list-view-calendar.html">List View Calendar</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="javascript:;">Mailbox<i class="fa fa-angle-right"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="admin/mailbox.html">Mailbox</a></li>
+                                                    <li><a href="admin/mailbox-compose.html">Compose</a></li>
+                                                    <li><a href="admin/mailbox-read.html">Mail Read</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="nav-social-link">
+                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                    <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                                    <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <!-- Navigation Menu END ==== -->
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="row h-100">
-                      <div class="col-12">
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFCC00" viewBox="0 0 16 16">
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                        <h5 class="my-4 fw-bold lh-sm">User friendly &amp; Customizable</h5>
-                        <p class="mb-0 text-center text-md-start">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
-                      </div>
-                      <div class="col-xl-6 pt-4 d-flex d-sm-block flex-center">
-                        <div class="d-flex align-items-md-center"><img class="img-fluid me-4 me-md-3 me-lg-4" src="assets/img/gallery/user-2.png" width="100" alt="" />
-                          <div class="w-lg-50 my-3">
-                            <h5 class="mb-0 fw-bold">Viezh Robert</h5>
-                            <p class="fw-normal mb-0">UI/UX Designer</p>
-                          </div>
+                </div>
+            </header>
+            <!-- Header Top END ==== -->
+            <!-- Content -->
+            <div class="page-content bg-white">
+                <!-- Main Slider -->
+                <div class="rev-slider">
+                    <div id="rev_slider_486_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="news-gallery36" data-source="gallery" style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
+                        <!-- START REVOLUTION SLIDER 5.3.0.2 fullwidth mode -->
+                        <div id="rev_slider_486_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.3.0.2">
+                            <ul>	<!-- SLIDE  -->
+                                <li data-index="rs-100" 
+                                    data-transition="parallaxvertical" 
+                                    data-slotamount="default" 
+                                    data-hideafterloop="0" 
+                                    data-hideslideonmobile="off" 
+                                    data-easein="default" 
+                                    data-easeout="default" 
+                                    data-masterspeed="default" 
+                                    data-thumb="error-404.html" 
+                                    data-rotate="0" 
+                                    data-fstransition="fade" 
+                                    data-fsmasterspeed="1500" 
+                                    data-fsslotamount="7" 
+                                    data-saveperformance="off" 
+                                    data-title="A STUDY ON HAPPINESS" 
+                                    data-param1="" data-param2="" 
+                                    data-param3="" data-param4="" 
+                                    data-param5="" data-param6="" 
+                                    data-param7="" data-param8="" 
+                                    data-param9="" data-param10="" 
+                                    data-description="Science says that Women are generally happier">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="assets/images/slider/slide1.jpg" alt="" 
+                                         data-bgposition="center center" 
+                                         data-bgfit="cover" 
+                                         data-bgrepeat="no-repeat" 
+                                         data-bgparallax="10" 
+                                         class="rev-slidebg" 
+                                         data-no-retina />
+
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-shape tp-shapewrapper " 
+                                         id="slide-100-layer-1" 
+                                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+                                         data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" 
+                                         data-width="full"
+                                         data-height="full"
+                                         data-whitespace="nowrap"
+                                         data-type="shape" 
+                                         data-basealign="slide" 
+                                         data-responsive_offset="off" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"opacity:0;","speed":1,"to":"o:1;","delay":0,"ease":"Power4.easeOut"},{"delay":"wait","speed":1,"to":"opacity:0;","ease":"Power4.easeOut"}]'
+                                         data-textAlign="['left','left','left','left']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 5;background-color:rgba(2, 0, 11, 0.80);border-color:rgba(0, 0, 0, 0);border-width:0px;"> </div>	
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption Newspaper-Title   tp-resizeme" 
+                                         id="slide-100-layer-2" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['250','250','250','240']" 
+                                         data-fontsize="['50','50','50','30']"
+                                         data-lineheight="['55','55','55','35']"
+                                         data-width="full"
+                                         data-height="none"
+                                         data-whitespace="normal"
+                                         data-type="text" 
+                                         data-responsive_offset="on" 
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[10,10,10,10]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;">
+                                        Welcome To University
+                                    </div>
+
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption Newspaper-Subtitle   tp-resizeme" 
+                                         id="slide-100-layer-3" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['210','210','210','210']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="text" 
+                                         data-responsive_offset="on"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['left','left','left','left']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 7; white-space: nowrap; color:#fff; font-family:rubik; font-size:18px; font-weight:400;">
+                                        Batter Education For A Better 
+                                    </div>
+
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption Newspaper-Subtitle   tp-resizeme" 
+                                         id="slide-100-layer-4" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['320','320','320','290']" 
+                                         data-width="['800','800','700','420']"
+                                         data-height="['100','100','100','120']"
+                                         data-whitespace="unset"
+                                         data-type="text" 
+                                         data-responsive_offset="on"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+                                    </div>
+                                    <!-- LAYER NR. 4 -->
+                                    <div class="tp-caption Newspaper-Button rev-btn " 
+                                         id="slide-100-layer-5" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['90','80','75','90']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['400','400','400','420']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button" 
+                                         data-responsive_offset="on" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
+                                    <div class="tp-caption Newspaper-Button rev-btn" 
+                                         id="slide-100-layer-6" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['-90','-80','-75','-90']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['400','400','400','420']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button" 
+                                         data-responsive_offset="on" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div>
+                                </li>
+                                <li data-index="rs-200" 
+                                    data-transition="parallaxvertical" 
+                                    data-slotamount="default" 
+                                    data-hideafterloop="0" 
+                                    data-hideslideonmobile="off" 
+                                    data-easein="default" 
+                                    data-easeout="default" 
+                                    data-masterspeed="default" 
+                                    data-thumb="assets/images/slider/slide1.jpg" 
+                                    data-rotate="0" 
+                                    data-fstransition="fade" 
+                                    data-fsmasterspeed="1500" 
+                                    data-fsslotamount="7" 
+                                    data-saveperformance="off" 
+                                    data-title="A STUDY ON HAPPINESS" 
+                                    data-param1="" data-param2="" 
+                                    data-param3="" data-param4="" 
+                                    data-param5="" data-param6="" 
+                                    data-param7="" data-param8="" 
+                                    data-param9="" data-param10="" 
+                                    data-description="Science says that Women are generally happier">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="assets/images/slider/slide2.jpg" alt="" 
+                                         data-bgposition="center center" 
+                                         data-bgfit="cover" 
+                                         data-bgrepeat="no-repeat" 
+                                         data-bgparallax="10" 
+                                         class="rev-slidebg" 
+                                         data-no-retina />
+
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-shape tp-shapewrapper " 
+                                         id="slide-200-layer-1" 
+                                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+                                         data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" 
+                                         data-width="full"
+                                         data-height="full"
+                                         data-whitespace="nowrap"
+                                         data-type="shape" 
+                                         data-basealign="slide" 
+                                         data-responsive_offset="off" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"opacity:0;","speed":1,"to":"o:1;","delay":0,"ease":"Power4.easeOut"},{"delay":"wait","speed":1000,"to":"opacity:1;","ease":"Power4.easeOut"}]'
+                                         data-textAlign="['left','left','left','left']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 5;background-color:rgba(2, 0, 11, 0.80);border-color:rgba(0, 0, 0, 0);border-width:0px;"> 
+                                    </div>
+
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption Newspaper-Title   tp-resizeme" 
+                                         id="slide-200-layer-2" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['250','250','250','240']" 
+                                         data-fontsize="['50','50','50','30']"
+                                         data-lineheight="['55','55','55','35']"
+                                         data-width="full"
+                                         data-height="none"
+                                         data-whitespace="normal"
+                                         data-type="text" 
+                                         data-responsive_offset="on" 
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[10,10,10,10]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;text-transform:uppercase;">
+                                        Welcome To University
+                                    </div>
+
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption Newspaper-Subtitle   tp-resizeme" 
+                                         id="slide-200-layer-3" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['210','210','210','210']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="text" 
+                                         data-responsive_offset="on"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['left','left','left','left']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 7; white-space: nowrap;text-transform:uppercase; color:#fff; font-family:rubik; font-size:18px; font-weight:400;">
+                                        Batter Education For A Better 
+                                    </div>
+
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption Newspaper-Subtitle   tp-resizeme" 
+                                         id="slide-200-layer-4" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['0','0','0','0']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['320','320','320','290']" 
+                                         data-width="['800','800','700','420']"
+                                         data-height="['100','100','100','120']"
+                                         data-whitespace="unset"
+                                         data-type="text" 
+                                         data-responsive_offset="on"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[0,0,0,0]"
+                                         data-paddingright="[0,0,0,0]"
+                                         data-paddingbottom="[0,0,0,0]"
+                                         data-paddingleft="[0,0,0,0]"
+                                         style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+                                    </div>
+                                    <!-- LAYER NR. 4 -->
+                                    <div class="tp-caption Newspaper-Button rev-btn " 
+                                         id="slide-200-layer-5" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['90','80','75','90']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['400','400','400','420']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button" 
+                                         data-responsive_offset="on" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
+                                    <div class="tp-caption Newspaper-Button rev-btn" 
+                                         id="slide-200-layer-6" 
+                                         data-x="['center','center','center','center']" 
+                                         data-hoffset="['-90','-80','-75','-90']" 
+                                         data-y="['top','top','top','top']" 
+                                         data-voffset="['400','400','400','420']" 
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button" 
+                                         data-responsive_offset="on" 
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div>
+                                </li>
+                                <!-- SLIDE  -->
+                            </ul>
+                        </div><!-- END REVOLUTION SLIDER -->  
+                    </div>  
+                </div>  
+                <!-- Main Slider -->
+                <div class="content-block">
+
+                    <!-- Our Services -->
+                    <div class="section-area content-inner service-info-bx">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="service-bx">
+                                        <div class="action-box">
+                                            <img src="assets/images/our-services/pic1.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx text-center">
+                                            <div class="feature-box-sm radius bg-white">
+                                                <i class="fa fa-bank text-primary"></i>
+                                            </div>
+                                            <h4><a href="#">Best Industry Leaders</a></h4>
+                                            <a href="#" class="btn radius-xl">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="service-bx">
+                                        <div class="action-box">
+                                            <img src="assets/images/our-services/pic2.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx text-center">
+                                            <div class="feature-box-sm radius bg-white">
+                                                <i class="fa fa-book text-primary"></i>
+                                            </div>
+                                            <h4><a href="#">Learn Courses Online</a></h4>
+                                            <a href="#" class="btn radius-xl">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="service-bx m-b0">
+                                        <div class="action-box">
+                                            <img src="assets/images/our-services/pic3.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx text-center">
+                                            <div class="feature-box-sm radius bg-white">
+                                                <i class="fa fa-file-text-o text-primary"></i>
+                                            </div>
+                                            <h4><a href="#">Book Library & Store</a></h4>
+                                            <a href="#" class="btn radius-xl">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                    <!-- Our Services END -->
+
+                    <!-- Popular Courses -->
+                    <div class="section-area section-sp2 popular-courses-bx">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 heading-bx left">
+                                    <h2 class="title-head">Popular <span>Courses</span></h2>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/courses/pic1.jpg" alt="">
+                                                <a href="#" class="btn">Read More</a>
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
+                                                <span>Programming</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>3 Review</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>$190</del>
+                                                    <h5>$120</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/courses/pic2.jpg" alt="">
+                                                <a href="#" class="btn">Read More</a>
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
+                                                <span>Programming</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>3 Review</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>$190</del>
+                                                    <h5>$120</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/courses/pic3.jpg" alt="">
+                                                <a href="#" class="btn">Read More</a>
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
+                                                <span>Programming</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>3 Review</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>$190</del>
+                                                    <h5>$120</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/courses/pic4.jpg" alt="">
+                                                <a href="#" class="btn">Read More</a>
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
+                                                <span>Programming</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>3 Review</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>$190</del>
+                                                    <h5>$120</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Popular Courses END -->
+
+                    <!-- Form -->
+                    <div class="section-area section-sp1 ovpr-dark bg-fix online-cours" style="background-image:url(assets/images/background/bg1.jpg);">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 text-center text-white">
+                                    <h2>Online Courses To Learn</h2>
+                                    <h5>Own Your Feature Learning New Skills Online</h5>
+                                    <form class="cours-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="What do you want to learn today?	">
+                                            <div class="input-group-append">
+                                                <button class="btn" type="submit">Search</button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="mw800 m-auto">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="cours-search-bx m-b30">
+                                            <div class="icon-box">
+                                                <h3><i class="ti-user"></i><span class="counter">5</span>M</h3>
+                                            </div>
+                                            <span class="cours-search-text">Over 5 million student</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="cours-search-bx m-b30">
+                                            <div class="icon-box">
+                                                <h3><i class="ti-book"></i><span class="counter">30</span>K</h3>
+                                            </div>
+                                            <span class="cours-search-text">30,000 Courses.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="cours-search-bx m-b30">
+                                            <div class="icon-box">
+                                                <h3><i class="ti-layout-list-post"></i><span class="counter">20</span>K</h3>
+                                            </div>
+                                            <span class="cours-search-text">Learn Anythink Online.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form END -->
+                    <div class="section-area section-sp2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 text-center heading-bx">
+                                    <h2 class="title-head m-b0">Upcoming <span>Events</span></h2>
+                                    <p class="m-b0">Upcoming Education Events To Feed Brain. </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="upcoming-event-carousel owl-carousel owl-btn-center-lr owl-btn-1 col-12 p-lr0  m-b30">
+                                    <div class="item">
+                                        <div class="event-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/event/pic4.jpg" alt="">
+                                            </div>
+                                            <div class="info-bx d-flex">
+                                                <div>
+                                                    <div class="event-time">
+                                                        <div class="event-date">29</div>
+                                                        <div class="event-month">October</div>
+                                                    </div>
+                                                </div>
+                                                <div class="event-info">
+                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <ul class="media-post">
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                    </ul>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="event-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/event/pic3.jpg" alt="">
+                                            </div>
+                                            <div class="info-bx d-flex">
+                                                <div>
+                                                    <div class="event-time">
+                                                        <div class="event-date">29</div>
+                                                        <div class="event-month">October</div>
+                                                    </div>
+                                                </div>
+                                                <div class="event-info">
+                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <ul class="media-post">
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                    </ul>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="event-bx">
+                                            <div class="action-box">
+                                                <img src="assets/images/event/pic2.jpg" alt="">
+                                            </div>
+                                            <div class="info-bx d-flex">
+                                                <div>
+                                                    <div class="event-time">
+                                                        <div class="event-date">29</div>
+                                                        <div class="event-month">October</div>
+                                                    </div>
+                                                </div>
+                                                <div class="event-info">
+                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <ul class="media-post">
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                    </ul>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="#" class="btn">View All Event</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials -->
+                    <div class="section-area section-sp2 bg-fix ovbl-dark" style="background-image:url(assets/images/background/bg1.jpg);">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 text-white heading-bx left">
+                                    <h2 class="title-head text-uppercase">what people <span>say</span></h2>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                                <div class="item">
+                                    <div class="testimonial-bx">
+                                        <div class="testimonial-thumb">
+                                            <img src="assets/images/testimonials/pic1.jpg" alt="">
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h5 class="name">Peter Packer</h5>
+                                            <p>-Art Director</p>
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="testimonial-bx">
+                                        <div class="testimonial-thumb">
+                                            <img src="assets/images/testimonials/pic2.jpg" alt="">
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h5 class="name">Peter Packer</h5>
+                                            <p>-Art Director</p>
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonials END -->
+
+                    <!-- Recent News -->
+                    <div class="section-area section-sp2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 heading-bx left">
+                                    <h2 class="title-head">Recent <span>News</span></h2>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
+                                </div>
+                            </div>
+                            <div class="recent-news-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                                <div class="item">
+                                    <div class="recent-news">
+                                        <div class="action-box">
+                                            <img src="assets/images/blog/latest-blog/pic1.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx">
+                                            <ul class="media-post">
+                                                <li><a href="#"><i class="fa fa-calendar"></i>Jan 02 2019</a></li>
+                                                <li><a href="#"><i class="fa fa-user"></i>By William</a></li>
+                                            </ul>
+                                            <h5 class="post-title"><a href="blog-details.html">This Story Behind Education Will Haunt You Forever.</a></h5>
+                                            <p>Knowing that, you’ve optimised your pages countless amount of times, written tons.</p>
+                                            <div class="post-extra">
+                                                <a href="#" class="btn-link">READ MORE</a>
+                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>20 Comment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="recent-news">
+                                        <div class="action-box">
+                                            <img src="assets/images/blog/latest-blog/pic2.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx">
+                                            <ul class="media-post">
+                                                <li><a href="#"><i class="fa fa-calendar"></i>Feb 05 2019</a></li>
+                                                <li><a href="#"><i class="fa fa-user"></i>By John</a></li>
+                                            </ul>
+                                            <h5 class="post-title"><a href="blog-details.html">What Will Education Be Like In The Next 50 Years?</a></h5>
+                                            <p>As desperate as you are right now, you have done everything you can on your.</p>
+                                            <div class="post-extra">
+                                                <a href="#" class="btn-link">READ MORE</a>
+                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>14 Comment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="recent-news">
+                                        <div class="action-box">
+                                            <img src="assets/images/blog/latest-blog/pic3.jpg" alt="">
+                                        </div>
+                                        <div class="info-bx">
+                                            <ul class="media-post">
+                                                <li><a href="#"><i class="fa fa-calendar"></i>April 14 2019</a></li>
+                                                <li><a href="#"><i class="fa fa-user"></i>By George</a></li>
+                                            </ul>
+                                            <h5 class="post-title"><a href="blog-details.html">Master The Skills Of Education And Be.</a></h5>
+                                            <p>You will see in the guide all my years of valuable experience together with.</p>
+                                            <div class="post-extra">
+                                                <a href="#" class="btn-link">READ MORE</a>
+                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>23 Comment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent News End -->
+
                 </div>
-                <div class="position-relative mt-sm-n5"><a class="carousel-control-prev carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
-              </div>
+                <!-- contact area END -->
             </div>
-          </div>
+            <!-- Content END-->
+            <!-- Footer ==== -->
+            <footer>
+                <div class="footer-top">
+                    <div class="pt-exebar">
+                        <div class="container">
+                            <div class="d-flex align-items-stretch">
+                                <div class="pt-logo mr-auto">
+                                    <a href="index.html"><img src="assets/images/logo-white.png" alt=""/></a>
+                                </div>
+                                <div class="pt-social-link">
+                                    <ul class="list-inline m-a0">
+                                        <li><a href="#" class="btn-link"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" class="btn-link"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="pt-btn-join">
+                                    <a href="#" class="btn ">Join Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
+                                <div class="widget">
+                                    <h5 class="footer-title">Sign Up For A Newsletter</h5>
+                                    <p class="text-capitalize m-b20">Weekly Breaking news analysis and cutting edge advices on job searching.</p>
+                                    <div class="subscribe-form m-b20">
+                                        <form class="subscription-form" action="http://educhamp.themetrades.com/demo/assets/script/mailchamp.php" method="post">
+                                            <div class="ajax-message"></div>
+                                            <div class="input-group">
+                                                <input name="email" required="required"  class="form-control" placeholder="Your Email Address" type="email">
+                                                <span class="input-group-btn">
+                                                    <button name="submit" value="Submit" type="submit" class="btn"><i class="fa fa-arrow-right"></i></button>
+                                                </span> 
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-5 col-md-7 col-sm-12">
+                                <div class="row">
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                                        <div class="widget footer_widget">
+                                            <h5 class="footer-title">Company</h5>
+                                            <ul>
+                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="about-1.html">About</a></li>
+                                                <li><a href="faq-1.html">FAQs</a></li>
+                                                <li><a href="contact-1.html">Contact</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                                        <div class="widget footer_widget">
+                                            <h5 class="footer-title">Get In Touch</h5>
+                                            <ul>
+                                                <li><a href="http://educhamp.themetrades.com/admin/index.html">Dashboard</a></li>
+                                                <li><a href="blog-classic-grid.html">Blog</a></li>
+                                                <li><a href="portfolio.html">Portfolio</a></li>
+                                                <li><a href="event.html">Event</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                                        <div class="widget footer_widget">
+                                            <h5 class="footer-title">Courses</h5>
+                                            <ul>
+                                                <li><a href="courses.html">Courses</a></li>
+                                                <li><a href="courses-details.html">Details</a></li>
+                                                <li><a href="membership.html">Membership</a></li>
+                                                <li><a href="profile.html">Profile</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-5 col-sm-12 footer-col-4">
+                                <div class="widget widget_gallery gallery-grid-4">
+                                    <h5 class="footer-title">Our Gallery</h5>
+                                    <ul class="magnific-image">
+                                        <li><a href="assets/images/gallery/pic1.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic1.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic2.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic2.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic3.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic3.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic4.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic4.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic5.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic5.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic6.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic6.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic7.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic7.jpg" alt=""></a></li>
+                                        <li><a href="assets/images/gallery/pic8.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic8.jpg" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center"> <a target="_blank" href="https://www.templateshub.net">Templates Hub</a></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer END ==== -->
+            <button class="back-to-top fa fa-chevron-up" ></button>
         </div>
-      </section>
 
+        <!-- External JavaScripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+        <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+        <script src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+        <script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
+        <script src="assets/vendors/counter/waypoints-min.js"></script>
+        <script src="assets/vendors/counter/counterup.min.js"></script>
+        <script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
+        <script src="assets/vendors/masonry/masonry.js"></script>
+        <script src="assets/vendors/masonry/filter.js"></script>
+        <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
+        <script src="assets/js/functions.js"></script>
+        <script src="assets/js/contact.js"></script>
+        <script src='assets/vendors/switcher/switcher.js'></script>
+        <!-- Revolution JavaScripts Files -->
+        <script src="assets/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+        <script src="assets/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script src="assets/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+        <script>
+            jQuery(document).ready(function () {
+                var ttrevapi;
+                var tpj = jQuery;
+                if (tpj("#rev_slider_486_1").revolution == undefined) {
+                    revslider_showDoubleJqueryError("#rev_slider_486_1");
+                } else {
+                    ttrevapi = tpj("#rev_slider_486_1").show().revolution({
+                        sliderType: "standard",
+                        jsFileLocation: "assets/vendors/revolution/js/",
+                        sliderLayout: "fullwidth",
+                        dottedOverlay: "none",
+                        delay: 9000,
+                        navigation: {
+                            keyboardNavigation: "on",
+                            keyboard_direction: "horizontal",
+                            mouseScrollNavigation: "off",
+                            mouseScrollReverse: "default",
+                            onHoverStop: "on",
+                            touch: {
+                                touchenabled: "on",
+                                swipe_threshold: 75,
+                                swipe_min_touches: 1,
+                                swipe_direction: "horizontal",
+                                drag_block_vertical: false
+                            }
+                            ,
+                            arrows: {
+                                style: "uranus",
+                                enable: true,
+                                hide_onmobile: false,
+                                hide_onleave: false,
+                                tmp: '',
+                                left: {
+                                    h_align: "left",
+                                    v_align: "center",
+                                    h_offset: 10,
+                                    v_offset: 0
+                                },
+                                right: {
+                                    h_align: "right",
+                                    v_align: "center",
+                                    h_offset: 10,
+                                    v_offset: 0
+                                }
+                            },
 
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-8" id="faq">
-
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 text-center mb-3">
-              <h6 class="fw-bold fs-4 display-3 lh-sm mb-3">Frequently asked questions</h6>
-              <p class="mb-5">The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p>
-            </div>
-          </div>
-          <div class="row flex-center">
-            <div class="col-lg-9">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item mb-2">
-                  <h2 class="accordion-header" id="heading1">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1"><span class="mb-0 fw-bold text-start fs-1 text-1000">How to contact with riders emergency?</span></button>
-                  </h2>
-                  <div class="accordion-collapse collapse show" id="collapse1" aria-labelledby="heading1" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-100">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</div>
-                  </div>
-                </div>
-                <div class="accordion-item mb-2">
-                  <h2 class="accordion-header" id="heading2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2"><span class="mb-0 fw-bold text-start fs-1 text-1000">App installation failed, how to update system information?</span></button>
-                  </h2>
-                  <div class="accordion-collapse collapse" id="collapse2" aria-labelledby="heading2" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-100">You can issue either partial or full refunds. There are no fees to refund a charge, but the fees from the original charge are not returned.</div>
-                  </div>
-                </div>
-                <div class="accordion-item mb-2">
-                  <h2 class="accordion-header" id="heading3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="true" aria-controls="collapse3"><span class="mb-0 fw-bold text-start fs-1 text-1000">Website reponse taking time, how to improve?</span></button>
-                  </h2>
-                  <div class="accordion-collapse collapse" id="collapse3" aria-labelledby="heading3" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-100">Disputed payments (also known as chargebacks) incur a $15.00 fee. If the customer’s bank resolves the dispute in your favor, the fee is fully refunded.</div>
-                  </div>
-                </div>
-                <div class="accordion-item mb-2">
-                  <h2 class="accordion-header" id="heading4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4"><span class="mb-0 fw-bold text-start fs-1 text-1000">New update fixed all bug and issues</span></button>
-                  </h2>
-                  <div class="accordion-collapse collapse" id="collapse4" aria-labelledby="heading4" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-100">There are no additional fees for using our mobile SDKs or to accept payments using consumer wallets like Apple Pay or Google Pay.</div>
-                  </div>
-                </div>
-                <div class="accordion-item mb-2">
-                  <h2 class="accordion-header" id="heading5">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5"><span class="mb-0 fw-bold text-start fs-1 text-1000">How to contact with riders emergency?</span></button>
-                  </h2>
-                  <div class="accordion-collapse collapse" id="collapse5" aria-labelledby="heading5" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-100">There are no additional fees for using our mobile SDKs or to accept payments using consumer wallets like Apple Pay or Google Pay.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-      <section class="py-6">
-        <hr />
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-5 col-lg-7 order-md-1 text-center text-md-start z-index-2 cta-image"><img class="img-fluid mb-4 mb-md-0" src="assets/img/illustrations/cta.png" width="850" alt="" /></div>
-            <div class="col-md-7 col-lg-5 text-center text-md-start">
-              <h1 class="display-3 fw-bold lh-sm">Download our App now</h1>
-              <p class="my-4"> The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.</p>
-              <div class="d-flex justify-content-center d-md-inline-block"><a class="pe-2 pe-sm-3 pe-md-4" href="!#"><img src="assets/img/illustrations/google-play.png" width="160" alt="" /></a><a href="!#"><img src="assets/img/illustrations/app-store.png" width="160" alt="" /></a></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-8 bg-1000">
-
-        <div class="container">
-          <div class="row flex-center">
-            <div class="col-auto mb-5"><a class="pe-2 d-flex align-items-center text-decoration-none fw-bold fs-3" href="#">
-                <div class="text-white">Groovy</div>
-                <div class="text-warning"> Network</div>
-              </a></div>
-          </div>
-          <div class="row flex-center">
-            <div class="col-auto mb-5">
-              <ul class="list-unstyled list-inline mb-0">
-                <li class="list-inline-item me3 me-sm-4"><a class="text-light text-decoration-none" href="#!">Home</a></li>
-                <li class="list-inline-item me3 me-sm-4"><a class="text-light text-decoration-none" href="#!">Key Features</a></li>
-                <li class="list-inline-item me3 me-sm-4"><a class="text-light text-decoration-none" href="#!">Pricing</a></li>
-                <li class="list-inline-item me3 me-sm-4"><a class="text-light text-decoration-none" href="#!">Testimonial</a></li>
-                <li class="list-inline-item me3 me-sm-4"><a class="text-light text-decoration-none" href="#!">FAQ</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="row flex-center">
-            <div class="col-auto mb-5">
-              <ul class="list-unstyled list-inline">
-                <li class="list-inline-item me-3"><a class="text-decoration-none" href="#!">
-                    <svg class="bi bi-facebook" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#7D7987" viewBox="0 0 16 16">
-                      <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
-                    </svg></a></li>
-                <li class="list-inline-item me-3"><a href="#!">
-                    <svg class="bi bi-twitter" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#7D7987" viewBox="0 0 16 16">
-                      <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
-                    </svg></a></li>
-                <li class="list-inline-item me-3"><a href="#!">
-                    <svg class="bi bi-hash" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff" viewBox="0 0 16 16">
-                      <path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"></path>
-                    </svg></a></li>
-                <li class="list-inline-item me-3"><a href="#!">
-                    <svg class="bi bi-instagram" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#7D7987" viewBox="0 0 16 16">
-                      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"> </path>
-                    </svg></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="row flex-center">
-            <div class="col-auto">
-              <p class="mb-0 fs--1 text-700">&copy; This template is made with&nbsp;
-                <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 16 16">
-                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-                </svg>&nbsp;by&nbsp;<a class="text-700" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-
-    </main>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
-
-
-
-
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="assets/js/theme.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
-  </body>
+                        },
+                        viewPort: {
+                            enable: true,
+                            outof: "pause",
+                            visible_area: "80%",
+                            presize: false
+                        },
+                        responsiveLevels: [1240, 1024, 778, 480],
+                        visibilityLevels: [1240, 1024, 778, 480],
+                        gridwidth: [1240, 1024, 778, 480],
+                        gridheight: [768, 600, 600, 600],
+                        lazyType: "none",
+                        parallax: {
+                            type: "scroll",
+                            origo: "enterpoint",
+                            speed: 400,
+                            levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 46, 47, 48, 49, 50, 55],
+                            type: "scroll",
+                        },
+                        shadow: 0,
+                        spinner: "off",
+                        stopLoop: "off",
+                        stopAfterLoops: -1,
+                        stopAtSlide: -1,
+                        shuffle: "off",
+                        autoHeight: "off",
+                        hideThumbsOnMobile: "off",
+                        hideSliderAtLimit: 0,
+                        hideCaptionAtLimit: 0,
+                        hideAllCaptionAtLilmit: 0,
+                        debugMode: false,
+                        fallbacks: {
+                            simplifyAll: "off",
+                            nextSlideOnWindowFocus: "off",
+                            disableFocusListener: false,
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
 
 </html>
