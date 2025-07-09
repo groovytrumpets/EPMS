@@ -78,7 +78,18 @@
                                                     <td>${u.email}</td>
                                                     <td>${u.phone}</td>
                                                     <td>${u.gender}</td>
-                                                    <td>${u.status}</td>
+                                                    <td>
+                                                        <span class="btn button-sm
+                                                              <c:choose>
+                                                                  <c:when test="${u.status == 'active'}">green</c:when>
+                                                                  <c:when test="${u.status == 'inactive'}">red</c:when>
+                                                                  <c:otherwise>blue</c:otherwise>
+                                                              </c:choose>
+                                                              ">
+                                                            ${u.status}
+                                                        </span>
+                                                    </td>
+
                                                     <td>${u.role.roleName}</td>
                                                     <td>${u.formattedCreateDate}</td>
                                                     <td>
