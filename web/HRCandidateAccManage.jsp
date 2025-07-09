@@ -20,13 +20,13 @@
         <meta name="keywords" content="" />
         <meta name="author" content="" />
         <meta name="robots" content="" />
-
         <!-- DESCRIPTION -->
         <meta name="description" content="EPMS" />
 
         <!-- OG -->
         <meta property="og:title" content="EPMS" />
         <meta property="og:description" content="EPMS" />
+
         <meta property="og:image" content="" />
         <meta name="format-detection" content="telephone=no">
 
@@ -36,6 +36,7 @@
 
         <!-- PAGE TITLE HERE ============================================= -->
         <title>EPMS </title>
+
 
 
         <!-- MOBILE SPECIFIC ============================================= -->

@@ -24,6 +24,7 @@
         <!-- OG -->
         <meta property="og:title" content="EPMS" />
         <meta property="og:description" content="EPMS" />
+
         <meta property="og:image" content="" />
         <meta name="format-detection" content="telephone=no">
 
@@ -241,6 +242,7 @@
 			<!-- side menu logo start -->
 			<div class="ttr-sidebar-logo">
 				<a href="#" ><img alt="" src="assets/images/logo-pdp4.jpg" width="122" height="27"></a>
+
 				<!-- <div class="ttr-sidebar-pin-button" title="Pin/Unpin Menu">
 					<i class="material-icons ttr-fixed-icon">gps_fixed</i>
 					<i class="material-icons ttr-not-fixed-icon">gps_not_fixed</i>

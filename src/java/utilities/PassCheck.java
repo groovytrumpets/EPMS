@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package utilities;
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;

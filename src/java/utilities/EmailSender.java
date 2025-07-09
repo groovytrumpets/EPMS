@@ -72,6 +72,7 @@ public class EmailSender {
         Transport.send(message);
         return true;
     }
+
     public static void main(String[] args) throws MessagingException {
         if (sendEmail("nguyennamkhanhnnk@gmail.com", "alo", "911")) {
       

@@ -45,7 +45,7 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
-
+  
     public List<Document> getListOfCV() {
         List<Document> CVList = new ArrayList<>();
         String sql = "select * from Document where Type='CV' and Status='submitted'";
