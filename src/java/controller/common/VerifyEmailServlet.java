@@ -4,24 +4,32 @@
  */
 package controller.common;
 
-import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import model.User;
+import jakarta.servlet.http.HttpSession;
+import jakarta.mail.MessagingException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utilities.EmailSender;
 
 /**
  *
  * @author Acer
  */
-public class ForgetPasswordServlet extends HttpServlet {
+public class VerifyEmailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +48,10 @@ public class ForgetPasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgetPasswordServlet</title>");
+            out.println("<title>Servlet VerifyEmailServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgetPasswordServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet VerifyEmailServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +69,30 @@ public class ForgetPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("forget-password.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        String otp = OTPGenerator.generateOTP();
+        HttpSession session = request.getSession();
+        session.setAttribute("otp", otp);  // lưu OTP vào session
+        session.setAttribute("email", email); // lưu lại email nếu cần đối chiếu
+
+        //System.out.println(email);
+        OTPGenerator.generateOTP();
+        try {
+            EmailSender.sendEmail(email, "Ngo", otp + "");
+            //ep kieu int to string otp+"" ez
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(VerifyEmailServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public class OTPGenerator {
+
+        public static String generateOTP() {
+            Random random = new Random();
+            int otp = 100000 + random.nextInt(900000); // 6 digits
+            return String.valueOf(otp);
+        }
     }
 
     /**
@@ -75,23 +106,22 @@ public class ForgetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
+        String uOtp = request.getParameter("otp");
+        HttpSession session = request.getSession();
+        String correctOtp = (String) session.getAttribute("otp");
+        String email = (String) session.getAttribute("email");
 
-        UserDAO userDAO = new UserDAO();
-
-        User user = userDAO.findUserByEmail(email);
-
-        if (user != null) {
-
-            response.sendRedirect("verify?email=" + email);
-
+        System.out.println(correctOtp + "and" + uOtp);
+        if ((correctOtp + "").equalsIgnoreCase(uOtp)) {
+            SignUpDAO sud = new SignUpDAO();
+            sud.changeUserStatusToVerifyByEmail(email);
+            response.sendRedirect("home");
+            //change user status to verified
         } else {
-            // No user found with the given email and account
-            request.setAttribute("error", "No account found with the provided email and username.");
+            request.setAttribute("error", "OTP is wrong");
+            request.getRequestDispatcher("verify.jsp").forward(request, response);
         }
-
-        // Forward back to the password reset request page
-        request.getRequestDispatcher("forget-password.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
