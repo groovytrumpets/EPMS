@@ -44,4 +44,22 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
+
+    public boolean addCandidate(String fullName, String email, String phone, String password, String cvFileName) {
+        String sql = "INSERT INTO [User] (username, password, status, fullName, phone, createDate, email, roleId) VALUES (?, ?, ?, ?, ?, GETDATE(), ?, 4)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email); // username là email
+            st.setString(2, password);
+            st.setString(3, cvFileName); // status tạm lưu tên file CV
+            st.setString(4, fullName);
+            st.setString(5, phone);
+            st.setString(6, email);
+            int rows = st.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 }
