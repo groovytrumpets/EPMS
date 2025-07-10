@@ -6,32 +6,18 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author nguye
- */
-/*
-(<Username, nvarchar(50),>
-           ,<Password, nvarchar(200),>
-           ,<Status, nvarchar(20),>
-           ,<FullName, nvarchar(100),>
-           ,<Phone, nvarchar(15),>
-           ,<CreateDate, datetime,>
-           ,<Dob, date,>
-           ,<Email, nvarchar(100),>
-           ,<Gender, nvarchar(10),>
-           ,<RoleId, int,>)
-GO
-*/
 public class User {
+
     private int userId;
     private String userName;
     private int roleId;
     private String status;
     private LocalDateTime createDate;
     private Date dob;
-    private String email, phone, password,fullName, gender;
+    private String email, phone, password, fullName, gender;
+    private Role role;
 
     public User() {
     }
@@ -137,5 +123,21 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getFormattedCreateDate() {
+        if (createDate == null) {
+            return "";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return createDate.format(formatter);
+    }
+
 }

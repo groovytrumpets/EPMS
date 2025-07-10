@@ -2,26 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.common;
 
-import DAO.AdminDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import model.User;
 
 /**
  *
- * @author asus
+ * @author Acer
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/admindashboard"})
-public class DashboardServlet extends HttpServlet {
+public class ForgetPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");            
+            out.println("<title>Servlet ForgetPasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ForgetPasswordServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,21 +60,8 @@ public class DashboardServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        try {
-            AdminDAO adminDAO = new AdminDAO();
-
-            List<User> listUsers = adminDAO.getAllNonAdminUsers();
-            int totalUsers = listUsers.size();
-            List<Object[]> userCreationStats = adminDAO.getUserCreationStats();
-
-            request.setAttribute("listuser", listUsers);
-            request.setAttribute("totalUsers", totalUsers);
-            request.setAttribute("userCreationStats", userCreationStats);
-        } catch (Exception e) {
-            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
-        }
-        request.getRequestDispatcher("/AdminPage/adminDashboard.jsp").forward(request, response);
+            throws ServletException, IOException {
+        request.getRequestDispatcher("forget-password.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +75,23 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+
+        UserDAO userDAO = new UserDAO();
+
+        User user = userDAO.findUserByEmail(email);
+
+        if (user != null) {
+
+            response.sendRedirect("verify?email=" + email);
+
+        } else {
+            // No user found with the given email and account
+            request.setAttribute("error", "No account found with the provided email and username.");
+            request.getRequestDispatcher("forget-password.jsp").forward(request, response);
+        }
+
+        // Forward back to the password reset request page
     }
 
     /**

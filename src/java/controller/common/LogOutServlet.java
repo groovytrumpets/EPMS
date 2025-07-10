@@ -2,26 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.common;
 
-import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
-import model.User;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author asus
+ * @author Acer
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/admindashboard"})
-public class DashboardServlet extends HttpServlet {
+public class LogOutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +35,10 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");            
+            out.println("<title>Servlet LogOutServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogOutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,21 +55,11 @@ public class DashboardServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        try {
-            AdminDAO adminDAO = new AdminDAO();
-
-            List<User> listUsers = adminDAO.getAllNonAdminUsers();
-            int totalUsers = listUsers.size();
-            List<Object[]> userCreationStats = adminDAO.getUserCreationStats();
-
-            request.setAttribute("listuser", listUsers);
-            request.setAttribute("totalUsers", totalUsers);
-            request.setAttribute("userCreationStats", userCreationStats);
-        } catch (Exception e) {
-            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
-        }
-        request.getRequestDispatcher("/AdminPage/adminDashboard.jsp").forward(request, response);
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("acc");
+        session.invalidate();
+        response.sendRedirect("home");
     }
 
     /**

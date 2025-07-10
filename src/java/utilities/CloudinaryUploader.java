@@ -90,7 +90,7 @@ public class CloudinaryUploader {
         }
     }
     public static void main(String[] args) {
-        File file = new File("E:\\Demo.txt");  // Đường dẫn file bạn muốn test
+        File file = new File("D:\\Demo.txt");  // Đường dẫn file bạn muốn test
 
         try {
             String uploadedUrl = uploadFile(file);

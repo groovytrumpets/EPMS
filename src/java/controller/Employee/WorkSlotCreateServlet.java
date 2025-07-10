@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.Employee;
 
-import DAO.AdminDAO;
+import DAO.WorkScheduleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,16 +12,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
-import model.User;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import model.WorkSchedule;
+import model.WorkShift;
 
 /**
  *
- * @author asus
+ * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/admindashboard"})
-public class DashboardServlet extends HttpServlet {
+@WebServlet(name = "WorkSlotCreateServlet", urlPatterns = {"/createSlot"})
+public class WorkSlotCreateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +42,10 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");            
+            out.println("<title>Servlet WorkSlotCreateServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet WorkSlotCreateServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,21 +62,8 @@ public class DashboardServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        try {
-            AdminDAO adminDAO = new AdminDAO();
-
-            List<User> listUsers = adminDAO.getAllNonAdminUsers();
-            int totalUsers = listUsers.size();
-            List<Object[]> userCreationStats = adminDAO.getUserCreationStats();
-
-            request.setAttribute("listuser", listUsers);
-            request.setAttribute("totalUsers", totalUsers);
-            request.setAttribute("userCreationStats", userCreationStats);
-        } catch (Exception e) {
-            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
-        }
-        request.getRequestDispatcher("/AdminPage/adminDashboard.jsp").forward(request, response);
+            throws ServletException, IOException {
+        request.getRequestDispatcher("slotCreate.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +77,58 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String slottime = request.getParameter("slotTime");
+        String employeeId_raw = request.getParameter("employeeId");
+        System.out.println(slottime);
+
+        int employeeId;
+        int start = 0;
+        int end = 0;
+        switch (slottime) {
+            case "1" -> {
+                start = 8;
+                end = 17;
+            }
+            case "2" -> {
+                start = 8;
+                end = 12;
+            }
+            case "3" -> {
+                start = 13;
+                end = 17;
+            }
+            default -> {
+                start = 0;
+                end = 0;
+                throw new IllegalArgumentException("Out of slot range!");
+            }
+        }
+       //genarate date
+        LocalDate today = LocalDate.now();
+        LocalTime timeStart = LocalTime.of(start, 0);
+        LocalTime timeEnd = LocalTime.of(end, 0);
+        
+        LocalDateTime WorkScheduleStart = LocalDateTime.of(today, timeStart);
+        LocalDateTime WorkScheduleEnd = LocalDateTime.of(today, timeEnd);
+        
+        
+        WorkScheduleDAO wsd = new WorkScheduleDAO();
+//        employeeId = Integer.parseInt(employeeId_raw);
+        WorkSchedule schedule = new WorkSchedule();
+        schedule.setStatus("pending");
+        schedule.setStartDate(WorkScheduleStart);
+        schedule.setEndDate(WorkScheduleEnd);
+        schedule.setRemainLeave(12);      
+        schedule.setWorkDay(0);          
+        schedule.setUserId(8);
+        
+
+
+        if (wsd.addSlot(schedule)) {
+            response.sendRedirect("slotdraft?id=" + employeeId_raw + "&mess=Your slot has been created successfully!");
+        } else {
+            response.sendRedirect("slotdraft?id=" + employeeId_raw + "&mess=Unable to create your slot in the Slot draft. Please try again.");
+        }
     }
 
     /**
