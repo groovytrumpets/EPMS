@@ -1,14 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html>
-<head>
-    <title>Create Test</title>
-</head>
-<body>
-<h2>Create Test</h2>
-
 <form action="createTest" method="post">
-    User ID:<br>
-    <input type="number" name="userId" required><br><br>
+    <label>
+        <input type="checkbox" name="isForGroup" value="yes" onclick="toggleGroup(this)">
+        T?o test cho nhóm Employee?
+    </label>
+    <br><br>
+
+    <div id="groupSection" style="display: none;">
+        Role ID (ví d? Employee = 3):<br>
+        <input type="number" name="roleId" value="3"><br><br>
+    </div>
+
+    <div id="userSection">
+        User ID:<br>
+        <input type="number" name="userId"><br><br>
+    </div>
 
     Title:<br>
     <input type="text" name="title" required><br><br>
@@ -34,6 +39,11 @@
 </form>
 
 <script>
+    function toggleGroup(checkbox) {
+        document.getElementById("groupSection").style.display = checkbox.checked ? "block" : "none";
+        document.getElementById("userSection").style.display = checkbox.checked ? "none" : "block";
+    }
+
     function addQuestion() {
         var container = document.getElementById("questions-container");
         var block = document.createElement("div");
@@ -48,6 +58,3 @@
         container.appendChild(block);
     }
 </script>
-
-</body>
-</html>
