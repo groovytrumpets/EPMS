@@ -94,7 +94,6 @@
                         </table>
                     </div>
 
-                    <!-- Bảng 2: Role | Bảng 3: Status -->
                     <div class="col-md-6">
                         <h4>Role</h4>
                         <table class="table table-bordered">
