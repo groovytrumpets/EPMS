@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import DAO.HRDAO;
+import model.FormSubmission;
 
 @WebServlet(name = "CandidateRegisterServlet", urlPatterns = {"/CandidateRegisterServlet"})
 @MultipartConfig(maxFileSize = 2 * 1024 * 1024) // 2MB
@@ -32,6 +33,48 @@ public class CandidateRegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         Part filePart = request.getPart("cvFile");
+
+        HRDAO dao = new HRDAO();
+        // Validate trùng email
+        if (dao.isEmailExists(email)) {
+            request.setAttribute("error", "Email đã tồn tại!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        // Validate trùng số điện thoại
+        if (dao.isPhoneExists(phone)) {
+            request.setAttribute("error", "Số điện thoại đã tồn tại!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        // Validate email đúng định dạng @gmail.com
+        if (!email.matches("^[A-Za-z0-9._%+-]+@gmail\\.com$")) {
+            request.setAttribute("error", "Email phải đúng định dạng @gmail.com!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        // Validate số điện thoại: bắt đầu từ 0, 10 chữ số, không ký tự đặc biệt
+        if (!phone.matches("^0[0-9]{9}$")) {
+            request.setAttribute("error", "Số điện thoại phải bắt đầu từ 0, gồm 10 chữ số và không có ký tự đặc biệt!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        // Validate tên không ký tự đặc biệt và chỉ 1 khoảng trắng giữa các từ
+        if (!fullname.matches("^[A-Za-zÀ-ỹà-ỹ\s]+$")) {
+            request.setAttribute("error", "Tên không được chứa ký tự đặc biệt!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        if (fullname.trim().replaceAll(" +", " ").split(" ").length < 2 && fullname.contains(" ")) {
+            request.setAttribute("error", "Tên phải có ít nhất 2 từ!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
+        if (fullname.contains("  ")) {
+            request.setAttribute("error", "Tên chỉ được phép có 1 khoảng trắng giữa các từ!");
+            request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+            return;
+        }
 
         // Kiểm tra mật khẩu xác nhận
         if (!password.equals(confirmPassword)) {
@@ -73,9 +116,18 @@ public class CandidateRegisterServlet extends HttpServlet {
         }
 
         // Lưu thông tin ứng viên vào DB
-        HRDAO dao = new HRDAO();
         boolean success = dao.addCandidate(fullname, email, phone, password, savedFileName);
         if (success) {
+            // Lấy userId vừa đăng ký (giả sử username là email, lấy userId theo email)
+            int userId = dao.getUserIdByEmail(email);
+            FormSubmission submission = new FormSubmission();
+            submission.setType("CV");
+            submission.setPurpose("Nộp CV ứng tuyển");
+            submission.setStatus("PENDING");
+            submission.setNote("");
+            submission.setFileLink(savedFileName);
+            submission.setUserId(userId);
+            dao.addFormSubmission(submission);
             request.setAttribute("message", "Đăng ký thành công! Vui lòng chờ xác nhận.");
         } else {
             request.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại!");
