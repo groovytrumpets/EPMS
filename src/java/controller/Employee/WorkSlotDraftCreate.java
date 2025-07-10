@@ -61,15 +61,15 @@ public class WorkSlotDraftCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String mentorId_raw = request.getParameter("id");
+        String userId_raw = request.getParameter("id");
         String error = request.getParameter("error");
         String mess = request.getParameter("mess");
         int userId;
          try {
            
-//            userId = Integer.parseInt(mentorId_raw);
+            userId = Integer.parseInt(userId_raw);
             WorkScheduleDAO wsd = new WorkScheduleDAO();
-             List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(8);
+             List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(userId);
              request.setAttribute("pendingSchedulesList", pendingSchedulesList);
              
 //            request.setAttribute("skillMentor", mentorSkillList);
