@@ -12,16 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
-import model.User;
 
 /**
  *
  * @author asus
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/admindashboard"})
-public class DashboardServlet extends HttpServlet {
+@WebServlet(name = "UpdateUserServlet", urlPatterns = {"/updateuser"})
+public class UpdateUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");            
+            out.println("<title>Servlet UpdateUserServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateUserServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,21 +57,8 @@ public class DashboardServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        try {
-            AdminDAO adminDAO = new AdminDAO();
-
-            List<User> listUsers = adminDAO.getAllNonAdminUsers();
-            int totalUsers = listUsers.size();
-            List<Object[]> userCreationStats = adminDAO.getUserCreationStats();
-
-            request.setAttribute("listuser", listUsers);
-            request.setAttribute("totalUsers", totalUsers);
-            request.setAttribute("userCreationStats", userCreationStats);
-        } catch (Exception e) {
-            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
-        }
-        request.getRequestDispatcher("/AdminPage/adminDashboard.jsp").forward(request, response);
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -88,7 +72,22 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int userId = Integer.parseInt(request.getParameter("userid"));
+            String username = request.getParameter("username");
+            String fullName = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String gender = request.getParameter("gender");
+
+            AdminDAO dao = new AdminDAO();
+            dao.updateUserProfile(userId, username, fullName, email, phone, gender);
+
+            response.sendRedirect("admindashboard");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi cập nhật thông tin user");
+        }
     }
 
     /**
