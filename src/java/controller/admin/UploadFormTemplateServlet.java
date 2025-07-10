@@ -8,17 +8,28 @@ import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import model.FormTemplate;
+import utilities.CloudinaryUploader;
 
 /**
  *
  * @author asus
  */
-@WebServlet(name = "ToggleStatusServlet", urlPatterns = {"/togglestatus"})
-public class ToggleStatusServlet extends HttpServlet {
+@MultipartConfig
+@WebServlet(name = "UploadFormTemplateServlet", urlPatterns = {"/uploadformtemplate"})
+public class UploadFormTemplateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +48,10 @@ public class ToggleStatusServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ToggleStatusServlet</title>");
+            out.println("<title>Servlet UploadFormTemplateServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ToggleStatusServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UploadFormTemplateServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,25 +83,40 @@ public class ToggleStatusServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userIdRaw = request.getParameter("userid");
-        String newStatus = request.getParameter("status");
+        Part filePart = request.getPart("file");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-        if (userIdRaw == null || userIdRaw.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu userId");
-            return;
+        File tempFile = File.createTempFile("upload-", fileName);
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
+
+        String uploadedUrl = CloudinaryUploader.uploadFile(tempFile);
+
+        String title = request.getParameter("title");
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        String status = "Active";
+
+        FormTemplate template = new FormTemplate();
+        template.setTitle(title);
+        template.setFileLink(uploadedUrl);
+        template.setCreateDate(LocalDateTime.now());
+        template.setStatus(status);
+        template.setDownloadCount(0);
+        template.setUserId(userId);
 
         try {
-            int userId = Integer.parseInt(userIdRaw);
             AdminDAO dao = new AdminDAO();
-            dao.updateStatus(userId, newStatus);
+            dao.insertFormTemplate(template);
 
-            response.sendRedirect("admindashboard"); // reload trang
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().println("Upload & Save Successfully: <a href='" + uploadedUrl + "'>" + uploadedUrl + "</a>");
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "❌ Lỗi cập nhật trạng thái");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Save Unsuccessfully");
         }
     }
+
     /**
      * Returns a short description of the servlet.
      *

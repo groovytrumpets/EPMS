@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author asus
  */
-@WebServlet(name = "ToggleStatusServlet", urlPatterns = {"/togglestatus"})
-public class ToggleStatusServlet extends HttpServlet {
+@WebServlet(name = "UpdateUserServlet", urlPatterns = {"/updateuser"})
+public class UpdateUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class ToggleStatusServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ToggleStatusServlet</title>");
+            out.println("<title>Servlet UpdateUserServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ToggleStatusServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateUserServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,25 +72,24 @@ public class ToggleStatusServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userIdRaw = request.getParameter("userid");
-        String newStatus = request.getParameter("status");
-
-        if (userIdRaw == null || userIdRaw.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu userId");
-            return;
-        }
-
         try {
-            int userId = Integer.parseInt(userIdRaw);
-            AdminDAO dao = new AdminDAO();
-            dao.updateStatus(userId, newStatus);
+            int userId = Integer.parseInt(request.getParameter("userid"));
+            String username = request.getParameter("username");
+            String fullName = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String gender = request.getParameter("gender");
 
-            response.sendRedirect("admindashboard"); // reload trang
+            AdminDAO dao = new AdminDAO();
+            dao.updateUserProfile(userId, username, fullName, email, phone, gender);
+
+            response.sendRedirect("admindashboard");
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "❌ Lỗi cập nhật trạng thái");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi cập nhật thông tin user");
         }
     }
+
     /**
      * Returns a short description of the servlet.
      *

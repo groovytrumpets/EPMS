@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
+import model.FormTemplate;
 import model.Role;
 import model.User;
 
@@ -52,6 +53,20 @@ public class AdminDAO extends DBContext {
         ps.setString(7, u.getStatus());
         ps.setInt(8, u.getUserId());
         ps.executeUpdate();
+    }
+
+    public void updateUserProfile(int userId, String username, String fullName, String email, String phone, String gender) throws SQLException {
+        String sql = "UPDATE [User] SET UserName = ?, FullName = ?, Email = ?, Phone = ?, Gender = ? WHERE UserId = ?";
+        try (
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, fullName);
+            ps.setString(3, email);
+            ps.setString(4, phone);
+            ps.setString(5, gender);
+            ps.setInt(6, userId);
+            ps.executeUpdate();
+        }
     }
 
     public void updateStatus(int id, String status) throws SQLException {
@@ -131,6 +146,29 @@ public class AdminDAO extends DBContext {
 
         return stats;
     }
-    
 
+    public void updateRole(int userId, int roleId) throws SQLException {
+        String sql = "UPDATE [User] SET RoleId = ? WHERE UserId = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, roleId);
+        ps.setInt(2, userId);
+        ps.executeUpdate();
+    }
+
+    public void insertFormTemplate(FormTemplate template) throws Exception {
+        String sql = "INSERT INTO FormTemplate (Status, CreateDate, DownloadCount, FileLink, Title, UserId) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, template.getStatus());
+            ps.setTimestamp(2, Timestamp.valueOf(template.getCreateDate()));
+            ps.setInt(3, template.getDownloadCount());
+            ps.setString(4, template.getFileLink());
+            ps.setString(5, template.getTitle());
+            ps.setInt(6, template.getUserId());
+
+            ps.executeUpdate();
+        }
+    }
 }
