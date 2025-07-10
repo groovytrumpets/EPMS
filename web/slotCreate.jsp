@@ -105,7 +105,7 @@
                             <div class="wc-title d-flex align-items-center">
                                 <h4 class="d-inline-block">Create Slot:&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</a></h4>
                                 <!--                                <div class="d-inline-block ml-auto">
-                                                                    <a href="deleteslot?all=all&mentorid=${uFound.mentorId}" class="btn button-layout red">Delete All</a>
+                                                                    <a href="deleteslot?all=all&userId=${uFound}" class="btn button-layout red">Delete All</a>
                                                                 </div>-->
                             </div>
                             <div class="widget-inner">
@@ -149,7 +149,7 @@
                                                                     </div>
 
                                                                     <form action="updateslot" method="get">
-                                                                        <input class="form-control" type="text" value="${uFound.mentorId}" name="mentorId" hidden="">
+                                                                        <input class="form-control" type="text" value="${uFound}" name="userId" hidden="">
                                                                         <input class="form-control" type="text" value="${c.workScheduleId}" name="slotId" hidden="">
 
                                                                         <div class="modal-body">
@@ -207,7 +207,7 @@
                                     </div>
 
                                     <form action="createSlot" method="post">
-                                        <input class="form-control" type="text" value="${uFound.mentorId}" name="mentorId" hidden="">
+                                        <input class="form-control" type="text" value="${uFound}" name="userId" hidden="">
                                         <div class="modal-body">
                                             <div class="row edit-profile m-b30">
 

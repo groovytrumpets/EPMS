@@ -5,6 +5,7 @@
 package controller.Employee;
 
 import DAO.WorkScheduleDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import model.WorkSchedule;
 import model.WorkShift;
 
@@ -63,7 +66,44 @@ public class WorkSlotCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("slotCreate.jsp").forward(request, response);
+        String userId_raw = request.getParameter("id");
+        String error = request.getParameter("error");
+        String mess = request.getParameter("mess");
+        int userId;
+         try {
+           
+            userId = Integer.parseInt(userId_raw);
+            WorkScheduleDAO wsd = new WorkScheduleDAO();
+             List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(userId);
+             request.setAttribute("pendingSchedulesList", pendingSchedulesList);
+             
+//            request.setAttribute("skillMentor", mentorSkillList);
+            request.setAttribute("error", error);
+            request.setAttribute("mess", mess);
+             request.setAttribute("uFound", userId);
+            request.setAttribute("slotList", pendingSchedulesList);
+             //s;ot view
+             List<String> dateConverted = new ArrayList<>();
+            List<String> enddateConverted = new ArrayList<>();
+            List<String> statusSlot = new ArrayList<>();
+            
+            for (int i = 0; i < pendingSchedulesList.size(); i++) {
+                String startDate = pendingSchedulesList.get(i).getStartDate().toString();
+                String endDate = pendingSchedulesList.get(i).getEndDate().toString();
+                statusSlot.add(pendingSchedulesList.get(i).getStatus());
+                //System.out.println(startDate+", "+mentorSlot.get(i).getEndTime());
+                dateConverted.add(startDate);
+                enddateConverted.add(endDate);
+            }
+            
+            request.setAttribute("status", new Gson().toJson(statusSlot));
+            request.setAttribute("values", new Gson().toJson(dateConverted));
+            request.setAttribute("endValues", new Gson().toJson(enddateConverted));
+
+            request.getRequestDispatcher("slotCreate.jsp").forward(request, response);
+         }catch(Exception e){
+             System.out.println(e);
+         }
     }
 
     /**
@@ -78,8 +118,8 @@ public class WorkSlotCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String slottime = request.getParameter("slotTime");
-        String employeeId_raw = request.getParameter("employeeId");
-        System.out.println(slottime);
+        String employeeId_raw = request.getParameter("userId");
+        System.out.println(employeeId_raw);
 
         int employeeId;
         int start = 0;
@@ -119,8 +159,15 @@ public class WorkSlotCreateServlet extends HttpServlet {
         schedule.setStartDate(WorkScheduleStart);
         schedule.setEndDate(WorkScheduleEnd);
         schedule.setRemainLeave(12);      
-        schedule.setWorkDay(0);          
-        schedule.setUserId(8);
+        schedule.setWorkDay(0);  
+        try {
+            employeeId=Integer.parseInt(employeeId_raw);
+        schedule.setUserId(employeeId);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
         
 
 
