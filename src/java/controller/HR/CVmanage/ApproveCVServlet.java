@@ -6,6 +6,7 @@
 package controller.HR.CVmanage;
 
 import DAO.HRDAO;
+import controller.common.ResetChangePassword;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -65,7 +66,8 @@ public class ApproveCVServlet extends HttpServlet {
             int cvId=Integer.parseInt(cvId_raw);
             int userId=Integer.parseInt(userId_raw);
             
-            String newPass = PassCheck.generateSecurePassword(8);
+            String Pass = PassCheck.generateSecurePassword(8);
+            String newPass = ResetChangePassword.encrypt(Pass);
             HRDAO hrd = new HRDAO();
             hrd.changeCVStatusApprove(cvId);
             hrd.hrCreateAccount(userId, newPass);
@@ -90,7 +92,7 @@ public class ApproveCVServlet extends HttpServlet {
                            
                            Best regards,  
                            HR Department – PFTU,SWD391
-                           """.formatted(approveUser.getFullName(),approveUser.getEmail(),newPass);
+                           """.formatted(approveUser.getFullName(),approveUser.getEmail(),Pass);
             
             
             EmailSender.sendNotificationEmail(approveUser.getEmail(), title, content);

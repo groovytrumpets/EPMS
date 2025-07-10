@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 public class ResetChangePassword extends HttpServlet {
 
     // Encrypt password using MD5
-    private String encrypt(String password) {
+    public static String encrypt(String password) {
         String digest = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
