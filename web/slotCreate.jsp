@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +34,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/faviconV2.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
-        <title>Slot Mentor </title>
+        <title>EPMS </title>
 
         <!-- MOBILE SPECIFIC ============================================= -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,9 +104,9 @@
                         <div class="widget-box">
                             <div class="wc-title d-flex align-items-center">
                                 <h4 class="d-inline-block">Create Slot:&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</a></h4>
-<!--                                <div class="d-inline-block ml-auto">
-                                    <a href="deleteslot?all=all&mentorid=${uFound.mentorId}" class="btn button-layout red">Delete All</a>
-                                </div>-->
+                                <!--                                <div class="d-inline-block ml-auto">
+                                                                    <a href="deleteslot?all=all&mentorid=${uFound.mentorId}" class="btn button-layout red">Delete All</a>
+                                                                </div>-->
                             </div>
                             <div class="widget-inner">
                                 <div class="new-user-list" style="max-height: 600px; overflow-y: auto;" >
@@ -115,31 +116,29 @@
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Start Time</th>
                                                 <th scope="col">End Time</th>
-                                                <th scope="col">Day In Week</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+
                                             <c:forEach items="${requestScope.slotList}" var="c"  varStatus="status">
                                                 <tr>
                                                     <th class="align-middle" scope="row">${status.index + 1}</th>
-                                                    <td class="align-middle">${c.startTime}</td>
-                                                    <td class="align-middle">${c.endTime}</td>
-                                                    <td class="align-middle">${c.dayInWeek}</td>
+                                                    <td class="align-middle">${fn:substring(c.startDate, 11, 16)}</td>
+                                                    <td class="align-middle">${fn:substring(c.endDate, 11, 16)}</td>
                                                     <td class="align-middle">${c.status}</td>
                                                     <td class="align-middle" style="max-width: 200px;word-wrap: break-word;">
                                                         <span class="orders-btn">
-                                                            <a href="#" class="btn button-sm orange" data-toggle="modal" data-target="#updateModal${c.slotID}"><i class="ti-pencil"></i></a>
+                                                            <a href="#" class="btn button-sm orange" data-toggle="modal" data-target="#updateModal${c.workScheduleId}"><i class="ti-pencil"></i></a>
                                                         </span>
                                                         <span class="orders-btn">
-                                                            <a href="#" onclick="delete1('${c.slotID}', '${c.startTime}', '${c.endTime}', '${c.dayInWeek}')" class="btn button-sm red"><i class="ti-close"></i></a>
+                                                            <a href="#" onclick="delete1('${c.workScheduleId}', '${c.startDate}', '${c.endDate}')" class="btn button-sm red"><i class="ti-close"></i></a>
                                                         </span>
 
 
-                                                         Modal 
-                                                        <div class="modal fade" id="updateModal${c.slotID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                        <div class="modal fade" id="updateModal${c.workScheduleId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -151,34 +150,17 @@
 
                                                                     <form action="updateslot" method="get">
                                                                         <input class="form-control" type="text" value="${uFound.mentorId}" name="mentorId" hidden="">
-                                                                        <input class="form-control" type="text" value="${c.slotID}" name="slotId" hidden="">
+                                                                        <input class="form-control" type="text" value="${c.workScheduleId}" name="slotId" hidden="">
 
                                                                         <div class="modal-body">
                                                                             <div class="row edit-profile m-b30">
-                                                                                <div class="form-group col-6">
-                                                                                    <label class="col-form-label">Day In Week</label>
-                                                                                    <div>
-                                                                                        <select name="dayinweek" class="">
-                                                                                            <option value="Monday" <c:if test="${c.dayInWeek == 'Monday'}">selected</c:if>>Monday</option>
-                                                                                            <option value="Tuesday" <c:if test="${c.dayInWeek == 'Tuesday'}">selected</c:if>>Tuesday</option>
-                                                                                            <option value="Wednesday" <c:if test="${c.dayInWeek == 'Wednesday'}">selected</c:if>>Wednesday</option>
-                                                                                            <option value="Thursday" <c:if test="${c.dayInWeek == 'Thursday'}">selected</c:if>>Thursday</option>
-                                                                                            <option value="Friday" <c:if test="${c.dayInWeek == 'Friday'}">selected</c:if>>Friday</option>
-                                                                                            <option value="Saturday" <c:if test="${c.dayInWeek == 'Saturday'}">selected</c:if>>Saturday</option>
-                                                                                            <option value="Sunday" <c:if test="${c.dayInWeek == 'Sunday'}">selected</c:if>>Sunday</option>
-                                                                                            </select>
 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group col-6">
-                                                                                        <label class="col-form-label">Slot</label>
-                                                                                        <select name="slotTime" class="">
-                                                                                            <option value="1" <c:if test="${c.startTime == '07:00'}">selected</c:if>>1</option>
-                                                                                        <option value="2" <c:if test="${c.startTime == '09:00'}">selected</c:if>>2</option>
-                                                                                        <option value="3" <c:if test="${c.startTime == '11:00'}">selected</c:if>>3</option>
-                                                                                        <option value="4" <c:if test="${c.startTime == '13:00'}">selected</c:if>>4</option>
-                                                                                        <option value="5" <c:if test="${c.startTime == '15:00'}">selected</c:if>>5</option>
-                                                                                        <option value="6" <c:if test="${c.startTime == '17:00'}">selected</c:if>>6</option>
+                                                                                <div class="form-group col-8">
+                                                                                    <label class="col-form-label">Slot</label>
+                                                                                    <select name="slotTime" class="">
+                                                                                        <option value="1" <c:if test="${fn:substring(c.startDate, 11, 16) == '08:00'}">selected</c:if>>Full-time: 08:00h – 17:00h</option>
+                                                                                        <option value="2" <c:if test="${fn:substring(c.endDate, 11, 16) == '12:00'}">selected</c:if>>Partime: 08:00h – 12:00h</option>
+                                                                                        <option value="3" <c:if test="${fn:substring(c.startDate, 11, 16) == '13:00'}">selected</c:if>>Partime: 13:00h – 17:00h</option>
                                                                                         </select>
                                                                                     </div>
 
@@ -228,7 +210,7 @@
                                         <input class="form-control" type="text" value="${uFound.mentorId}" name="mentorId" hidden="">
                                         <div class="modal-body">
                                             <div class="row edit-profile m-b30">
-                                                
+
                                                 <div class="form-group col-12"style="text-align: center">
                                                     <label class="col-form-label">Slot</label>
                                                     <select name="slotTime" class="">
@@ -295,9 +277,9 @@
         <script src='assets/vendors/calendar/fullcalendar.js'></script>
 
         <script>
-                                                                function delete1(id, start, end, diw) {
-                                                                    if (confirm('Do you sure to delete slot ' + diw + ' start at ' + start + ' to ' + end + '?')) {
-                                                                        window.location = '/happy_programming/deleteslot?requestid=' + id;
+                                                                function delete1(id, start, end) {
+                                                                    if (confirm('Do you sure to delete slot start at ' + start + ' to ' + end + '?')) {
+                                                                        window.location = '/EPMS/deleteslot?requestid=' + id;
                                                                     }
                                                                 }
         </script>
@@ -309,14 +291,14 @@
                 var eventsArray = [];
                 for (var i = 0; i < start.length; i++) {
                     var eventColor = '';
-                    if (status[i].toLowerCase() === 'inactive') {
+                    if (status[i].toLowerCase() === 'pending') {
                         eventColor = '#c22d2d';
                     } else {
                         eventColor = '#2dc22d';
                     }
                     console.log('debug:');
                     console.log(status[i]);
-                    console.log(status[i].toLowerCase() === 'inactive');
+                    console.log(status[i].toLowerCase() === 'pending');
                     eventsArray.push({
                         title: status[i],
                         start: start[i],
