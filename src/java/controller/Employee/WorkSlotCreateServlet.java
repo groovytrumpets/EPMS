@@ -12,7 +12,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import model.WorkSchedule;
 import model.WorkShift;
 
 /**
@@ -79,34 +82,49 @@ public class WorkSlotCreateServlet extends HttpServlet {
         System.out.println(slottime);
 
         int employeeId;
-        String start = "";
-        String end = "";
+        int start = 0;
+        int end = 0;
         switch (slottime) {
             case "1" -> {
-                start = "08:00:00";
-                end = "17:00:00";
+                start = 8;
+                end = 17;
             }
             case "2" -> {
-                start = "08:00:00";
-                end = "12:00:00";
+                start = 8;
+                end = 12;
             }
             case "3" -> {
-                start = "13:00:00";
-                end = "17:00:00";
+                start = 13;
+                end = 17;
             }
             default -> {
-                start = "00:00:00";
-                end = "00:00:00";
+                start = 0;
+                end = 0;
                 throw new IllegalArgumentException("Out of slot range!");
             }
         }
+       //genarate date
+        LocalDate today = LocalDate.now();
+        LocalTime timeStart = LocalTime.of(start, 0);
+        LocalTime timeEnd = LocalTime.of(end, 0);
+        
+        LocalDateTime WorkScheduleStart = LocalDateTime.of(today, timeStart);
+        LocalDateTime WorkScheduleEnd = LocalDateTime.of(today, timeEnd);
+        
+        
         WorkScheduleDAO wsd = new WorkScheduleDAO();
-        employeeId = Integer.parseInt(employeeId_raw);
-        WorkShift shift = new WorkShift();
-        shift.setWorkScheduleId(employeeId); 
+//        employeeId = Integer.parseInt(employeeId_raw);
+        WorkSchedule schedule = new WorkSchedule();
+        schedule.setStatus("pending");
+        schedule.setStartDate(WorkScheduleStart);
+        schedule.setEndDate(WorkScheduleEnd);
+        schedule.setRemainLeave(12);      
+        schedule.setWorkDay(0);          
+        schedule.setUserId(8);
+        
 
 
-        if (wsd.addSlot(shift)) {
+        if (wsd.addSlot(schedule)) {
             response.sendRedirect("slotdraft?id=" + employeeId_raw + "&mess=Your slot has been created successfully!");
         } else {
             response.sendRedirect("slotdraft?id=" + employeeId_raw + "&mess=Unable to create your slot in the Slot draft. Please try again.");
