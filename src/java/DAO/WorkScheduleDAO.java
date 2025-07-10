@@ -5,11 +5,13 @@
 package DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import model.WorkSchedule;
 
@@ -17,7 +19,7 @@ import model.WorkSchedule;
  *
  * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-public class WorkScheduleDAO extends DBContext{
+public class WorkScheduleDAO extends DBContext {
 
     public boolean addSlot(WorkSchedule schedule) {
         String sql = """
@@ -38,7 +40,7 @@ public class WorkScheduleDAO extends DBContext{
             rs.setInt(4, schedule.getRemainLeave());
             rs.setInt(5, schedule.getWorkDay());
             rs.setInt(6, schedule.getUserId());
-            
+
             int rowsInserted = rs.executeUpdate();
             return rowsInserted > 0; // Returns true if the payment was added successfully
         } catch (SQLException e) {
@@ -46,23 +48,74 @@ public class WorkScheduleDAO extends DBContext{
             return false; // Return false if there was an error
         }
     }
-    public static void main(String[] args) {
-        LocalDate today = LocalDate.now();
-        LocalTime time = LocalTime.of(8, 0);
-        LocalDateTime result = LocalDateTime.of(today, time);
-        WorkScheduleDAO wsd = new WorkScheduleDAO();
-        WorkSchedule schedule = new WorkSchedule();
-        schedule.setStatus("pending");
-        schedule.setStartDate(result);
-        schedule.setEndDate(result.plusYears(1));
-        schedule.setRemainLeave(12);      
-        schedule.setWorkDay(0);          
-        schedule.setUserId(8);
-        wsd.addSlot(schedule);
+
+    public List<WorkSchedule> getListofPendingSchedule(int id) {
+        List<WorkSchedule> workSchedules = new ArrayList<>();
+        String sql = "select * from WorkSchedule where UserId=? and Status = 'pending'";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                WorkSchedule slot = new WorkSchedule();
+                slot.setWorkScheduleId(rs.getInt("WorkScheduleId"));
+                slot.setStatus(rs.getString("Status"));
+                slot.setStartDate(rs.getTimestamp("StartDate").toLocalDateTime());
+                slot.setEndDate(rs.getTimestamp("EndDate").toLocalDateTime());
+                slot.setRemainLeave(rs.getInt("RemainLeave"));
+                slot.setWorkDay(rs.getInt("WorkDay"));
+                slot.setUserId(rs.getInt("UserId"));
+
+                workSchedules.add(slot);
+            }
+            return workSchedules;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
-    public List<WorkSchedule> getListofPendingSchedule() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public static void main(String[] args) {
+//        LocalDate today = LocalDate.now();
+//        LocalTime time = LocalTime.of(8, 0);
+//        LocalDateTime result = LocalDateTime.of(today, time);
+        WorkScheduleDAO wsd = new WorkScheduleDAO();
+        
+        System.out.println(wsd.deleteWorkSchedule(3));
     }
-    
+
+    public WorkSchedule getWorkScheduleById(int id) {
+        String sql = "select * from WorkSchedule where WorkScheduleId=? and Status = 'pending'";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                WorkSchedule slot = new WorkSchedule();
+                slot.setWorkScheduleId(rs.getInt("WorkScheduleId"));
+                slot.setStatus(rs.getString("Status"));
+                slot.setStartDate(rs.getTimestamp("StartDate").toLocalDateTime());
+                slot.setEndDate(rs.getTimestamp("EndDate").toLocalDateTime());
+                slot.setRemainLeave(rs.getInt("RemainLeave"));
+                slot.setWorkDay(rs.getInt("WorkDay"));
+                slot.setUserId(rs.getInt("UserId"));
+                return slot;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public boolean deleteWorkSchedule(int id) {
+        String sql = "delete from WorkSchedule where WorkScheduleId=? and Status = 'pending'";
+        try (PreparedStatement rs = connection.prepareStatement(sql)) {
+            rs.setInt(1, id);
+            int rowsInserted = rs.executeUpdate();
+        return rowsInserted > 0; // Returns true if the payment was added successfully
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if there was an error
+        }
+    }
 }
