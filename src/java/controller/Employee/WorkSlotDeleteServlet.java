@@ -6,7 +6,6 @@
 package controller.Employee;
 
 import DAO.WorkScheduleDAO;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,8 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import model.WorkSchedule;
 
@@ -23,8 +20,8 @@ import model.WorkSchedule;
  *
  * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-@WebServlet(name="WorkSlotDraftCreate", urlPatterns={"/slotdraft"})
-public class WorkSlotDraftCreate extends HttpServlet {
+@WebServlet(name="WorkSlotDeleteServlet", urlPatterns={"/deleteslot"})
+public class WorkSlotDeleteServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +38,10 @@ public class WorkSlotDraftCreate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet WorkSlotDraftCreate</title>");  
+            out.println("<title>Servlet WorkSlotDeleteServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet WorkSlotDraftCreate at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet WorkSlotDeleteServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,44 +58,30 @@ public class WorkSlotDraftCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String mentorId_raw = request.getParameter("id");
-        String error = request.getParameter("error");
-        String mess = request.getParameter("mess");
-        int userId;
-         try {
-           
-//            userId = Integer.parseInt(mentorId_raw);
+        String slotId_raw = request.getParameter("requestid");
+        int slotId;
+        try {
             WorkScheduleDAO wsd = new WorkScheduleDAO();
-             List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(8);
-             request.setAttribute("pendingSchedulesList", pendingSchedulesList);
-             
-//            request.setAttribute("skillMentor", mentorSkillList);
-            request.setAttribute("error", error);
-            request.setAttribute("mess", mess);
-//            request.setAttribute("uFound", mentor);
-            request.setAttribute("slotList", pendingSchedulesList);
-             //s;ot view
-             List<String> dateConverted = new ArrayList<>();
-            List<String> enddateConverted = new ArrayList<>();
-            List<String> statusSlot = new ArrayList<>();
-            
-            for (int i = 0; i < pendingSchedulesList.size(); i++) {
-                String startDate = pendingSchedulesList.get(i).getStartDate().toString();
-                String endDate = pendingSchedulesList.get(i).getEndDate().toString();
-                statusSlot.add(pendingSchedulesList.get(i).getStatus());
-                //System.out.println(startDate+", "+mentorSlot.get(i).getEndTime());
-                dateConverted.add(startDate);
-                enddateConverted.add(endDate);
-            }
-            
-            request.setAttribute("status", new Gson().toJson(statusSlot));
-            request.setAttribute("values", new Gson().toJson(dateConverted));
-            request.setAttribute("endValues", new Gson().toJson(enddateConverted));
-
-            request.getRequestDispatcher("slotCreate.jsp").forward(request, response);
-         }catch(Exception e){
-             System.out.println(e);
-         }
+            slotId = Integer.parseInt(slotId_raw);
+            WorkSchedule slot = wsd.getWorkScheduleById(slotId);
+//            if (slot.getStatus().equalsIgnoreCase("available")) {
+//                List<Slot> slotActive = wsd.getListofActiveSlotsByMentorId(slot.getMentorID());
+//                for (Slot slot1 : slotActive) {
+//                    //re-add another slot except slot wantto delet
+//                    if (slot1.getSlotID() != slot.getSlotID()) {
+//                        slot1.setStatus("inactive");
+//                        wsd.addSlot(slot1);
+//                    }
+//                }
+//            }
+//            if (slot.getStatus().equalsIgnoreCase("inactive")) {
+                wsd.deleteWorkSchedule(slotId);
+//            }
+            //System.out.println(slotId);
+            response.sendRedirect("slotdraft?id=" + slot.getUserId()+"&mess=Your slot has been deleted all successfully!");
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
     } 
 
     /** 
