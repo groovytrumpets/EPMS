@@ -2,56 +2,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller.common;
 
-package controller.HR;
-
-
-import DAO.HRDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Document;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import model.User;
+
 /**
  *
- * @author nguye
+ * @author Acer
  */
-@WebServlet(name="CandidateAccountManageServlet", urlPatterns={"/candiAccManage"})
-public class CandidateAccountManageServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class ForgetPasswordServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CandidateAccountManageServlet</title>");  
+            out.println("<title>Servlet ForgetPasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CandidateAccountManageServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ForgetPasswordServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,17 +60,13 @@ public class CandidateAccountManageServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        HRDAO hrd = new HRDAO();
-        List<User> CandidateList = hrd.getListOfCandidateUsers();
-        List<Document> CVList = hrd.getListOfCV();
-        request.setAttribute("candidateList", CandidateList);
-        request.setAttribute("CVList", CVList);
-        request.getRequestDispatcher("HRCandidateAccManage.jsp").forward(request, response);
+            throws ServletException, IOException {
+        request.getRequestDispatcher("forget-password.jsp").forward(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -77,12 +74,29 @@ public class CandidateAccountManageServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+
+        UserDAO userDAO = new UserDAO();
+
+        User user = userDAO.findUserByEmail(email);
+
+        if (user != null) {
+
+            response.sendRedirect("verify?email=" + email);
+
+        } else {
+            // No user found with the given email and account
+            request.setAttribute("error", "No account found with the provided email and username.");
+            request.getRequestDispatcher("forget-password.jsp").forward(request, response);
+        }
+
+        // Forward back to the password reset request page
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

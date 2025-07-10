@@ -12,20 +12,29 @@ import java.time.LocalDateTime;
  */
 public class Document {
     private int documentId;
-    private String fileLink, type, status;
+    private String fileLink, type, status,title;
     private LocalDateTime uploadDate;
     private int userId;
 
     public Document() {
     }
 
-    public Document(int documentId, String fileLink, String type, String status, LocalDateTime uploadDate, int userId) {
+    public Document(int documentId, String fileLink, String type, String status, String title, LocalDateTime uploadDate, int userId) {
         this.documentId = documentId;
         this.fileLink = fileLink;
         this.type = type;
         this.status = status;
+        this.title = title;
         this.uploadDate = uploadDate;
         this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getDocumentId() {

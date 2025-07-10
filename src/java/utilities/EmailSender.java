@@ -12,6 +12,7 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -23,20 +24,19 @@ public class EmailSender {
     static final String senderEmail = "groovytrumpets@gmail.com";
     static final String senderPassword = "wieq zojo idky olyd"; // Google's  App password
 
-
     public static boolean sendEmail(String recipientEmail, String title, String otpCode) throws AddressException, MessagingException {
-    Properties props = new Properties();
+        Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(props,
-            new jakarta.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(senderEmail, senderPassword);
-                }
-            });
+                new jakarta.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(senderEmail));
 
@@ -48,9 +48,62 @@ public class EmailSender {
         Transport.send(message);
         return true;
     }
+
+    public static boolean sendNotificationEmail(String recipientEmail, String title, String content) throws AddressException, MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new jakarta.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(senderEmail));
+
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+        message.setSubject(title);
+
+        message.setText(content);
+
+        Transport.send(message);
+        return true;
+    }
+
+    public static boolean sendNotificationEmailBCC(List<String> recipientEmail, String title, String content) throws AddressException, MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new jakarta.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(senderEmail));
+
+        for (String email : recipientEmail) {
+            message.addRecipient(Message.RecipientType.BCC, new InternetAddress(email));
+        }
+        message.setSubject(title);
+
+        message.setText(content);
+
+        Transport.send(message);
+        return true;
+    }
+
     public static void main(String[] args) throws MessagingException {
         if (sendEmail("nguyennamkhanhnnk@gmail.com", "alo", "911")) {
-      
+
         }
     }
 }

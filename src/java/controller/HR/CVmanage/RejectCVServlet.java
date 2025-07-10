@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.HR;
-
+package controller.HR.CVmanage;
 
 import DAO.HRDAO;
 import java.io.IOException;
@@ -14,16 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Document;
 import model.User;
+import utilities.EmailSender;
+
 /**
  *
- * @author nguye
+ * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
-@WebServlet(name="CandidateAccountManageServlet", urlPatterns={"/candiAccManage"})
-public class CandidateAccountManageServlet extends HttpServlet {
+@WebServlet(name="RejectCVServlet", urlPatterns={"/rejectCV"})
+public class RejectCVServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class CandidateAccountManageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CandidateAccountManageServlet</title>");  
+            out.println("<title>Servlet RejectCVServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CandidateAccountManageServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RejectCVServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,13 +58,37 @@ public class CandidateAccountManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HRDAO hrd = new HRDAO();
-        List<User> CandidateList = hrd.getListOfCandidateUsers();
-        List<Document> CVList = hrd.getListOfCV();
-        request.setAttribute("candidateList", CandidateList);
-        request.setAttribute("CVList", CVList);
-        request.getRequestDispatcher("HRCandidateAccManage.jsp").forward(request, response);
-    }
+        String cvId_raw = request.getParameter("cvid");
+        String userId_raw = request.getParameter("uid");
+        try {
+            int cvId=Integer.parseInt(cvId_raw);
+            int userId=Integer.parseInt(userId_raw);
+            
+            HRDAO hrd = new HRDAO();
+            hrd.changeCVStatusReject(cvId);
+            User rejectUser = hrd.getUserbyId(userId);
+            String title = """
+                           Subject: Application Status at PFTU-SWD391
+                           """;
+            String content ="""
+                           Dear %s,
+                    
+                           Thank you for your interest in the position at PFTU-SWD391.                           
+                           We have carefully reviewed your CV and, unfortunately, it does not meet our current requirements for this role. 
+                           We truly appreciate your time and effort, and we hope to consider you for other opportunities in the future.
+                           We wish you all the best in your career journey.
+                           Best regards,  
+                           HR Department – PFTU,SWD391
+                           """.formatted(rejectUser.getFullName());
+            
+            
+            EmailSender.sendNotificationEmail(rejectUser.getEmail(), title, content);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        response.sendRedirect("candiAccManage");
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
