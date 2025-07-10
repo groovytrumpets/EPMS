@@ -24,6 +24,34 @@
         <servlet-name>ResetChangePassword</servlet-name>
         <servlet-class>controller.common.ResetChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadDocumentServlet</servlet-name>
+        <servlet-class>controller.Employee.UploadDocumentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadFormServlet</servlet-name>
+        <servlet-class>controller.Employee.DownloadFormServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyDocumentsServlet</servlet-name>
+        <servlet-class>controller.Employee.MyDocumentsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadDocumentServlet</servlet-name>
+        <servlet-class>controller.Employee.DownloadDocumentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateTestServlet</servlet-name>
+        <servlet-class>controller.HR.CreateTestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyTestsServlet</servlet-name>
+        <servlet-class>controller.Employee.MyTestsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StartTestServlet</servlet-name>
+        <servlet-class>controller.Employee.StartTestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,5 +75,33 @@
     <servlet-mapping>
         <servlet-name>ResetChangePassword</servlet-name>
         <url-pattern>/reset-changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadDocumentServlet</servlet-name>
+        <url-pattern>/uploadDocument</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadFormServlet</servlet-name>
+        <url-pattern>/downloadForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyDocumentsServlet</servlet-name>
+        <url-pattern>/myDocuments</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadDocumentServlet</servlet-name>
+        <url-pattern>/downloadDocument</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateTestServlet</servlet-name>
+        <url-pattern>/createTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyTestsServlet</servlet-name>
+        <url-pattern>/myTests</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StartTestServlet</servlet-name>
+        <url-pattern>/startTest</url-pattern>
     </servlet-mapping>
 </web-app>
