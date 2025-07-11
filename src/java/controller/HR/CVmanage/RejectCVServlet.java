@@ -5,6 +5,7 @@
 
 package controller.HR.CVmanage;
 
+import DAO.AdminDAO;
 import DAO.HRDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.User;
 import utilities.EmailSender;
 
@@ -83,6 +85,11 @@ public class RejectCVServlet extends HttpServlet {
             
             
             EmailSender.sendNotificationEmail(rejectUser.getEmail(), title, content);
+            HttpSession session = request.getSession();
+            User admin = (User) session.getAttribute("acc");
+            AdminDAO admindao = new AdminDAO();
+            String action = "HR reject CV ID: "+cvId_raw;
+            admindao.logAction(admin.getUserId(), action);
         } catch (Exception e) {
             System.out.println(e);
         }

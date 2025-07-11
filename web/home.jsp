@@ -207,6 +207,10 @@
                                                             <c:when test="${sessionScope.acc.roleId==1}">
                                                             <li><a href="admindashboard">Admin Dashboard</a></li>
                                                             </c:when>
+                                                            <c:when test="${sessionScope.acc.roleId==2}">
+                                                            <li><a href="employeeManage">Manage Employee</a></li>
+                                                            <li><a href="candiAccManage">Manage Candidate CV</a></li>
+                                                            </c:when>
                                                             <c:when test="${sessionScope.acc.roleId==3}">
                                                             <li><a href="createSlot">Work schedule</a></li>
                                                             <li><a href="#">Work Test</a></li>

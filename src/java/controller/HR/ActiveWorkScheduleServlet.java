@@ -5,6 +5,7 @@
 
 package controller.HR;
 
+import DAO.AdminDAO;
 import DAO.WorkScheduleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -62,6 +65,11 @@ public class ActiveWorkScheduleServlet extends HttpServlet {
             userId=Integer.parseInt(userId_raw);
             WorkScheduleDAO wsd = new WorkScheduleDAO();
             wsd.activeWorkScheduleById(userId);
+            HttpSession session = request.getSession();
+            User admin = (User) session.getAttribute("acc");
+            AdminDAO admindao = new AdminDAO();
+            String action = "HR approve Workschedule of User ID: "+userId_raw;
+            admindao.logAction(admin.getUserId(), action);
         response.sendRedirect("slotmanagercate?id="+userId_raw);
         } catch (Exception e) {
             System.out.println(e);
