@@ -78,7 +78,7 @@ public class WorkSlotDeleteServlet extends HttpServlet {
                 wsd.deleteWorkSchedule(slotId);
 //            }
             //System.out.println(slotId);
-            response.sendRedirect("slotdraft?id=" + slot.getUserId()+"&mess=Your slot has been deleted all successfully!");
+            response.sendRedirect("slotdraft?mess=Your slot has been deleted all successfully!");
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
