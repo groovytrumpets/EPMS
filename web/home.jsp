@@ -26,7 +26,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
-        <title>EduChamp : Education HTML Template </title>
+        <title>EPMS : Employee Profile Management System </title>
 
         <!-- MOBILE SPECIFIC ============================================= -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -205,7 +205,7 @@
                                                     <li><a href="changePassword">Change Password</a></li>
                                                         <c:choose>
                                                             <c:when test="${sessionScope.acc.roleId==1}">
-                                                            
+                                                            <li><a href="admindashboard">Admin Dashboard</a></li>
                                                             </c:when>
                                                             <c:when test="${sessionScope.acc.roleId==3}">
                                                             <li><a href="createSlot">Work schedule</a></li>
