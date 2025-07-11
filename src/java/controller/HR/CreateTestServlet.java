@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.*;
-import controller.common.UserDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

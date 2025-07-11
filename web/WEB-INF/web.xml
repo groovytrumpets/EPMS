@@ -25,6 +25,14 @@
         <servlet-class>controller.common.ResetChangePassword</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>controller.common.UserProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.common.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UploadDocumentServlet</servlet-name>
         <servlet-class>controller.Employee.UploadDocumentServlet</servlet-class>
     </servlet>
@@ -75,6 +83,14 @@
     <servlet-mapping>
         <servlet-name>ResetChangePassword</servlet-name>
         <url-pattern>/reset-changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UploadDocumentServlet</servlet-name>
