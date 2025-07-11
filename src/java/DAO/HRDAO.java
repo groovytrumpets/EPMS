@@ -64,7 +64,6 @@ public class HRDAO extends DBContext {
                 CV.setUserId(rs.getInt("userId"));
                 CVList.add(CV);
             }
-            System.out.println(CVList.get(0).getDocumentId());
             return CVList;
         } catch (SQLException e) {
             System.out.println(e);
