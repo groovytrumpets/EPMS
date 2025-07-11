@@ -1,34 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
-/**
- *
- * @author nguye
- */
 public class TestSession {
     private int testId;
     private int testScheduleId;
     private String title;
-    private int timer, mark;
-    private LocalDateTime deadline, createDate;
+    private int timer;
+    private Timestamp deadline;
+    private int mark;
     private String status;
 
-    public TestSession() {
-    }
+    public TestSession() {}
 
-    public TestSession(int testId, int testScheduleId, String title, int timer, int mark, LocalDateTime deadline, LocalDateTime createDate, String status) {
+    public TestSession(int testId, int testScheduleId, String title,
+                       int timer, Timestamp deadline, int mark, String status) {
         this.testId = testId;
         this.testScheduleId = testScheduleId;
         this.title = title;
         this.timer = timer;
-        this.mark = mark;
         this.deadline = deadline;
-        this.createDate = createDate;
+        this.mark = mark;
         this.status = status;
     }
 
@@ -64,28 +56,20 @@ public class TestSession {
         this.timer = timer;
     }
 
+    public Timestamp getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Timestamp deadline) {
+        this.deadline = deadline;
+    }
+
     public int getMark() {
         return mark;
     }
 
     public void setMark(int mark) {
         this.mark = mark;
-    }
-
-    public LocalDateTime getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
     }
 
     public String getStatus() {
@@ -95,5 +79,4 @@ public class TestSession {
     public void setStatus(String status) {
         this.status = status;
     }
-    
 }
