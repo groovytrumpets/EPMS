@@ -138,4 +138,9 @@ public class CandidateRegisterServlet extends HttpServlet {
         request.setAttribute("success", "Đăng ký thành công! Vui lòng chờ kích hoạt tài khoản.");
         request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("candidateRegister.jsp").forward(request, response);
+    }
 } 

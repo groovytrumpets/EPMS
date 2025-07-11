@@ -1,15 +1,19 @@
 package DAO;
 
-import model.FormSubmission;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.ResultSet;
+import model.FormSubmission;
 
 public class FormSubmissionDAO extends DBContext {
+    public FormSubmissionDAO() {
+        super();
+    }
+
     public void insertFormSubmission(FormSubmission form) {
         String sql = "INSERT INTO FormSubmission (type, purpose, status, note, fileLink, createDate, userId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

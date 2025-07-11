@@ -18,34 +18,36 @@ import model.User;
  */
 public class HRDAO extends DBContext {
 
-    public List<User> getListOfCandidateUsers() {
-        List<User> candidateList = new ArrayList<>();
-        String sql = "select * from [User] where RoleId=4;";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                User can = new User();
-                can.setUserId(rs.getInt("userId"));
-                can.setUserName(rs.getString("username"));
-                can.setPassword(rs.getString("password"));
-                can.setStatus(rs.getString("status"));
-                can.setFullName(rs.getString("fullName"));
-                can.setPhone(rs.getString("phone"));
-                can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
-                can.setDob(rs.getDate("dob"));
-                can.setEmail(rs.getString("email"));
-                can.setGender(rs.getString("gender"));
-                can.setRoleId(rs.getInt("roleId"));
-                candidateList.add(can);
-            }
-            System.out.println(candidateList.get(0).getFullName());
-            return candidateList;
-        } catch (SQLException e) {
-            System.out.println(e);
+   public List<User> getListOfCandidateUsers() {
+    List<User> candidateList = new ArrayList<>();
+    String sql = "select * from [User] where RoleId=4;";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            User can = new User();
+            can.setUserId(rs.getInt("userId"));
+            can.setUserName(rs.getString("username"));
+            can.setPassword(rs.getString("password"));
+            can.setStatus(rs.getString("status"));
+            can.setFullName(rs.getString("fullName"));
+            can.setPhone(rs.getString("phone"));
+            can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+            can.setDob(rs.getDate("dob"));
+            can.setEmail(rs.getString("email"));
+            can.setGender(rs.getString("gender"));
+            can.setRoleId(rs.getInt("roleId"));
+            candidateList.add(can);
         }
-        return null;
+        if (!candidateList.isEmpty()) {
+            System.out.println(candidateList.get(0).getFullName());
+        }
+        return candidateList;
+    } catch (SQLException e) {
+        System.out.println(e);
     }
+    return candidateList;
+}
   
     public List<Document> getListOfCV() {
         List<Document> CVList = new ArrayList<>();
