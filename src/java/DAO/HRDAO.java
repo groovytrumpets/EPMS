@@ -46,6 +46,8 @@ public class HRDAO extends DBContext {
     } catch (SQLException e) {
         System.out.println(e);
     }
+    return candidateList;
+}
     public List<User> getListOfEmployeeAndCandidateUsers() {
         List<User> candidateList = new ArrayList<>();
         String sql = "select * from [User] where RoleId=3 or RoleId=4;";
