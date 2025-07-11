@@ -4,6 +4,7 @@
  */
 package controller.Employee;
 
+import DAO.AdminDAO;
 import DAO.QuestionDAO;
 import DAO.TestScheduleDAO;
 import DAO.TestSessionDAO;
@@ -39,7 +40,9 @@ public class SubmitTestServlet extends HttpServlet {
             for (Question q : questions) {
                 String paramName = "answer_" + q.getQuestionId();
                 String ansStr = request.getParameter(paramName);
-                if (ansStr == null || ansStr.isEmpty()) continue;
+                if (ansStr == null || ansStr.isEmpty()) {
+                    continue;
+                }
 
                 int ans = Integer.parseInt(ansStr);
                 if (ans == q.getAnswer()) {
@@ -65,7 +68,9 @@ public class SubmitTestServlet extends HttpServlet {
             User user = userDao.getUserById(userId);
 
             String message = null;
-
+            AdminDAO admindao = new AdminDAO();
+            String action = "User ID " + userId + " submit test";
+            admindao.logAction(user.getUserId(), action);
             if (user != null && user.getRoleId() == 4) {
                 if (mark >= 75) {
                     userDao.updateStatusAndRole(userId, "active", 3);
