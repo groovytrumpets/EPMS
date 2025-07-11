@@ -2,36 +2,61 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.FormTemplate" %>
 
-<html>
+<html lang="vi">
 <head>
-    <title>Form List</title>
+    <meta charset="UTF-8">
+    <title>Danh sách Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h2>Available Forms</h2>
+<body class="bg-light">
 
-<table border="1">
-    <tr>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Download</th>
-    </tr>
-<%
-    List<FormTemplate> forms = (List<FormTemplate>) request.getAttribute("forms");
-    if (forms != null) {
-        for (FormTemplate form : forms) {
-%>
-    <tr>
-        <td><%= form.getTitle() %></td>
-        <td><%= form.getStatus() %></td>
-        <td>
-            <a href="downloadForm?id=<%= form.getTemplateId() %>">Download</a>
-        </td>
-    </tr>
-<%
-        }
-    }
-%>
-</table>
+<div class="container py-5">
+    <h2 class="mb-4">Danh sách Form có sẵn</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tiêu đề</th>
+                    <th>Trạng thái</th>
+                    <th>Tải xuống</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    List<FormTemplate> forms = (List<FormTemplate>) request.getAttribute("forms");
+                    if (forms != null) {
+                        for (FormTemplate form : forms) {
+                            String badgeClass = "secondary";
+                            if ("created".equalsIgnoreCase(form.getStatus())) {
+                                badgeClass = "primary";
+                            } else if ("pending".equalsIgnoreCase(form.getStatus())) {
+                                badgeClass = "warning";
+                            } else if ("approved".equalsIgnoreCase(form.getStatus())) {
+                                badgeClass = "success";
+                            }
+                %>
+                <tr>
+                    <td><%= form.getTitle() %></td>
+                    <td>
+                        <span class="badge bg-<%= badgeClass %>">
+                            <%= form.getStatus() %>
+                        </span>
+                    </td>
+                    <td>
+                        <a href="downloadForm?id=<%= form.getTemplateId() %>" class="btn btn-sm btn-success">
+                            Download
+                        </a>
+                    </td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

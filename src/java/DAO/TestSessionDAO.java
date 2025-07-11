@@ -26,4 +26,32 @@ public class TestSessionDAO extends DBContext {
         }
         return -1;
     }
+    public TestSession getTestById(int testId) throws SQLException {
+    String sql = "SELECT * FROM TestSession WHERE TestId = ?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setInt(1, testId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        return new TestSession(
+                rs.getInt("TestId"),
+                rs.getInt("TestScheduleId"),
+                rs.getString("Title"),
+                rs.getInt("Timer"),
+                rs.getTimestamp("Deadline"),
+                rs.getInt("Mark"),
+                rs.getString("Status")
+        );
+    }
+    return null;
+}
+    public void updateMarkAndStatus(int testId, int mark, String status) throws SQLException {
+    String sql = "UPDATE TestSession SET Mark = ?, Status = ? WHERE TestId = ?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setInt(1, mark);
+    ps.setString(2, status);
+    ps.setInt(3, testId);
+    ps.executeUpdate();
+}
+
+
 }

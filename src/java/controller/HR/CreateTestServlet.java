@@ -80,7 +80,7 @@ public class CreateTestServlet extends HttpServlet {
                     }
                 }
 
-                response.getWriter().println("Tạo bài test cho nhóm Employee thành công!");
+                response.getWriter().println("Successfully created a quiz for the Employee group!");
 
             } else {
                 // HR tạo test cho 1 user duy nhất
