@@ -100,7 +100,7 @@ public class UploadFormTemplateServlet extends HttpServlet {
         FormTemplate template = new FormTemplate();
         template.setTitle(title);
         template.setFileLink(uploadedUrl);
-        template.setCreateDate(LocalDateTime.now());
+        template.setCreateDate(java.time.LocalDateTime.now());
         template.setStatus(status);
         template.setDownloadCount(0);
         template.setUserId(userId);
@@ -109,6 +109,12 @@ public class UploadFormTemplateServlet extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             dao.insertFormTemplate(template);
 
+            jakarta.servlet.http.HttpSession session = request.getSession();
+            model.User currentUser = (model.User) session.getAttribute("acc");
+            if (currentUser != null) {
+                String action = "Uploaded form template: " + title;
+                dao.logAction(currentUser.getUserId(), action);
+            }
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().println("Upload & Save Successfully: <a href='" + uploadedUrl + "'>" + uploadedUrl + "</a>");
         } catch (Exception e) {

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.ArrayList;
+import model.ActivityLog;
 import model.User;
 
 /**
@@ -72,10 +73,12 @@ public class DashboardServlet extends HttpServlet {
             List<User> listUsers = adminDAO.getAllNonAdminUsers();
             int totalUsers = listUsers.size();
             List<Object[]> userCreationStats = adminDAO.getUserCreationStats();
+            List<ActivityLog> logs = adminDAO.getAllLogs();
 
             request.setAttribute("listuser", listUsers);
             request.setAttribute("totalUsers", totalUsers);
             request.setAttribute("userCreationStats", userCreationStats);
+            request.setAttribute("logs", logs);
         } catch (Exception e) {
             request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
         }

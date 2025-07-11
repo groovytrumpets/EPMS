@@ -87,7 +87,16 @@ public class UpdateRoleServlet extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             dao.updateRole(userId, roleId);
 
+            jakarta.servlet.http.HttpSession session = request.getSession();
+            model.User admin = (model.User) session.getAttribute("acc");
+
+            if (admin != null) {
+                String action = "Changed role of user ID " + userId + " to role ID " + roleId;
+                dao.logAction(admin.getUserId(), action);
+            }
+
             response.sendRedirect("admindashboard");
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi cập nhật quyền");
