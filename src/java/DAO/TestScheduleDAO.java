@@ -47,5 +47,39 @@ public class TestScheduleDAO extends DBContext {
         }
         return list;
     }
-    
+    public List<Object[]> getAllTestSchedules() throws SQLException {
+    List<Object[]> list = new ArrayList<>();
+    String sql = """
+        SELECT 
+            TS.TestScheduleId,
+            U.FullName,
+            S.Title,
+            S.Deadline,
+            S.Status,
+            S.Mark,
+            U.UserId,
+            S.TestId
+        FROM TestSchedule TS
+        JOIN [User] U ON TS.UserId = U.UserId
+        JOIN TestSession S ON TS.TestScheduleId = S.TestScheduleId
+        ORDER BY S.Deadline DESC
+    """;
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+    while (rs.next()) {
+        Object[] row = new Object[]{
+                rs.getInt("TestScheduleId"),
+                rs.getString("FullName"),
+                rs.getString("Title"),
+                rs.getTimestamp("Deadline"),
+                rs.getString("Status"),
+                rs.getInt("Mark"),
+                rs.getInt("UserId"),
+                rs.getInt("TestId")
+        };
+        list.add(row);
+    }
+    return list;
+}
+
 }
