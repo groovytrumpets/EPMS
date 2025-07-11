@@ -202,7 +202,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                     <li><a href="profile">User Profile</a></li>
-                                                    <li><a href="admin/user-profile.html">Change Password</a></li>
+                                                    <li><a href="changePassword">Change Password</a></li>
                                                     </c:otherwise>
                                                 </c:choose>
 
