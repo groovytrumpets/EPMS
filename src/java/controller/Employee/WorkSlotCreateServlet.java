@@ -4,6 +4,7 @@
  */
 package controller.Employee;
 
+import DAO.AdminDAO;
 import DAO.WorkScheduleDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -69,28 +70,28 @@ public class WorkSlotCreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("acc");
+        User user = (User) session.getAttribute("acc");
 //        String userId_raw = request.getParameter("id");
         String error = request.getParameter("error");
         String mess = request.getParameter("mess");
         int userId;
-         try {
-           
+        try {
+
             userId = user.getUserId();
             WorkScheduleDAO wsd = new WorkScheduleDAO();
-             List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(userId);
-             request.setAttribute("pendingSchedulesList", pendingSchedulesList);
-             
+            List<WorkSchedule> pendingSchedulesList = wsd.getListofPendingSchedule(userId);
+            request.setAttribute("pendingSchedulesList", pendingSchedulesList);
+
 //            request.setAttribute("skillMentor", mentorSkillList);
             request.setAttribute("error", error);
             request.setAttribute("mess", mess);
-             request.setAttribute("uFound", userId);
+            request.setAttribute("uFound", userId);
             request.setAttribute("slotList", pendingSchedulesList);
-             //s;ot view
-             List<String> dateConverted = new ArrayList<>();
+            //s;ot view
+            List<String> dateConverted = new ArrayList<>();
             List<String> enddateConverted = new ArrayList<>();
             List<String> statusSlot = new ArrayList<>();
-            
+
             for (int i = 0; i < pendingSchedulesList.size(); i++) {
                 String startDate = pendingSchedulesList.get(i).getStartDate().toString();
                 String endDate = pendingSchedulesList.get(i).getEndDate().toString();
@@ -99,15 +100,15 @@ public class WorkSlotCreateServlet extends HttpServlet {
                 dateConverted.add(startDate);
                 enddateConverted.add(endDate);
             }
-            
+
             request.setAttribute("status", new Gson().toJson(statusSlot));
             request.setAttribute("values", new Gson().toJson(dateConverted));
             request.setAttribute("endValues", new Gson().toJson(enddateConverted));
 
             request.getRequestDispatcher("slotCreate.jsp").forward(request, response);
-         }catch(Exception e){
-             System.out.println(e);
-         }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -122,7 +123,7 @@ public class WorkSlotCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("acc");
+        User user = (User) session.getAttribute("acc");
         String slottime = request.getParameter("slotTime");
 
         int employeeId;
@@ -147,35 +148,35 @@ public class WorkSlotCreateServlet extends HttpServlet {
                 throw new IllegalArgumentException("Out of slot range!");
             }
         }
-       //genarate date
+        //genarate date
         LocalDate today = LocalDate.now();
         LocalTime timeStart = LocalTime.of(start, 0);
         LocalTime timeEnd = LocalTime.of(end, 0);
-        
+
         LocalDateTime WorkScheduleStart = LocalDateTime.of(today, timeStart);
         LocalDateTime WorkScheduleEnd = LocalDateTime.of(today, timeEnd);
-        
-        
+
         WorkScheduleDAO wsd = new WorkScheduleDAO();
 //        employeeId = Integer.parseInt(employeeId_raw);
         WorkSchedule schedule = new WorkSchedule();
         schedule.setStatus("pending");
         schedule.setStartDate(WorkScheduleStart);
         schedule.setEndDate(WorkScheduleEnd);
-        schedule.setRemainLeave(12);      
-        schedule.setWorkDay(0);  
+        schedule.setRemainLeave(12);
+        schedule.setWorkDay(0);
         try {
-            employeeId=user.getUserId();
-        schedule.setUserId(employeeId);
-            
+            employeeId = user.getUserId();
+            schedule.setUserId(employeeId);
+
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-        
-
 
         if (wsd.addSlot(schedule)) {
+            User admin = (User) session.getAttribute("acc");
+            AdminDAO admindao = new AdminDAO();
+            String action = "Create new work schedule";
+            admindao.logAction(admin.getUserId(), action);
             response.sendRedirect("slotdraft?mess=Your slot has been created successfully!");
         } else {
             response.sendRedirect("slotdraft?mess=Unable to create your slot in the Slot draft. Please try again.");
