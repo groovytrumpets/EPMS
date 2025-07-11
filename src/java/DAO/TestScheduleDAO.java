@@ -81,5 +81,16 @@ public class TestScheduleDAO extends DBContext {
     }
     return list;
 }
+    public int getUserIdByScheduleId(int scheduleId) throws SQLException {
+    String sql = "SELECT UserId FROM TestSchedule WHERE TestScheduleId = ?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setInt(1, scheduleId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        return rs.getInt("UserId");
+    }
+    return -1;
+}
+
 
 }

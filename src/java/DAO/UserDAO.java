@@ -107,5 +107,32 @@ public class UserDAO extends DBContext {
             System.out.println("❌ Đăng nhập thất bại. Sai email hoặc mật khẩu.");
         }
     }
+    public void updateStatusAndRole(int userId, String status, int roleId) throws SQLException {
+    String sql = "UPDATE [User] SET Status = ?, RoleId = ? WHERE UserId = ?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setString(1, status);
+    ps.setInt(2, roleId);
+    ps.setInt(3, userId);
+    ps.executeUpdate();
+}
+    public User getUserById(int userId) throws SQLException {
+    String sql = "SELECT * FROM [User] WHERE UserId = ?";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setInt(1, userId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        User u = new User();
+        u.setUserId(rs.getInt("UserId"));
+        u.setUserName(rs.getString("Username"));
+        u.setRoleId(rs.getInt("RoleId"));
+        u.setStatus(rs.getString("Status"));
+        u.setEmail(rs.getString("Email"));
+        u.setFullName(rs.getString("FullName"));
+        // lấy thêm các field khác nếu muốn
+        return u;
+    }
+    return null;
+}
+
 
 }
