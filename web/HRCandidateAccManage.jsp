@@ -66,7 +66,7 @@
     <body class="ttr-opened-sidebar ttr-pinned-sidebar">
 
         <!-- header start -->
-        <jsp:include page="headerAdmin.jsp" />
+        <jsp:include page="AdminPage/headerAdmin.jsp" />
 
         <!-- Left sidebar menu end -->
 
