@@ -46,6 +46,34 @@ public class HRDAO extends DBContext {
     } catch (SQLException e) {
         System.out.println(e);
     }
+    public List<User> getListOfEmployeeAndCandidateUsers() {
+        List<User> candidateList = new ArrayList<>();
+        String sql = "select * from [User] where RoleId=3 or RoleId=4;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User can = new User();
+                can.setUserId(rs.getInt("userId"));
+                can.setUserName(rs.getString("username"));
+                can.setPassword(rs.getString("password"));
+                can.setStatus(rs.getString("status"));
+                can.setFullName(rs.getString("fullName"));
+                can.setPhone(rs.getString("phone"));
+                can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+                can.setDob(rs.getDate("dob"));
+                can.setEmail(rs.getString("email"));
+                can.setGender(rs.getString("gender"));
+                can.setRoleId(rs.getInt("roleId"));
+                candidateList.add(can);
+            }
+            System.out.println(candidateList.get(0).getFullName());
+            return candidateList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
     return candidateList;
 }
     public List<User> getListOfEmployeeAndCandidateUsers() {
