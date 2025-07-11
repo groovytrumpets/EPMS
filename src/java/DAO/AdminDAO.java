@@ -4,12 +4,17 @@
  */
 package DAO;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import model.ActivityLog;
 import model.FormTemplate;
 import model.Role;
@@ -188,8 +193,7 @@ public class AdminDAO extends DBContext {
         List<ActivityLog> list = new ArrayList<>();
         String sql = "SELECT * FROM ActivityLog ORDER BY CreateDate DESC";
         try (
-                PreparedStatement ps = connection.prepareStatement(sql); 
-                ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 ActivityLog log = new ActivityLog();
                 log.setLogId(rs.getInt("LogId"));
@@ -203,4 +207,21 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
+
+    public String backupDatabase(String backupDirPath) throws SQLException {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filePath = backupDirPath + "\\EPMS_Backup_" + timestamp + ".bak";
+
+        String sql = "BACKUP DATABASE EPMS TO DISK = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, filePath);
+            stmt.executeUpdate();
+        }
+        return filePath;
+    }
+
+    public AdminDAO() {
+        super(); // gọi constructor DBContext để lấy connection
+    }
+
 }

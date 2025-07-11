@@ -28,7 +28,7 @@
         <servlet-name>UserProfileServlet</servlet-name>
         <servlet-class>controller.common.UserProfileServlet</servlet-class>
     </servlet>
-<!--    ádasd-->
+    <!--    ádasd-->
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>controller.common.ChangePassword</servlet-class>
@@ -60,6 +60,10 @@
     <servlet>
         <servlet-name>StartTestServlet</servlet-name>
         <servlet-class>controller.Employee.StartTestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BackupDatabaseServlet</servlet-name>
+        <servlet-class>controller.common.BackupDatabaseServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -120,5 +124,9 @@
     <servlet-mapping>
         <servlet-name>StartTestServlet</servlet-name>
         <url-pattern>/startTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BackupDatabaseServlet</servlet-name>
+        <url-pattern>/backupDatabase</url-pattern>
     </servlet-mapping>
 </web-app>

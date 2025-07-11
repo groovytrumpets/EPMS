@@ -46,7 +46,9 @@
                     <ul class="db-breadcrumb-list">
                         <button class="btn btn-success" onclick="triggerUpload()">Upload Form</button>
                         <button class="btn btn-success" onclick="document.getElementById('logModal').style.display = 'block'">Log Activity</button>
-
+                        <form action="backupDatabase" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-success">Backup Data</button>
+                        </form>
                         <form id="uploadForm" action="uploadformtemplate" method="post" enctype="multipart/form-data" style="display: none;">
                             <input type="file" id="fileInput" name="file" onchange="uploadFile()" />
                             <input type="hidden" name="title" value="Form hành chính mẫu" />
