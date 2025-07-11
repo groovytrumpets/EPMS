@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.HR;
 
 import DAO.*;
@@ -25,7 +24,9 @@ public class CreateTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        User hr = (User) session.getAttribute("acc");
+        AdminDAO admindao = new AdminDAO();
         try {
             String title = request.getParameter("title");
             int timer = Integer.parseInt(request.getParameter("timer"));
@@ -115,6 +116,10 @@ public class CreateTestServlet extends HttpServlet {
                 }
 
                 response.getWriter().println("Tạo bài test cho user thành công!");
+                
+
+                String action = "User ID " + hr.getUserId() + " create test ";
+                admindao.logAction(hr.getUserId(), action);
             }
 
         } catch (Exception e) {

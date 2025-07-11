@@ -1,5 +1,6 @@
 package controller.Employee;
 
+import DAO.AdminDAO;
 import DAO.FormTemplateDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import model.FormTemplate;
+import model.User;
 
 public class DownloadFormServlet extends HttpServlet {
   @Override
@@ -17,7 +19,8 @@ public class DownloadFormServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String idRaw = request.getParameter("id");
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("acc");
         if (idRaw == null || idRaw.isEmpty()) {
             // **KHÔNG có id → HIỂN THỊ DANH SÁCH**
             FormTemplateDAO dao = new FormTemplateDAO();
@@ -42,7 +45,10 @@ public class DownloadFormServlet extends HttpServlet {
                     dao.updateDownloadCount(templateId);
 
                     String cloudUrl = form.getFileLink();
-
+            User admin = (User) session.getAttribute("acc");
+            AdminDAO admindao = new AdminDAO();
+            String action = "User ID " + user.getUserId() +" download form" ;
+            admindao.logAction(admin.getUserId(), action);
                     if (cloudUrl == null || cloudUrl.isEmpty()) {
                         response.getWriter().println("File không tồn tại trên Cloudinary!");
                         return;
