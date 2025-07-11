@@ -4,6 +4,7 @@
  */
 package controller.common;
 
+import DAO.AdminDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,7 +73,6 @@ public class UserProfileServlet extends HttpServlet {
      */
     @Override
 
-   
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -110,6 +110,12 @@ public class UserProfileServlet extends HttpServlet {
                 acc.setPhone(phone);
                 acc.setDob(dob);
                 acc.setGender(gender);
+                User admin = (User) session.getAttribute("acc");
+
+                AdminDAO admindao = new AdminDAO();
+
+                String action = "Update profile by " + acc.getFullName() ;
+                admindao.logAction(admin.getUserId(), action);
                 session.setAttribute("acc", acc);
             } else {
                 request.setAttribute("error", "Failed to update profile.");

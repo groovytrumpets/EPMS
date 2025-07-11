@@ -1,7 +1,6 @@
 package controller.common;
 
-
-
+import DAO.AdminDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import model.User;
 
 public class ResetChangePassword extends HttpServlet {
 
@@ -54,7 +54,7 @@ public class ResetChangePassword extends HttpServlet {
         String newPass1 = request.getParameter("newPass1");
         String newPass2 = request.getParameter("newPass2");
         String email = (String) session.getAttribute("email");
-
+        User currentUser = (User) session.getAttribute("acc");  // Đã đăng nhập
         // Validate password strength
         if (!isStrongPassword(newPass1)) {
             request.setAttribute("error", "Password must contain at least 8 characters including uppercase, lowercase, number, and special character.");
@@ -74,6 +74,12 @@ public class ResetChangePassword extends HttpServlet {
         boolean success = userDAO.updatePasswordByEmail(email, encryptedPassword);
 
         if (success) {
+            User admin = (User) session.getAttribute("acc");
+
+            AdminDAO admindao = new AdminDAO();
+
+            String action = "Changed password after reset password by user " + currentUser.getFullName();
+            admindao.logAction(admin.getUserId(), action);
             request.setAttribute("message", "Password changed successfully. Please log in again.");
         } else {
             request.setAttribute("error", "An error occurred while updating the password.");

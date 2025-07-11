@@ -4,6 +4,7 @@
  */
 package controller.common;
 
+import DAO.AdminDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,6 +102,12 @@ public class ChangePassword extends HttpServlet {
         boolean success = userDAO.updatePasswordByEmail(email, encryptedNew);
 
         if (success) {
+            User admin = (User) session.getAttribute("acc");
+
+            AdminDAO admindao = new AdminDAO();
+
+            String action = "Changed password of user " + currentUser.getFullName() ;
+            admindao.logAction(admin.getUserId(), action);
             session.setAttribute("message", "Password changed successfully.");
             response.sendRedirect("changePassword");
 
