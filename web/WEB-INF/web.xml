@@ -73,6 +73,10 @@
         <servlet-name>HRViewTestDetailServlet</servlet-name>
         <servlet-class>controller.HR.HRViewTestDetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BackupDatabaseServlet</servlet-name>
+        <servlet-class>controller.common.BackupDatabaseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -144,6 +148,10 @@
     <servlet-mapping>
         <servlet-name>HRViewTestDetailServlet</servlet-name>
         <url-pattern>/hr/viewTestDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BackupDatabaseServlet</servlet-name>
+        <url-pattern>/backupDatabase</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
