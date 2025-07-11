@@ -11,13 +11,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.util.*;
+
 /**
  *
  * @author groovytrumpets <nguyennamkhanhnnk@gmail.com>
  */
 public class CloudinaryUploader {
 
-   private static final String CLOUD_NAME = "dlevje6nq";
+    private static final String CLOUD_NAME = "dlevje6nq";
     private static final String API_KEY = "532963552644636";
     private static final String API_SECRET = "sBhbk34GT9XFuSiGMW-mn8OgLG8";
 
@@ -28,7 +29,9 @@ public class CloudinaryUploader {
 
         // Tạo thông tin bảo mật
         String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
-        String signature = sha1("timestamp=" + timestamp + API_SECRET);
+        String folder = "EPMS"; // dùng lại sau
+        String toSign = "folder=" + folder + "&timestamp=" + timestamp;
+        String signature = sha1(toSign + API_SECRET);
 
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setDoOutput(true);
@@ -36,9 +39,7 @@ public class CloudinaryUploader {
         conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 
         try (
-            OutputStream output = conn.getOutputStream();
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8), true)
-        ) {
+                OutputStream output = conn.getOutputStream(); PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8), true)) {
             // api_key
             writer.append("--").append(boundary).append(CRLF);
             writer.append("Content-Disposition: form-data; name=\"api_key\"").append(CRLF).append(CRLF).append(API_KEY).append(CRLF);
@@ -50,6 +51,10 @@ public class CloudinaryUploader {
             // signature
             writer.append("--").append(boundary).append(CRLF);
             writer.append("Content-Disposition: form-data; name=\"signature\"").append(CRLF).append(CRLF).append(signature).append(CRLF);
+
+            writer.append("--").append(boundary).append(CRLF);
+            writer.append("Content-Disposition: form-data; name=\"folder\"").append(CRLF).append(CRLF);
+            writer.append(folder).append(CRLF); // dùng biến đã định nghĩa
 
             // file
             writer.append("--").append(boundary).append(CRLF);
@@ -83,15 +88,17 @@ public class CloudinaryUploader {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             byte[] result = md.digest(input.getBytes(StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
-            for (byte b : result) sb.append(String.format("%02x", b));
+            for (byte b : result) {
+                sb.append(String.format("%02x", b));
+            }
             return sb.toString();
         } catch (Exception e) {
             throw new RuntimeException("SHA1 failed", e);
         }
     }
+
     public static void main(String[] args) {
         File file = new File("D:\\Demo.txt");  // Đường dẫn file bạn muốn test
-
         try {
             String uploadedUrl = uploadFile(file);
             System.out.println("Upload thành công:");
