@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -82,10 +84,20 @@ public class ToggleStatusServlet extends HttpServlet {
 
         try {
             int userId = Integer.parseInt(userIdRaw);
+
+            HttpSession session = request.getSession();
+            User admin = (User) session.getAttribute("acc");
+            if (admin == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
             AdminDAO dao = new AdminDAO();
             dao.updateStatus(userId, newStatus);
 
-            response.sendRedirect("admindashboard"); // reload trang
+            String action = "Changed status of user ID " + userId + " to " + newStatus;
+            dao.logAction(admin.getUserId(), action);
+
+            response.sendRedirect("admindashboard");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi cập nhật trạng thái");

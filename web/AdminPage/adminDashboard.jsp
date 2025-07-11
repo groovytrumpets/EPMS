@@ -45,6 +45,7 @@
                     <h4 class="breadcrumb-title">Dashboard</h4>
                     <ul class="db-breadcrumb-list">
                         <button class="btn btn-success" onclick="triggerUpload()">Upload Form</button>
+                        <button class="btn btn-success" onclick="document.getElementById('logModal').style.display = 'block'">Log Activity</button>
 
                         <form id="uploadForm" action="uploadformtemplate" method="post" enctype="multipart/form-data" style="display: none;">
                             <input type="file" id="fileInput" name="file" onchange="uploadFile()" />
@@ -181,6 +182,33 @@
                     </div>
                 </div>
             </div>
+            <div id="logModal" style="display:none; position:fixed; top:10%; left:10%; width:80%; height:80%; background-color:white; border:1px solid #ccc; overflow:auto; z-index:9999; padding:20px;">
+                <h2>Activity</h2>
+                <button onclick="document.getElementById('logModal').style.display = 'none'">Close</button>
+                <br/><br/>
+
+                <table border="1" cellpadding="8" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Log ID</th>
+                            <th>User ID</th>
+                            <th>Action</th>
+                            <th>Create Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="log" items="${logs}">
+                            <tr>
+                                <td>${log.logId}</td>
+                                <td>${log.userId}</td>
+                                <td>${log.action}</td>
+                                <td>${log.createDate}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
         </main>
         <div class="ttr-overlay"></div>
 
@@ -203,7 +231,7 @@
         <script src='assets/vendors/calendar/moment.min.js'></script>
         <script src='assets/vendors/calendar/fullcalendar.js'></script>
         <script>
-                                const USER_ID = 1;
+                    const USER_ID = 1;
         </script>
         <script>
             function triggerUpload() {

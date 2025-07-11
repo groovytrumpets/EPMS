@@ -83,6 +83,14 @@ public class UpdateUserServlet extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             dao.updateUserProfile(userId, username, fullName, email, phone, gender);
 
+            jakarta.servlet.http.HttpSession session = request.getSession();
+            model.User admin = (model.User) session.getAttribute("acc");
+
+            if (admin != null) {
+                String action = "Updated user info for user ID " + userId;
+                dao.logAction(admin.getUserId(), action);
+            }
+
             response.sendRedirect("admindashboard");
         } catch (Exception e) {
             e.printStackTrace();

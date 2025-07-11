@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
  * @author nguye
  */
 public class ActivityLog {
+
     private int logId;
     private int userId;
     private String action;
     private LocalDateTime createDate;
+    private String userFullName;
 
     public ActivityLog(int logId, int userId, String action, LocalDateTime createDate) {
         this.logId = logId;
@@ -24,6 +26,14 @@ public class ActivityLog {
     }
 
     public ActivityLog() {
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
     public int getLogId() {
@@ -57,6 +67,5 @@ public class ActivityLog {
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
-    
 
 }
