@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import model.User;
 
 /**
@@ -148,6 +146,73 @@ public class UserDAO extends DBContext {
             list.add(u);
         }
         return list;
+    }
+
+    public boolean isUsernameExists(String username) {
+        String sql = "SELECT 1 FROM [User] WHERE Username = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, username);
+            ResultSet rs = st.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isEmailExists(String email) {
+        String sql = "SELECT 1 FROM [User] WHERE Email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isPhoneExists(String phone) {
+        String sql = "SELECT 1 FROM [User] WHERE Phone = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, phone);
+            ResultSet rs = st.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public int insertUser(User user) {
+        String sql = "INSERT INTO [User] (Username, Password, Status, FullName, Phone, Email, RoleId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement st = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            st.setString(1, user.getUserName());
+            st.setString(2, user.getPassword());
+            st.setString(3, user.getStatus());
+            st.setString(4, user.getFullName());
+            st.setString(5, user.getPhone());
+            st.setString(6, user.getEmail());
+            st.setInt(7, user.getRoleId()); // Bạn cần set RoleId phù hợp (ví dụ: 3 cho candidate)
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public void activateUser(int userId) {
+        String sql = "UPDATE [User] SET Status = 'Active' WHERE UserId = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, userId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

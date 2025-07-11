@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller.HR.CVmanage;
 
 import DAO.FormSubmissionDAO;
@@ -13,15 +8,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RejectCVServlet", urlPatterns = {"/RejectCVServlet"})
-public class RejectCVServlet extends HttpServlet {
+@WebServlet(name = "ApproveLeaveServlet", urlPatterns = {"/ApproveLeaveServlet"})
+public class ApproveLeaveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int submissionId = Integer.parseInt(request.getParameter("submissionId"));
-        // Cập nhật trạng thái form submission
         FormSubmissionDAO formDAO = new FormSubmissionDAO();
-        formDAO.rejectSubmission(submissionId);
-        // Chuyển hướng về trang danh sách
-        response.sendRedirect("/HRPendingCVList.jsp");
+        formDAO.approveSubmission(submissionId);
+        response.sendRedirect("/HRPendingLeaveList.jsp");
     }
-}
+} 
