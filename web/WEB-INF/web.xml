@@ -28,6 +28,7 @@
         <servlet-name>UserProfileServlet</servlet-name>
         <servlet-class>controller.common.UserProfileServlet</servlet-class>
     </servlet>
+<!--    ádasd-->
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>controller.common.ChangePassword</servlet-class>
