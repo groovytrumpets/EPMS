@@ -203,6 +203,15 @@
                                                     <c:otherwise>
                                                     <li><a href="profile">User Profile</a></li>
                                                     <li><a href="changePassword">Change Password</a></li>
+                                                        <c:choose>
+                                                            <c:when test="${sessionScope.acc.roleId==1}">
+                                                            
+                                                            </c:when>
+                                                            <c:when test="${sessionScope.acc.roleId==3}">
+                                                            <li><a href="createSlot">Work schedule</a></li>
+                                                            <li><a href="#">Work Test</a></li>
+                                                            </c:when>
+                                                        </c:choose>
                                                     </c:otherwise>
                                                 </c:choose>
 
