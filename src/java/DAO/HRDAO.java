@@ -46,10 +46,61 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
+    public List<User> getListOfEmployeeAndCandidateUsers() {
+        List<User> candidateList = new ArrayList<>();
+        String sql = "select * from [User] where RoleId=3 or RoleId=4;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User can = new User();
+                can.setUserId(rs.getInt("userId"));
+                can.setUserName(rs.getString("username"));
+                can.setPassword(rs.getString("password"));
+                can.setStatus(rs.getString("status"));
+                can.setFullName(rs.getString("fullName"));
+                can.setPhone(rs.getString("phone"));
+                can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+                can.setDob(rs.getDate("dob"));
+                can.setEmail(rs.getString("email"));
+                can.setGender(rs.getString("gender"));
+                can.setRoleId(rs.getInt("roleId"));
+                candidateList.add(can);
+            }
+            System.out.println(candidateList.get(0).getFullName());
+            return candidateList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
   
     public List<Document> getListOfCV() {
         List<Document> CVList = new ArrayList<>();
         String sql = "select * from Document where Type='CV' and Status='submitted'";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Document CV = new Document();
+                CV.setDocumentId(rs.getInt("documentId"));
+                CV.setTitle(rs.getString("title"));
+                CV.setFileLink(rs.getString("fileLink"));
+                CV.setType(rs.getString("type"));
+                CV.setStatus(rs.getString("status"));
+                CV.setUploadDate(rs.getTimestamp("uploadDate").toLocalDateTime());
+                CV.setUserId(rs.getInt("userId"));
+                CVList.add(CV);
+            }
+            return CVList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public List<Document> getAllListOfCV() {
+        List<Document> CVList = new ArrayList<>();
+        String sql = "select * from Document where Type='CV'";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

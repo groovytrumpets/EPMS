@@ -74,6 +74,31 @@ public class WorkScheduleDAO extends DBContext {
         }
         return null;
     }
+    public List<WorkSchedule> getListofRuningSchedule(int id) {
+        List<WorkSchedule> workSchedules = new ArrayList<>();
+        String sql = "select * from WorkSchedule where UserId=? and Status = 'running'";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                WorkSchedule slot = new WorkSchedule();
+                slot.setWorkScheduleId(rs.getInt("WorkScheduleId"));
+                slot.setStatus(rs.getString("Status"));
+                slot.setStartDate(rs.getTimestamp("StartDate").toLocalDateTime());
+                slot.setEndDate(rs.getTimestamp("EndDate").toLocalDateTime());
+                slot.setRemainLeave(rs.getInt("RemainLeave"));
+                slot.setWorkDay(rs.getInt("WorkDay"));
+                slot.setUserId(rs.getInt("UserId"));
+
+                workSchedules.add(slot);
+            }
+            return workSchedules;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
 //        LocalDate today = LocalDate.now();
@@ -116,6 +141,55 @@ public class WorkScheduleDAO extends DBContext {
         } catch (SQLException e) {
             e.printStackTrace();
             return false; // Return false if there was an error
+        }
+    }
+
+    public List<WorkSchedule> getListofWorkScheduleByUid(int id) {
+        List<WorkSchedule> workSchedules = new ArrayList<>();
+        String sql = "select * from WorkSchedule where UserId=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                WorkSchedule slot = new WorkSchedule();
+                slot.setWorkScheduleId(rs.getInt("WorkScheduleId"));
+                slot.setStatus(rs.getString("Status"));
+                slot.setStartDate(rs.getTimestamp("StartDate").toLocalDateTime());
+                slot.setEndDate(rs.getTimestamp("EndDate").toLocalDateTime());
+                slot.setRemainLeave(rs.getInt("RemainLeave"));
+                slot.setWorkDay(rs.getInt("WorkDay"));
+                slot.setUserId(rs.getInt("UserId"));
+
+                workSchedules.add(slot);
+            }
+            return workSchedules;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void activeWorkScheduleById(int userId) {
+        String sql ="update WorkSchedule set Status = 'approved' where Status='pending' and UserId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void rejectWorkScheduleById(int userId) {
+        String sql ="update WorkSchedule set Status = 'rejected' where Status='pending' and UserId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 }
