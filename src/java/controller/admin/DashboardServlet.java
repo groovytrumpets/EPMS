@@ -40,7 +40,7 @@ public class DashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DashboardServlet</title>");            
+            out.println("<title>Servlet DashboardServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
@@ -60,7 +60,12 @@ public class DashboardServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
+        User loggedInUser = (User) request.getSession().getAttribute("acc");
+        if (loggedInUser == null || loggedInUser.getRoleId() != 1) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
         try {
             AdminDAO adminDAO = new AdminDAO();
 
