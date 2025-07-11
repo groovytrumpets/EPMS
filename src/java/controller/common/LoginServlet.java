@@ -110,10 +110,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 if (a != null) {
                     
-                    if (a.getRoleId() == 1) {
-                        request.setAttribute("notify", "Admin can't login here");
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
-                    }
+                    
 
                     if (rememberMe != null) {  // Checkbox was checked
                         Cookie emailCookie = new Cookie("email", email);

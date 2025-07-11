@@ -88,7 +88,7 @@ public class ToggleStatusServlet extends HttpServlet {
             response.sendRedirect("admindashboard"); // reload trang
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "❌ Lỗi cập nhật trạng thái");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi cập nhật trạng thái");
         }
     }
     /**

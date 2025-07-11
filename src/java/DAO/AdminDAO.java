@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
+import model.ActivityLog;
 import model.FormTemplate;
 import model.Role;
 import model.User;
@@ -58,7 +59,7 @@ public class AdminDAO extends DBContext {
     public void updateUserProfile(int userId, String username, String fullName, String email, String phone, String gender) throws SQLException {
         String sql = "UPDATE [User] SET UserName = ?, FullName = ?, Email = ?, Phone = ?, Gender = ? WHERE UserId = ?";
         try (
-            PreparedStatement ps = connection.prepareStatement(sql)) {
+                PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, fullName);
             ps.setString(3, email);
@@ -170,5 +171,36 @@ public class AdminDAO extends DBContext {
 
             ps.executeUpdate();
         }
+    }
+
+    public void logAction(int userId, String action) {
+        String sql = "INSERT INTO ActivityLog (UserId, Action, CreateDate) VALUES (?, ?, GETDATE())";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setString(2, action);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<ActivityLog> getAllLogs() {
+        List<ActivityLog> list = new ArrayList<>();
+        String sql = "SELECT * FROM ActivityLog ORDER BY CreateDate DESC";
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql); 
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                ActivityLog log = new ActivityLog();
+                log.setLogId(rs.getInt("LogId"));
+                log.setUserId(rs.getInt("UserId"));
+                log.setAction(rs.getString("Action"));
+                log.setCreateDate(rs.getTimestamp("CreateDate").toLocalDateTime());
+                list.add(log);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
