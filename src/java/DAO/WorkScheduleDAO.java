@@ -76,7 +76,7 @@ public class WorkScheduleDAO extends DBContext {
     }
     public List<WorkSchedule> getListofRuningSchedule(int id) {
         List<WorkSchedule> workSchedules = new ArrayList<>();
-        String sql = "select * from WorkSchedule where UserId=? and Status = 'running'";
+        String sql = "select * from WorkSchedule where UserId=? and Status = 'approved'";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
