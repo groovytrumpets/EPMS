@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Document;
+import model.FormSubmission;
 import model.User;
 
 /**
@@ -18,36 +19,37 @@ import model.User;
  */
 public class HRDAO extends DBContext {
 
-   public List<User> getListOfCandidateUsers() {
-    List<User> candidateList = new ArrayList<>();
-    String sql = "select * from [User] where RoleId=4;";
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        ResultSet rs = st.executeQuery();
-        while (rs.next()) {
-            User can = new User();
-            can.setUserId(rs.getInt("userId"));
-            can.setUserName(rs.getString("username"));
-            can.setPassword(rs.getString("password"));
-            can.setStatus(rs.getString("status"));
-            can.setFullName(rs.getString("fullName"));
-            can.setPhone(rs.getString("phone"));
-            can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
-            can.setDob(rs.getDate("dob"));
-            can.setEmail(rs.getString("email"));
-            can.setGender(rs.getString("gender"));
-            can.setRoleId(rs.getInt("roleId"));
-            candidateList.add(can);
-        }
-        if (!candidateList.isEmpty()) {
-            System.out.println(candidateList.get(0).getFullName());
+    public List<User> getListOfCandidateUsers() {
+        List<User> candidateList = new ArrayList<>();
+        String sql = "select * from [User] where RoleId=4;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User can = new User();
+                can.setUserId(rs.getInt("userId"));
+                can.setUserName(rs.getString("username"));
+                can.setPassword(rs.getString("password"));
+                can.setStatus(rs.getString("status"));
+                can.setFullName(rs.getString("fullName"));
+                can.setPhone(rs.getString("phone"));
+                can.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+                can.setDob(rs.getDate("dob"));
+                can.setEmail(rs.getString("email"));
+                can.setGender(rs.getString("gender"));
+                can.setRoleId(rs.getInt("roleId"));
+                candidateList.add(can);
+            }
+            if (!candidateList.isEmpty()) {
+                System.out.println(candidateList.get(0).getFullName());
+            }
+            return candidateList;
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return candidateList;
-    } catch (SQLException e) {
-        System.out.println(e);
     }
-    return candidateList;
-}
+
     public List<User> getListOfEmployeeAndCandidateUsers() {
         List<User> candidateList = new ArrayList<>();
         String sql = "select * from [User] where RoleId=3 or RoleId=4;";
@@ -76,8 +78,31 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
-  
-  
+
+    public List<FormSubmission> getAllFormSubmissions() {
+        List<FormSubmission> list = new ArrayList<>();
+        String sql = "SELECT [SubmissionId], [Type], [Purpose], [Status], [CreateDate], [Note], [FileLink], [UserId] FROM FormSubmission";
+
+        try (PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                FormSubmission form = new FormSubmission();
+                form.setSubmissionId(rs.getInt("SubmissionId"));
+                form.setType(rs.getString("Type"));
+                form.setPurpose(rs.getString("Purpose"));
+                form.setStatus(rs.getString("Status"));
+                form.setCreateDate(rs.getTimestamp("CreateDate").toLocalDateTime());
+                form.setNote(rs.getString("Note"));
+                form.setFileLink(rs.getString("FileLink"));
+                form.setUserId(rs.getInt("UserId"));
+                list.add(form);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     public List<Document> getListOfCV() {
         List<Document> CVList = new ArrayList<>();
         String sql = "select * from Document where Type='CV' and Status='submitted'";
@@ -101,6 +126,7 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
+
     public List<Document> getAllListOfCV() {
         List<Document> CVList = new ArrayList<>();
         String sql = "select * from Document where Type='CV'";
@@ -124,42 +150,46 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
-    public void changeCVStatusReject(int cvId){
-        String sql ="update Document set Status = 'rejected' where Type='CV' and DocumentId=?";
+
+    public void changeCVStatusReject(int cvId) {
+        String sql = "update Document set Status = 'rejected' where Type='CV' and DocumentId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cvId);
             st.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void changeCVStatusApprove(int cvId){
-        String sql ="update Document set Status = 'approved' where Type='CV' and DocumentId=?";
+
+    public void changeCVStatusApprove(int cvId) {
+        String sql = "update Document set Status = 'approved' where Type='CV' and DocumentId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cvId);
             st.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void hrCreateAccount(int userId,String password){
-        String sql ="update [User] set Status ='verified',Password=? where UserId=?";
+
+    public void hrCreateAccount(int userId, String password) {
+        String sql = "update [User] set Status ='verified',Password=? where UserId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, password);
             st.setInt(2, userId);
             st.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public User getUserbyId(int userId){
-        String sql ="select * from [User] where UserId=?";
+
+    public User getUserbyId(int userId) {
+        String sql = "select * from [User] where UserId=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, userId);
@@ -184,11 +214,10 @@ public class HRDAO extends DBContext {
         }
         return null;
     }
+
     public static void main(String[] args) {
         HRDAO hrd = new HRDAO();
         hrd.hrCreateAccount(8, "123abc");
-        
-        
-        
+
     }
 }

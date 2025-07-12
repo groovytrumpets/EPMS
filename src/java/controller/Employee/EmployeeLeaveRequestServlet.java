@@ -14,61 +14,95 @@ import model.FormSubmission;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import model.User;
 
 @WebServlet(name = "EmployeeLeaveRequestServlet", urlPatterns = {"/EmployeeLeaveRequestServlet"})
 @MultipartConfig(maxFileSize = 2 * 1024 * 1024) // 2MB
 public class EmployeeLeaveRequestServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("employeeLeaveRequest.jsp").forward(request, response);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String reason = request.getParameter("reason");
-        Part leaveFilePart = request.getPart("leaveFile");
+        // Lấy dữ liệu từ form
+        String type = request.getParameter("type"); // "LeaveRequest"
+        String purpose = request.getParameter("purpose");
+        String note = request.getParameter("note");
+        Part filePart = request.getPart("fileLink"); // tên input trong JSP
 
-        // Lấy userId từ session
+        // Kiểm tra đăng nhập
         HttpSession session = request.getSession(false);
-        Integer userId = (session != null) ? (Integer) session.getAttribute("userId") : null;
-        if (userId == null) {
+        User currentUser = (session != null) ? (User) session.getAttribute("acc") : null;
+
+        if (currentUser == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        // Kiểm tra định dạng file
-        String fileName = leaveFilePart.getSubmittedFileName();
-        String fileExt = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if (!(fileExt.equals("pdf") || fileExt.equals("doc") || fileExt.equals("docx"))) {
-            request.setAttribute("error", "Chỉ chấp nhận file PDF, DOC, DOCX!");
+        int userId = currentUser.getUserId();
+
+        // Validate file
+        if (filePart == null || filePart.getSize() == 0) {
+            request.setAttribute("error", "Vui lòng chọn tệp đính kèm.");
             request.getRequestDispatcher("employeeLeaveRequest.jsp").forward(request, response);
             return;
         }
-        // Kiểm tra dung lượng file
-        if (leaveFilePart.getSize() > 2 * 1024 * 1024) {
+
+        String fileName = filePart.getSubmittedFileName();
+        String fileExt = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+        if (!(fileExt.equals("pdf") || fileExt.equals("doc") || fileExt.equals("docx"))) {
+            request.setAttribute("error", "Chỉ chấp nhận file PDF, DOC hoặc DOCX!");
+            request.getRequestDispatcher("employeeLeaveRequest.jsp").forward(request, response);
+            return;
+        }
+
+        if (filePart.getSize() > 2 * 1024 * 1024) {
             request.setAttribute("error", "File vượt quá dung lượng 2MB!");
             request.getRequestDispatcher("employeeLeaveRequest.jsp").forward(request, response);
             return;
         }
 
-        // Lưu file vào thư mục uploads
+        // Lưu file
         String uploadPath = getServletContext().getRealPath("/uploads");
         File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdir();
-        String saveFileName = userId + "_leave_" + System.currentTimeMillis() + "_" + fileName;
-        String filePath = uploadPath + File.separator + saveFileName;
-        leaveFilePart.write(filePath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
 
-        // Lưu vào FormSubmission
+        String sanitizedFileName = fileName.replaceAll("\\s+", "_");
+        String saveFileName = userId + "_leave_" + System.currentTimeMillis() + "_" + sanitizedFileName;
+        String filePath = uploadPath + File.separator + saveFileName;
+        filePart.write(filePath);
+
+        // Tạo form submission
         FormSubmission form = new FormSubmission();
         form.setUserId(userId);
-        form.setType("Đơn xin nghỉ");
-        form.setStatus("Chờ duyệt");
-        form.setNote(reason);
+        form.setType(type); // "LeaveRequest"
+        form.setPurpose(purpose);
+        form.setStatus("pending");
+        form.setNote(note);
         form.setFileLink("uploads/" + saveFileName);
         form.setCreateDate(LocalDateTime.now());
-        FormSubmissionDAO formDAO = new FormSubmissionDAO();
-        formDAO.insertFormSubmission(form);
 
-        request.setAttribute("success", "Nộp đơn thành công! Vui lòng chờ HR duyệt.");
+        try {
+            FormSubmissionDAO formDAO = new FormSubmissionDAO();
+            formDAO.insertFormSubmission(form);
+            request.setAttribute("success", "Đơn xin nghỉ của bạn đã được gửi thành công. Vui lòng chờ HR duyệt.");
+        } catch (Exception e) {
+            System.err.println("❌ Lỗi khi lưu vào cơ sở dữ liệu: " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("error", "Không thể gửi đơn nghỉ do lỗi hệ thống. Vui lòng thử lại sau.");
+        }
+
         request.getRequestDispatcher("employeeLeaveRequest.jsp").forward(request, response);
     }
-} 
+
+}

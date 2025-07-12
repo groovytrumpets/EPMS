@@ -10,8 +10,38 @@ import java.util.List;
 import model.FormSubmission;
 
 public class FormSubmissionDAO extends DBContext {
+
     public FormSubmissionDAO() {
         super();
+    }
+
+    public FormSubmission getSubmissionById(int id) {
+        String sql = "SELECT * FROM FormSubmission WHERE SubmissionId = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    FormSubmission form = new FormSubmission();
+                    form.setSubmissionId(rs.getInt("SubmissionId"));
+                    form.setType(rs.getString("Type"));
+                    form.setPurpose(rs.getString("Purpose"));
+                    form.setStatus(rs.getString("Status"));
+                    form.setNote(rs.getString("Note"));
+                    form.setFileLink(rs.getString("FileLink"));
+
+                    Timestamp ts = rs.getTimestamp("CreateDate");
+                    if (ts != null) {
+                        form.setCreateDate(ts.toLocalDateTime());
+                    }
+
+                    form.setUserId(rs.getInt("UserId"));
+                    return form;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // nếu không tìm thấy
     }
 
     public void insertFormSubmission(FormSubmission form) {
@@ -77,4 +107,27 @@ public class FormSubmissionDAO extends DBContext {
             e.printStackTrace();
         }
     }
-} 
+
+    public static void main(String[] args) {
+        // 1. Tạo đối tượng mẫu
+        FormSubmission form = new FormSubmission();
+        form.setType("Leave Request");
+        form.setPurpose("Nghỉ phép vì lý do cá nhân");
+        form.setStatus("pending");
+        form.setNote("Tôi xin nghỉ 2 ngày cuối tuần.");
+        form.setFileLink("uploads/test_leave_file.pdf");
+        form.setCreateDate(LocalDateTime.now());
+        form.setUserId(2);  // đảm bảo ID này tồn tại trong bảng User
+
+        // 2. Gọi DAO để insert
+        FormSubmissionDAO dao = new FormSubmissionDAO();  // đảm bảo connection hoạt động
+
+        try {
+            dao.insertFormSubmission(form);
+            System.out.println("✅ Insert thành công!");
+        } catch (Exception e) {
+            System.err.println("❌ Lỗi khi insert: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}

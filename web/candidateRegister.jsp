@@ -1,85 +1,100 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Map" %>
 <%
-    // Retrieve the errors map from the request, create a new one if it doesn't exist.
     Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
-    if (errors == null) {
-        errors = new java.util.HashMap<>();
-    }
-    // Retrieve the success message from the request.
+    if (errors == null) errors = new java.util.HashMap<>();
     String success = (String) request.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Candidate Registration & CV Submission</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .error-msg { color: #f55; font-size: 0.95em; margin: 2px 0 8px 0; }
-        .success-msg { color: green; font-size: 1em; margin: 8px 0; }
-    </style>
-</head>
-<body>
-    <h2>Candidate Registration & CV Submission</h2>
-    
-    <%-- Display success message if it exists --%>
-    <% if (success != null) { %>
-        <div class="success-msg"><%= success %></div>
-    <% } %>
-    
-    <form action="CandidateRegisterServlet" method="post" enctype="multipart/form-data">
-        
-        <label for="fullName">Full Name:</label><br>
-        <input type="text" id="fullName" name="fullName" value="<%= request.getParameter("fullName") != null ? request.getParameter("fullName") : "" %>" required><br>
-        <%-- Display full name validation error --%>
-        <% if (errors.get("fullName") != null) { %>
-            <div class="error-msg"><%= errors.get("fullName") %></div>
-        <% } %>
+    <head>
+        <title>Candidate Registration</title>
+        <meta charset="UTF-8">
+        <!-- Bootstrap 5 CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .form-container {
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 30px;
+                background-color: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            }
+            .error-msg {
+                color: #dc3545;
+                font-size: 0.9rem;
+            }
+            .success-msg {
+                color: #198754;
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="form-container">
+                <h3 class="text-center mb-4">🎓 Candidate Registration & CV Upload</h3>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>" required><br>
-        <%-- Display email validation error --%>
-        <% if (errors.get("email") != null) { %>
-            <div class="error-msg"><%= errors.get("email") %></div>
-        <% } %>
+                <% if (success != null) { %>
+                <div class="alert alert-success"><%= success %></div>
+                <% } %>
 
-        <label for="phone">Phone Number:</label><br>
-        <input type="text" id="phone" name="phone" value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>" required pattern="[0-9]{10,15}" title="Please enter a valid phone number"><br>
-        <%-- Display phone number validation error --%>
-        <% if (errors.get("phone") != null) { %>
-            <div class="error-msg"><%= errors.get("phone") %></div>
-        <% } %>
+                <form action="CandidateRegisterServlet" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName"
+                               value="<%= request.getParameter("fullName") != null ? request.getParameter("fullName") : "" %>" required>
+                        <% if (errors.get("fullName") != null) { %>
+                        <div class="error-msg"><%= errors.get("fullName") %></div>
+                        <% } %>
+                    </div>
 
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value="<%= request.getParameter("username") != null ? request.getParameter("username") : "" %>" required><br>
-        <%-- Display username validation error --%>
-        <% if (errors.get("username") != null) { %>
-            <div class="error-msg"><%= errors.get("username") %></div>
-        <% } %>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>" required>
+                        <% if (errors.get("email") != null) { %>
+                        <div class="error-msg"><%= errors.get("email") %></div>
+                        <% } %>
+                    </div>
 
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required minlength="6"><br>
-        <%-- Display password validation error --%>
-        <% if (errors.get("password") != null) { %>
-            <div class="error-msg"><%= errors.get("password") %></div>
-        <% } %>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone" name="phone"
+                               value="<%= request.getParameter("phone") != null ? request.getParameter("phone") : "" %>"
+                               pattern="[0-9]{10,15}" title="Please enter a valid phone number" required>
+                        <% if (errors.get("phone") != null) { %>
+                        <div class="error-msg"><%= errors.get("phone") %></div>
+                        <% } %>
+                    </div>
 
-        <label for="confirmPassword">Confirm Password:</label><br>
-        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"><br>
-        <%-- Display password confirmation validation error --%>
-        <% if (errors.get("confirmPassword") != null) { %>
-            <div class="error-msg"><%= errors.get("confirmPassword") %></div>
-        <% } %>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                               value="<%= request.getParameter("username") != null ? request.getParameter("username") : "" %>" required>
+                        <% if (errors.get("username") != null) { %>
+                        <div class="error-msg"><%= errors.get("username") %></div>
+                        <% } %>
+                    </div>
 
-        <label for="cvFile">Submit CV (PDF, DOC, DOCX, max 2MB):</label><br>
-        <input type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" required><br>
-        <%-- Display CV file validation error --%>
-        <% if (errors.get("cvFile") != null) { %>
-            <div class="error-msg"><%= errors.get("cvFile") %></div>
-        <% } %>
+                    <div class="mb-3">
+                        <label for="cvFile" class="form-label">Upload CV (PDF, DOC, DOCX - max 2MB)</label>
+                        <input class="form-control" type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" required>
+                        <% if (errors.get("cvFile") != null) { %>
+                        <div class="error-msg"><%= errors.get("cvFile") %></div>
+                        <% } %>
+                    </div>
 
-        <button type="submit">Register & Submit CV</button>
-    </form>
-</body>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Submit Registration</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
