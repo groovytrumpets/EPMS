@@ -34,11 +34,15 @@ public class CandidateRegisterServlet extends HttpServlet {
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+<<<<<<< HEAD
         String dobString = request.getParameter("dob");
+=======
+>>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
         String username = request.getParameter("username");
         String gender = request.getParameter("gender");
         Part cvFilePart = request.getPart("cvFile");
 
+<<<<<<< HEAD
         java.sql.Date dob = null;
         if (dobString == null || dobString.trim().isEmpty()) {
             errors.put("dob", "Date of Birth is required.");
@@ -50,6 +54,8 @@ public class CandidateRegisterServlet extends HttpServlet {
             }
         }
 
+=======
+>>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
         Map<String, String> errors = new HashMap<>();
         String fileName = null;
 
@@ -153,7 +159,10 @@ public class CandidateRegisterServlet extends HttpServlet {
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPhone(phone);
+<<<<<<< HEAD
         user.setDob(dob);
+=======
+>>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
         user.setUserName(username);
         user.setGender(gender);
         user.setPassword("123"); // Default password
