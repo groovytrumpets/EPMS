@@ -2,8 +2,10 @@ package controller.Candidate;
 
 import DAO.UserDAO;
 import DAO.FormSubmissionDAO;
+import DAO.DocumentDAO;
 import model.User;
 import model.FormSubmission;
+import model.Document;
 import utilities.PassCheck;
 import java.io.InputStream;
 import jakarta.servlet.ServletException;
@@ -31,18 +33,16 @@ public class CandidateRegisterServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        Map<String, String> errors = new HashMap<>();
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-<<<<<<< HEAD
-        String dobString = request.getParameter("dob");
-=======
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
         String username = request.getParameter("username");
         String gender = request.getParameter("gender");
+        String dobString = request.getParameter("dob");
         Part cvFilePart = request.getPart("cvFile");
 
-<<<<<<< HEAD
+
         java.sql.Date dob = null;
         if (dobString == null || dobString.trim().isEmpty()) {
             errors.put("dob", "Date of Birth is required.");
@@ -54,9 +54,6 @@ public class CandidateRegisterServlet extends HttpServlet {
             }
         }
 
-=======
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
-        Map<String, String> errors = new HashMap<>();
         String fileName = null;
 
         // === Validation ===
@@ -159,16 +156,29 @@ public class CandidateRegisterServlet extends HttpServlet {
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPhone(phone);
-<<<<<<< HEAD
         user.setDob(dob);
-=======
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
         user.setUserName(username);
         user.setGender(gender);
         user.setPassword("123"); // Default password
         user.setStatus("unverified");
         user.setRoleId(4); // Candidate role
         int userId = userDAO.insertUser(user);
+
+        // === Save Document (CV) ===
+        Document cvDoc = new Document();
+        cvDoc.setTitle("CV");
+        cvDoc.setFileLink(cloudUrl);
+        cvDoc.setType("CV");
+        cvDoc.setStatus("submitted");
+        cvDoc.setUserId(userId);
+        cvDoc.setUploadDate(LocalDateTime.now());
+        DocumentDAO docDAO = new DocumentDAO();
+        try {
+            docDAO.insertDocument(cvDoc);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally, you can set an error message for the user here
+        }
 
         // === Save FormSubmission ===
         FormSubmission form = new FormSubmission();

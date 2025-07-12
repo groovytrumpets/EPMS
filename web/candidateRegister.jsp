@@ -71,13 +71,15 @@
                     </div>
 
                     <div class="mb-3">
-<<<<<<< HEAD
                         <label for="dob" class="form-label">Date of Birth</label>
                         <input type="date" class="form-control" id="dob" name="dob"
                                value="<%= request.getParameter("dob") != null ? request.getParameter("dob") : "" %>" required>
                         <% if (errors.get("dob") != null) { %>
                         <div class="error-msg"><%= errors.get("dob") %></div>
-=======
+                        <% } %>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-control" id="gender" name="gender" required>
                             <option value="">Select Gender</option>
@@ -87,33 +89,10 @@
                         </select>
                         <% if (errors.get("gender") != null) { %>
                         <div class="error-msg"><%= errors.get("gender") %></div>
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
                         <% } %>
                     </div>
 
                     <div class="mb-3">
-<<<<<<< HEAD
-                        <label for="gender" class="form-label">Gender</label>
-                        <select class="form-control" id="gender" name="gender" required>
-                            <option value="">Select Gender</option>
-                            <option value="Male" <%= request.getParameter("gender") != null && request.getParameter("gender").equals("Male") ? "selected" : "" %>>Male</option>
-                            <option value="Female" <%= request.getParameter("gender") != null && request.getParameter("gender").equals("Female") ? "selected" : "" %>>Female</option>
-                            <option value="Other" <%= request.getParameter("gender") != null && request.getParameter("gender").equals("Other") ? "selected" : "" %>>Other</option>
-                        </select>
-                        <% if (errors.get("gender") != null) { %>
-                        <div class="error-msg"><%= errors.get("gender") %></div>
-=======
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username"
-                               value="<%= request.getParameter("username") != null ? request.getParameter("username") : "" %>" required>
-                        <% if (errors.get("username") != null) { %>
-                        <div class="error-msg"><%= errors.get("username") %></div>
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
-                        <% } %>
-                    </div>
-
-                    <div class="mb-3">
-<<<<<<< HEAD
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username"
                                value="<%= request.getParameter("username") != null ? request.getParameter("username") : "" %>" required>
@@ -123,8 +102,6 @@
                     </div>
 
                     <div class="mb-3">
-=======
->>>>>>> 0dcf0ff9f5951f7d54d7d0325794cb1d7d7f63dc
                         <label for="cvFile" class="form-label">Upload CV (PDF, DOC, DOCX - max 2MB)</label>
                         <input class="form-control" type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" required>
                         <% if (errors.get("cvFile") != null) { %>

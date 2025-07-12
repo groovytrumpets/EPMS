@@ -185,7 +185,7 @@ public class UserDAO extends DBContext {
     }
 
     public int insertUser(User user) {
-        String sql = "INSERT INTO [User] (Username, Password, Status, FullName, Phone, Email, RoleId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (Username, Password, Status, FullName, Phone, Email, RoleId, Dob, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement st = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setString(1, user.getUserName());
             st.setString(2, user.getPassword());
@@ -193,7 +193,14 @@ public class UserDAO extends DBContext {
             st.setString(4, user.getFullName());
             st.setString(5, user.getPhone());
             st.setString(6, user.getEmail());
-            st.setInt(7, user.getRoleId()); // Bạn cần set RoleId phù hợp (ví dụ: 3 cho candidate)
+            st.setInt(7, user.getRoleId());
+            java.util.Date utilDob = user.getDob();
+            if (utilDob != null) {
+                st.setDate(8, new java.sql.Date(utilDob.getTime()));
+            } else {
+                st.setDate(8, null);
+            }
+            st.setString(9, user.getGender());
             st.executeUpdate();
             ResultSet rs = st.getGeneratedKeys();
             if (rs.next()) {
