@@ -22,8 +22,8 @@
         <meta name="format-detection" content="telephone=no">
 
         <!-- FAVICONS ICON ============================================= -->
-        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
-        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+        <link rel="icon" href="assets/images/faviconV2.png" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/faviconV2.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
         <title>EPMS : Employee Profile Management System </title>
@@ -215,9 +215,10 @@
                                                             <li><a href="createTest.jsp">Create test</a></li>
                                                             </c:when>
                                                             <c:when test="${sessionScope.acc.roleId==3}">
-                                                            <li><a href="createSlot">Work schedule</a></li>
+                                                            <li><a href="slotview">Work schedule</a></li>
                                                             <li><a href="myTests">Work Test</a></li>
-                                                              <li><a href="EmployeeLeaveRequestServlet">leave application</a></li>
+                                                              <li><a href="EmployeeLeaveRequestServlet">Leave Application</a></li>
+                                                            <li><a href="createSlot">Request Work schedule</a></li>
                                                             <li><a href="myDocuments">My Documents</a></li>
                                                             <li><a href="downloadForm">Download form</a></li>
                                                             </c:when>
@@ -322,7 +323,7 @@
                                          data-paddingbottom="[10,10,10,10]"
                                          data-paddingleft="[0,0,0,0]"
                                          style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;">
-                                        Welcome To University
+                                        Welcome To EPMS
                                     </div>
 
                                     <!-- LAYER NR. 3 -->
@@ -480,7 +481,7 @@
                                          data-paddingbottom="[10,10,10,10]"
                                          data-paddingleft="[0,0,0,0]"
                                          style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;text-transform:uppercase;">
-                                        Welcome To University
+                                        Welcome To EPMS
                                     </div>
 
                                     <!-- LAYER NR. 3 -->

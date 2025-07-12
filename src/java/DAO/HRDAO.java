@@ -21,7 +21,7 @@ public class HRDAO extends DBContext {
 
     public List<User> getListOfCandidateUsers() {
         List<User> candidateList = new ArrayList<>();
-        String sql = "select * from [User] where RoleId=4;";
+        String sql = "select * from [User] where RoleId=4 or RoleId=3";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
