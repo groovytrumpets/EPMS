@@ -50,8 +50,48 @@
         <!-- STYLESHEETS ============================================= -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+        <style>
+            .register-section {
+                padding: 20px;
+                border-top: 1px solid #e9ecef;
+                margin-top: 20px;
+            }
+            
+            .register-section p {
+                font-size: 16px;
+                color: #6c757d;
+                margin-bottom: 15px;
+            }
+            
+            .btn-outline-primary {
+                border: 2px solid #007bff;
+                color: #007bff;
+                background: transparent;
+                transition: all 0.3s ease;
+                font-weight: 600;
+                padding: 12px 30px;
+                border-radius: 25px;
+            }
+            
+            .btn-outline-primary:hover {
+                background: #007bff;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+            }
+            
+            .text-muted {
+                color: #6c757d !important;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+            
+            .fa {
+                margin-right: 8px;
+            }
+        </style>
     </head>
     <body id="bg">
         <div class="page-wraper">
@@ -64,7 +104,7 @@
                     <div class="account-container">
                         <div class="heading-bx left">
                             <h2 class="title-head">Login to your <span>Account</span></h2>
-                            
+
                             <!--                                        <p>Login for admin, manager <a href="loginAdmin">here</a></p>-->
                             <p style="color: green">${message}<p>
                         </div>	
@@ -103,11 +143,15 @@
                                 <div class="col-lg-12 m-b30">
                                     <button name="submit" type="submit" value="Submit" class="btn button-md">Login</button>
                                 </div>
-                                <div class="col-lg-12">
-                                    <h6>Login with Social media</h6>
-                                    <div class="d-flex">
-                                        <a class="btn flex-fill m-r5 facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a>
-                                        <a class="btn flex-fill m-l5 google-plus" href="#"><i class="fa fa-google-plus"></i>Google Plus</a>
+                                <div class="col-lg-12 text-center">
+                                    <div class="register-section">
+                                        <p class="mb-3">Don't have an account?</p>
+                                        <a href="CandidateRegisterServlet" class="btn btn-outline-primary btn-lg">
+                                            <i class="fas fa-user-plus mr-2"></i>Register as Candidate
+                                        </a>
+                                        <div class="mt-3">
+                                            <small class="text-muted">Join our platform and submit your CV for job opportunities</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
