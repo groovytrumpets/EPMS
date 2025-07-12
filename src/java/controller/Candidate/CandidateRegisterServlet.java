@@ -39,6 +39,7 @@ public class CandidateRegisterServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         Part cvFilePart = request.getPart("cvFile");
 
+
         java.sql.Date dob = null;
         if (dobString == null || dobString.trim().isEmpty()) {
             errors.put("dob", "Date of Birth is required.");
@@ -49,7 +50,6 @@ public class CandidateRegisterServlet extends HttpServlet {
                 errors.put("dob", "Invalid date format. Use yyyy-MM-dd.");
             }
         }
-
         Map<String, String> errors = new HashMap<>();
         String fileName = null;
 
