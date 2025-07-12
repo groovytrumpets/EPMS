@@ -77,6 +77,10 @@
         <servlet-name>BackupDatabaseServlet</servlet-name>
         <servlet-class>controller.common.BackupDatabaseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageLeavaListServlet</servlet-name>
+        <servlet-class>controller.HR.ManageLeavaListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -153,11 +157,14 @@
         <servlet-name>BackupDatabaseServlet</servlet-name>
         <url-pattern>/backupDatabase</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageLeavaListServlet</servlet-name>
+        <url-pattern>/leavelist</url-pattern>
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
-
     <error-page>
         <error-code>500</error-code>
         <location>/500.jsp</location>

@@ -5,8 +5,8 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class User {
 

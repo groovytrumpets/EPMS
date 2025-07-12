@@ -210,12 +210,14 @@
                                                             <c:when test="${sessionScope.acc.roleId==2}">
                                                             <li><a href="employeeManage">Manage Employee</a></li>
                                                             <li><a href="candiAccManage">Manage Candidate CV</a></li>
+                                                            <li><a href="leavelist">Manage Leave List</a></li>
                                                             <li><a href="hr/viewTests">View test</a></li>
                                                             <li><a href="createTest.jsp">Create test</a></li>
                                                             </c:when>
                                                             <c:when test="${sessionScope.acc.roleId==3}">
                                                             <li><a href="createSlot">Work schedule</a></li>
                                                             <li><a href="myTests">Work Test</a></li>
+                                                              <li><a href="EmployeeLeaveRequestServlet">leave application</a></li>
                                                             <li><a href="myDocuments">My Documents</a></li>
                                                             <li><a href="downloadForm">Download form</a></li>
                                                             </c:when>

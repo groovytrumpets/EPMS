@@ -215,48 +215,67 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public void updateStatusAndRole(int userId, String status, int roleId) throws SQLException {
+        String sql = "UPDATE [User] SET Status = ?, RoleId = ? WHERE UserId = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, status);
+        ps.setInt(2, roleId);
+        ps.setInt(3, userId);
+        ps.executeUpdate();
+    }
+
+    public User getUserById(int userId) throws SQLException {
+        String sql = "SELECT * FROM [User] WHERE UserId = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            User u = new User();
+            u.setUserId(rs.getInt("UserId"));
+            u.setUserName(rs.getString("Username"));
+            u.setRoleId(rs.getInt("RoleId"));
+            u.setStatus(rs.getString("Status"));
+            u.setEmail(rs.getString("Email"));
+            u.setFullName(rs.getString("FullName"));
+            // lấy thêm các field khác nếu muốn
+            return u;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        // Tạo DAO hoặc class chứa hàm
-        UserDAO dao = new UserDAO(); // Giả định class tên là UserDAO
+        try {
+            UserDAO dao = new UserDAO();
 
-        // Gọi hàm kiểm tra đăng nhập
-        User user = dao.findUserPass("takashi.kato@example.com", "e10adc3949ba59abbe56e057f20f883e");
+            // 1. Tạo user mới
+            User newUser = new User();
+            newUser.setUserName("test_user");
+            newUser.setPassword("e10adc3949ba59abbe56e057f20f883e"); // md5("123456")
+            newUser.setStatus("pending");
+            newUser.setFullName("Test User");
+            newUser.setPhone("0987654321");
+            newUser.setEmail("test_user@example.com");
+            newUser.setRoleId(4); // Ví dụ: Candidate
 
-        if (user != null) {
-            System.out.println("✅ Đăng nhập thành công:");
-            System.out.println("Tên người dùng: " + user.getFullName());
-            System.out.println("Email: " + user.getEmail());
-            System.out.println("Vai trò (RoleId): " + user.getRoleId());
-        } else {
-            System.out.println("❌ Đăng nhập thất bại. Sai email hoặc mật khẩu.");
+            int userId = dao.insertUser(newUser);
+            if (userId != -1) {
+                System.out.println("✅ User inserted with ID: " + userId);
+            } else {
+                System.out.println("❌ Failed to insert user.");
+                return;
+            }
+
+            // 4. Test đăng nhập
+            User loggedIn = dao.findUserPass("test_user@example.com", "e10adc3949ba59abbe56e057f20f883e");
+            if (loggedIn != null) {
+                System.out.println("✅ Đăng nhập thành công với email: " + loggedIn.getEmail());
+            } else {
+                System.out.println("❌ Đăng nhập thất bại.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    public void updateStatusAndRole(int userId, String status, int roleId) throws SQLException {
-    String sql = "UPDATE [User] SET Status = ?, RoleId = ? WHERE UserId = ?";
-    PreparedStatement ps = connection.prepareStatement(sql);
-    ps.setString(1, status);
-    ps.setInt(2, roleId);
-    ps.setInt(3, userId);
-    ps.executeUpdate();
-}
-    public User getUserById(int userId) throws SQLException {
-    String sql = "SELECT * FROM [User] WHERE UserId = ?";
-    PreparedStatement ps = connection.prepareStatement(sql);
-    ps.setInt(1, userId);
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) {
-        User u = new User();
-        u.setUserId(rs.getInt("UserId"));
-        u.setUserName(rs.getString("Username"));
-        u.setRoleId(rs.getInt("RoleId"));
-        u.setStatus(rs.getString("Status"));
-        u.setEmail(rs.getString("Email"));
-        u.setFullName(rs.getString("FullName"));
-        // lấy thêm các field khác nếu muốn
-        return u;
-    }
-    return null;
-}
-
 
 }
