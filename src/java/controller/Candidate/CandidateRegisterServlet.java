@@ -34,9 +34,21 @@ public class CandidateRegisterServlet extends HttpServlet {
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+        String dobString = request.getParameter("dob");
         String username = request.getParameter("username");
         String gender = request.getParameter("gender");
         Part cvFilePart = request.getPart("cvFile");
+
+        java.sql.Date dob = null;
+        if (dobString == null || dobString.trim().isEmpty()) {
+            errors.put("dob", "Date of Birth is required.");
+        } else {
+            try {
+                dob = java.sql.Date.valueOf(dobString);
+            } catch (Exception e) {
+                errors.put("dob", "Invalid date format. Use yyyy-MM-dd.");
+            }
+        }
 
         Map<String, String> errors = new HashMap<>();
         String fileName = null;
@@ -141,6 +153,7 @@ public class CandidateRegisterServlet extends HttpServlet {
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPhone(phone);
+        user.setDob(dob);
         user.setUserName(username);
         user.setGender(gender);
         user.setPassword("123"); // Default password

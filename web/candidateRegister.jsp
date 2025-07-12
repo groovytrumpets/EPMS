@@ -71,6 +71,15 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="dob"
+                               value="<%= request.getParameter("dob") != null ? request.getParameter("dob") : "" %>" required>
+                        <% if (errors.get("dob") != null) { %>
+                        <div class="error-msg"><%= errors.get("dob") %></div>
+                        <% } %>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-control" id="gender" name="gender" required>
                             <option value="">Select Gender</option>
