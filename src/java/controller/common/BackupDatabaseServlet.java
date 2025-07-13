@@ -74,25 +74,34 @@ public class BackupDatabaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String backupFolder = "C:\\backup";  // Đường dẫn thư mục chứa file .bak
+        String backupFolder = "C:\\backup";  // Folder to store the .bak file
 
         try {
-            // 1. Backup local
-            AdminDAO dao = new AdminDAO();
-            String backupPath = dao.backupDatabase(backupFolder); // local path "C:\\backup\\EPMS_Backup_..."
+            // ✅ 1. Check and create the folder if it doesn't exist
+            File folder = new File(backupFolder);
+            if (!folder.exists()) {
+                boolean created = folder.mkdirs();
+                if (!created) {
+                    throw new IOException("Failed to create backup directory at: " + backupFolder);
+                }
+            }
 
-            // 2. Upload lên Cloudinary
+            // ✅ 2. Perform database backup
+            AdminDAO dao = new AdminDAO();
+            String backupPath = dao.backupDatabase(backupFolder); // Local path of the .bak file
+
+            // ✅ 3. Upload the backup file to Cloudinary
             File backupFile = new File(backupPath);
             String cloudinaryUrl = utilities.CloudinaryUploader.uploadFile(backupFile);
 
-            // 3. Truyền URL về JSP
+            // ✅ 4. Set attributes and forward to JSP
             request.setAttribute("backupPath", backupPath);
             request.setAttribute("cloudinaryUrl", cloudinaryUrl);
             request.getRequestDispatcher("backupFile.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Backup or Upload failed: " + e.getMessage());
+            request.setAttribute("error", "Backup or upload failed: " + e.getMessage());
             request.getRequestDispatcher("backupFile.jsp").forward(request, response);
         }
     }
