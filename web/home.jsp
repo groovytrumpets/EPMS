@@ -104,17 +104,7 @@
                                 <span></span>
                             </button>
                             <!-- Author Nav ==== -->
-                            <div class="secondary-menu">
-                                <div class="secondary-inner">
-                                    <ul>
-                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
-                                        <!-- Search Button ==== -->
-                                        <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
-                                    </ul>
-                                </div>
-                            </div>
+
                             <!-- Search Box ==== -->
                             <div class="nav-search-bar">
                                 <form action="#">
@@ -131,68 +121,13 @@
                                 <ul class="nav navbar-nav">	
                                     <li class="active"><a href="javascript:;">Home <i class="fa fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="index.html">Home 1</a></li>
-                                            <li><a href="index-2.html">Home 2</a></li>
+                                            <li><a href="index.html">Home</a></li>
+
                                         </ul>
                                     </li>
-                                    <li><a href="javascript:;">Pages <i class="fa fa-chevron-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="javascript:;">About<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="about-1.html">About 1</a></li>
-                                                    <li><a href="about-2.html">About 2</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="javascript:;">Event<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="event.html">Event</a></li>
-                                                    <li><a href="events-details.html">Events Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="javascript:;">FAQ's<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="faq-1.html">FAQ's 1</a></li>
-                                                    <li><a href="faq-2.html">FAQ's 2</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="javascript:;">Contact Us<i class="fa fa-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="contact-1.html">Contact Us 1</a></li>
-                                                    <li><a href="contact-2.html">Contact Us 2</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="portfolio.html">Portfolio</a></li>
-                                            <li><a href="profile.html">Profile</a></li>
-                                            <li><a href="membership.html">Membership</a></li>
-                                            <li><a href="error-404.html">404 Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>
-                                        <ul class="sub-menu add-menu">
-                                            <li class="add-menu-left">
-                                                <h5 class="menu-adv-title">Our Courses</h5>
-                                                <ul>
-                                                    <li><a href="courses.html">Courses </a></li>
-                                                    <li><a href="courses-details.html">Courses Details</a></li>
-                                                    <li><a href="profile.html">Instructor Profile</a></li>
-                                                    <li><a href="event.html">Upcoming Event</a></li>
-                                                    <li><a href="membership.html">Membership</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="add-menu-right">
-                                                <img src="assets/images/adv/adv.jpg" alt=""/>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="javascript:;">Blog <i class="fa fa-chevron-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog-classic-grid.html">Blog Classic</a></li>
-                                            <li><a href="blog-classic-sidebar.html">Blog Classic Sidebar</a></li>
-                                            <li><a href="blog-list-sidebar.html">Blog List Sidebar</a></li>
-                                            <li><a href="blog-standard-sidebar.html">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
+
+
+
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
                                             <c:choose>
@@ -217,7 +152,7 @@
                                                             <c:when test="${sessionScope.acc.roleId==3}">
                                                             <li><a href="slotview">Work schedule</a></li>
                                                             <li><a href="myTests">Work Test</a></li>
-                                                              <li><a href="EmployeeLeaveRequestServlet">Leave Application</a></li>
+                                                            <li><a href="EmployeeLeaveRequestServlet">Leave Application</a></li>
                                                             <li><a href="createSlot">Request Work schedule</a></li>
                                                             <li><a href="myDocuments">My Documents</a></li>
                                                             <li><a href="downloadForm">Download form</a></li>
@@ -233,11 +168,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <div class="nav-social-link">
-                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
-                                </div>
+
                             </div>
                             <!-- Navigation Menu END ==== -->
                         </div>
@@ -275,7 +206,7 @@
                                     data-param9="" data-param10="" 
                                     data-description="Science says that Women are generally happier">
                                     <!-- MAIN IMAGE -->
-                                    <img src="assets/images/slider/slide1.jpg" alt="" 
+                                    <img src="assets/images/slider/12-1024x576.png" alt="" 
                                          data-bgposition="center center" 
                                          data-bgfit="cover" 
                                          data-bgrepeat="no-repeat" 
@@ -345,7 +276,7 @@
                                          data-paddingbottom="[0,0,0,0]"
                                          data-paddingleft="[0,0,0,0]"
                                          style="z-index: 7; white-space: nowrap; color:#fff; font-family:rubik; font-size:18px; font-weight:400;">
-                                        Batter Education For A Better 
+                                        Empowering HR and employees with seamless profile, leave, and task management.
                                     </div>
 
                                     <!-- LAYER NR. 3 -->
@@ -367,8 +298,7 @@
                                          data-paddingbottom="[0,0,0,0]"
                                          data-paddingleft="[0,0,0,0]"
                                          style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                                    </div>
+                                        Manage employee data, work schedules, documents, and leave applications in one place.                                    </div>
                                     <!-- LAYER NR. 4 -->
                                     <div class="tp-caption Newspaper-Button rev-btn " 
                                          id="slide-100-layer-5" 
@@ -431,7 +361,7 @@
                                     data-param9="" data-param10="" 
                                     data-description="Science says that Women are generally happier">
                                     <!-- MAIN IMAGE -->
-                                    <img src="assets/images/slider/slide2.jpg" alt="" 
+                                    <img src="assets/images/slider/30.png" alt="" 
                                          data-bgposition="center center" 
                                          data-bgfit="cover" 
                                          data-bgrepeat="no-repeat" 
@@ -582,42 +512,42 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="service-bx">
                                         <div class="action-box">
-                                            <img src="assets/images/our-services/pic1.jpg" alt="">
+                                            <img src="assets/images/our-services/HR-Screening-Employee-Profile-for-Job-Interview.png" alt="">
                                         </div>
                                         <div class="info-bx text-center">
                                             <div class="feature-box-sm radius bg-white">
                                                 <i class="fa fa-bank text-primary"></i>
                                             </div>
-                                            <h4><a href="#">Best Industry Leaders</a></h4>
-                                            <a href="#" class="btn radius-xl">View More</a>
+                                            <h4><a href="#">Comprehensive Employee Profiles</a></h4>
+                                            <p>Store and view personal info, role, experience, and documents.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="service-bx">
                                         <div class="action-box">
-                                            <img src="assets/images/our-services/pic2.jpg" alt="">
+                                            <img src="assets/images/our-services/work-schedules-header-banner.png" alt="">
                                         </div>
                                         <div class="info-bx text-center">
                                             <div class="feature-box-sm radius bg-white">
                                                 <i class="fa fa-book text-primary"></i>
                                             </div>
-                                            <h4><a href="#">Learn Courses Online</a></h4>
-                                            <a href="#" class="btn radius-xl">View More</a>
+                                            <h4><a href="#">Work Schedule Management</a></h4>
+                                            <p>Submit, approve, and manage employee work slots easily.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <div class="service-bx m-b0">
                                         <div class="action-box">
-                                            <img src="assets/images/our-services/pic3.jpg" alt="">
+                                            <img src="assets/images/our-services/Handling-Leave-Management-with-Finesse-960x640-min.png" alt="">
                                         </div>
                                         <div class="info-bx text-center">
                                             <div class="feature-box-sm radius bg-white">
                                                 <i class="fa fa-file-text-o text-primary"></i>
                                             </div>
-                                            <h4><a href="#">Book Library & Store</a></h4>
-                                            <a href="#" class="btn radius-xl">View More</a>
+                                            <h4><a href="#">Leave & Document Handling</a></h4>
+                                            <p>Track leave applications and download essential forms.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -627,144 +557,19 @@
                     <!-- Our Services END -->
 
                     <!-- Popular Courses -->
-                    <div class="section-area section-sp2 popular-courses-bx">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 heading-bx left">
-                                    <h2 class="title-head">Popular <span>Courses</span></h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-                                    <div class="item">
-                                        <div class="cours-bx">
-                                            <div class="action-box">
-                                                <img src="assets/images/courses/pic1.jpg" alt="">
-                                                <a href="#" class="btn">Read More</a>
-                                            </div>
-                                            <div class="info-bx text-center">
-                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                                <span>Programming</span>
-                                            </div>
-                                            <div class="cours-more-info">
-                                                <div class="review">
-                                                    <span>3 Review</span>
-                                                    <ul class="cours-star">
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price">
-                                                    <del>$190</del>
-                                                    <h5>$120</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="cours-bx">
-                                            <div class="action-box">
-                                                <img src="assets/images/courses/pic2.jpg" alt="">
-                                                <a href="#" class="btn">Read More</a>
-                                            </div>
-                                            <div class="info-bx text-center">
-                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                                <span>Programming</span>
-                                            </div>
-                                            <div class="cours-more-info">
-                                                <div class="review">
-                                                    <span>3 Review</span>
-                                                    <ul class="cours-star">
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price">
-                                                    <del>$190</del>
-                                                    <h5>$120</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="cours-bx">
-                                            <div class="action-box">
-                                                <img src="assets/images/courses/pic3.jpg" alt="">
-                                                <a href="#" class="btn">Read More</a>
-                                            </div>
-                                            <div class="info-bx text-center">
-                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                                <span>Programming</span>
-                                            </div>
-                                            <div class="cours-more-info">
-                                                <div class="review">
-                                                    <span>3 Review</span>
-                                                    <ul class="cours-star">
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price">
-                                                    <del>$190</del>
-                                                    <h5>$120</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="cours-bx">
-                                            <div class="action-box">
-                                                <img src="assets/images/courses/pic4.jpg" alt="">
-                                                <a href="#" class="btn">Read More</a>
-                                            </div>
-                                            <div class="info-bx text-center">
-                                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                                <span>Programming</span>
-                                            </div>
-                                            <div class="cours-more-info">
-                                                <div class="review">
-                                                    <span>3 Review</span>
-                                                    <ul class="cours-star">
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price">
-                                                    <del>$190</del>
-                                                    <h5>$120</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Popular Courses END -->
 
                     <!-- Form -->
-                    <div class="section-area section-sp1 ovpr-dark bg-fix online-cours" style="background-image:url(assets/images/background/bg1.jpg);">
+                    <div class="section-area section-sp1 ovpr-dark bg-fix online-cours" style="background-image:url(assets/images/slider/0-upcoming-company-events-busine.jpg);">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 text-center text-white">
-                                    <h2>Online Courses To Learn</h2>
-                                    <h5>Own Your Feature Learning New Skills Online</h5>
+                                    <h2 class="title-head m-b0">Upcoming <span>Company Activities</span></h2>
+                                    <p class="m-b0">Stay updated with training sessions, team meetings, and HR activities.</p>
                                     <form class="cours-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="What do you want to learn today?	">
+                                            <input type="text" class="form-control" placeholder="Search events, workshops, or HR updates">
                                             <div class="input-group-append">
                                                 <button class="btn" type="submit">Search</button> 
                                             </div>
@@ -772,34 +577,36 @@
                                     </form>
                                 </div>
                             </div>
+
                             <div class="mw800 m-auto">
                                 <div class="row">
                                     <div class="col-md-4 col-sm-6">
                                         <div class="cours-search-bx m-b30">
                                             <div class="icon-box">
-                                                <h3><i class="ti-user"></i><span class="counter">5</span>M</h3>
+                                                <h3><i class="ti-user"></i><span class="counter">12</span></h3>
                                             </div>
-                                            <span class="cours-search-text">Over 5 million student</span>
+                                            <span class="cours-search-text">Active Employees</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="cours-search-bx m-b30">
                                             <div class="icon-box">
-                                                <h3><i class="ti-book"></i><span class="counter">30</span>K</h3>
+                                                <h3><i class="ti-book"></i><span class="counter">480</span></h3>
                                             </div>
-                                            <span class="cours-search-text">30,000 Courses.</span>
+                                            <span class="cours-search-text">Trainings & Certifications</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <div class="cours-search-bx m-b30">
                                             <div class="icon-box">
-                                                <h3><i class="ti-layout-list-post"></i><span class="counter">20</span>K</h3>
+                                                <h3><i class="ti-layout-list-post"></i><span class="counter">350</span></h3>
                                             </div>
-                                            <span class="cours-search-text">Learn Anythink Online.</span>
+                                            <span class="cours-search-text">Leave Requests Processed</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- Form END -->
@@ -807,8 +614,8 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 text-center heading-bx">
-                                    <h2 class="title-head m-b0">Upcoming <span>Events</span></h2>
-                                    <p class="m-b0">Upcoming Education Events To Feed Brain. </p>
+                                    <h2 class="title-head">Recent <span>Company Updates</span></h2>
+                                    <p class="m-b0">Latest HR announcements, system updates, and organizational changes.</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -816,72 +623,75 @@
                                     <div class="item">
                                         <div class="event-bx">
                                             <div class="action-box">
-                                                <img src="assets/images/event/pic4.jpg" alt="">
+                                                <img src="assets/images/event/hq720.jpg" alt="">
                                             </div>
                                             <div class="info-bx d-flex">
                                                 <div>
                                                     <div class="event-time">
-                                                        <div class="event-date">29</div>
-                                                        <div class="event-month">October</div>
+                                                        <div class="event-date">15</div>
+                                                        <div class="event-month">July</div>
                                                     </div>
                                                 </div>
                                                 <div class="event-info">
-                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <h4 class="event-title"><a href="#">Quarterly Townhall Meeting</a></h4>
                                                     <ul class="media-post">
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
-                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 2:00 PM – 3:30 PM</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Zoom / Conference Room A</a></li>
                                                     </ul>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                    <p>Join our CEO and HR team as they share updates, key company performance metrics, and recognize top performers.</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="item">
                                         <div class="event-bx">
                                             <div class="action-box">
-                                                <img src="assets/images/event/pic3.jpg" alt="">
+                                                <img src="assets/images/event/02-hr-policy-revisions.jpg.jpg" alt="">
                                             </div>
                                             <div class="info-bx d-flex">
                                                 <div>
                                                     <div class="event-time">
-                                                        <div class="event-date">29</div>
-                                                        <div class="event-month">October</div>
+                                                        <div class="event-date">20</div>
+                                                        <div class="event-month">July</div>
                                                     </div>
                                                 </div>
                                                 <div class="event-info">
-                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <h4 class="event-title"><a href="#">HR Policy Refresh Workshop</a></h4>
                                                     <ul class="media-post">
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
-                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 10:00 AM – 11:30 AM</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> HR Dept. / Meeting Room B</a></li>
                                                     </ul>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                    <p>Learn about our updated leave policies, flexible work hours, and employee assistance programs. Open Q&A session included.</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="item">
                                         <div class="event-bx">
                                             <div class="action-box">
-                                                <img src="assets/images/event/pic2.jpg" alt="">
+                                                <img src="assets/images/event/httpscdn.evbuc.comimages99990316.jpg" alt="">
                                             </div>
                                             <div class="info-bx d-flex">
                                                 <div>
                                                     <div class="event-time">
-                                                        <div class="event-date">29</div>
-                                                        <div class="event-month">October</div>
+                                                        <div class="event-date">25</div>
+                                                        <div class="event-month">July</div>
                                                     </div>
                                                 </div>
                                                 <div class="event-info">
-                                                    <h4 class="event-title"><a href="#">Education Autumn Tour 2019</a></h4>
+                                                    <h4 class="event-title"><a href="#">Employee Engagement Survey Launch</a></h4>
                                                     <ul class="media-post">
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 7:00am 8:00am</a></li>
-                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Berlin, Germany</a></li>
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 9:00 AM</a></li>
+                                                        <li><a href="#"><i class="fa fa-map-marker"></i> Company Portal</a></li>
                                                     </ul>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the..</p>
+                                                    <p>Help shape the workplace! Participate in our 2025 survey and voice your feedback on culture, leadership, and development.</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="text-center">
@@ -891,118 +701,11 @@
                     </div>
 
                     <!-- Testimonials -->
-                    <div class="section-area section-sp2 bg-fix ovbl-dark" style="background-image:url(assets/images/background/bg1.jpg);">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-white heading-bx left">
-                                    <h2 class="title-head text-uppercase">what people <span>say</span></h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
-                                </div>
-                            </div>
-                            <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-                                <div class="item">
-                                    <div class="testimonial-bx">
-                                        <div class="testimonial-thumb">
-                                            <img src="assets/images/testimonials/pic1.jpg" alt="">
-                                        </div>
-                                        <div class="testimonial-info">
-                                            <h5 class="name">Peter Packer</h5>
-                                            <p>-Art Director</p>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="testimonial-bx">
-                                        <div class="testimonial-thumb">
-                                            <img src="assets/images/testimonials/pic2.jpg" alt="">
-                                        </div>
-                                        <div class="testimonial-info">
-                                            <h5 class="name">Peter Packer</h5>
-                                            <p>-Art Director</p>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Testimonials END -->
 
                     <!-- Recent News -->
-                    <div class="section-area section-sp2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 heading-bx left">
-                                    <h2 class="title-head">Recent <span>News</span></h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
-                                </div>
-                            </div>
-                            <div class="recent-news-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-                                <div class="item">
-                                    <div class="recent-news">
-                                        <div class="action-box">
-                                            <img src="assets/images/blog/latest-blog/pic1.jpg" alt="">
-                                        </div>
-                                        <div class="info-bx">
-                                            <ul class="media-post">
-                                                <li><a href="#"><i class="fa fa-calendar"></i>Jan 02 2019</a></li>
-                                                <li><a href="#"><i class="fa fa-user"></i>By William</a></li>
-                                            </ul>
-                                            <h5 class="post-title"><a href="blog-details.html">This Story Behind Education Will Haunt You Forever.</a></h5>
-                                            <p>Knowing that, you’ve optimised your pages countless amount of times, written tons.</p>
-                                            <div class="post-extra">
-                                                <a href="#" class="btn-link">READ MORE</a>
-                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>20 Comment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="recent-news">
-                                        <div class="action-box">
-                                            <img src="assets/images/blog/latest-blog/pic2.jpg" alt="">
-                                        </div>
-                                        <div class="info-bx">
-                                            <ul class="media-post">
-                                                <li><a href="#"><i class="fa fa-calendar"></i>Feb 05 2019</a></li>
-                                                <li><a href="#"><i class="fa fa-user"></i>By John</a></li>
-                                            </ul>
-                                            <h5 class="post-title"><a href="blog-details.html">What Will Education Be Like In The Next 50 Years?</a></h5>
-                                            <p>As desperate as you are right now, you have done everything you can on your.</p>
-                                            <div class="post-extra">
-                                                <a href="#" class="btn-link">READ MORE</a>
-                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>14 Comment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="recent-news">
-                                        <div class="action-box">
-                                            <img src="assets/images/blog/latest-blog/pic3.jpg" alt="">
-                                        </div>
-                                        <div class="info-bx">
-                                            <ul class="media-post">
-                                                <li><a href="#"><i class="fa fa-calendar"></i>April 14 2019</a></li>
-                                                <li><a href="#"><i class="fa fa-user"></i>By George</a></li>
-                                            </ul>
-                                            <h5 class="post-title"><a href="blog-details.html">Master The Skills Of Education And Be.</a></h5>
-                                            <p>You will see in the guide all my years of valuable experience together with.</p>
-                                            <div class="post-extra">
-                                                <a href="#" class="btn-link">READ MORE</a>
-                                                <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>23 Comment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Recent News End -->
 
                 </div>
@@ -1018,17 +721,8 @@
                                 <div class="pt-logo mr-auto">
                                     <a href="index.html"><img src="assets/images/logo-white.png" alt=""/></a>
                                 </div>
-                                <div class="pt-social-link">
-                                    <ul class="list-inline m-a0">
-                                        <li><a href="#" class="btn-link"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#" class="btn-link"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="pt-btn-join">
-                                    <a href="#" class="btn ">Join Now</a>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -1036,7 +730,10 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
                                 <div class="widget">
-                                    <h5 class="footer-title">Sign Up For A Newsletter</h5>
+                                    <h5 class="footer-title">Sign Up For A Candidate</h5>
+                                    <div class="pt-btn-join">
+                                        <a href="CandidateRegisterServlet" class="btn ">Join Now</a>
+                                    </div> 
                                     <p class="text-capitalize m-b20">Weekly Breaking news analysis and cutting edge advices on job searching.</p>
                                     <div class="subscribe-form m-b20">
                                         <form class="subscription-form" action="http://educhamp.themetrades.com/demo/assets/script/mailchamp.php" method="post">
@@ -1057,7 +754,7 @@
                                         <div class="widget footer_widget">
                                             <h5 class="footer-title">Company</h5>
                                             <ul>
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="home">Home</a></li>
                                                 <li><a href="about-1.html">About</a></li>
                                                 <li><a href="faq-1.html">FAQs</a></li>
                                                 <li><a href="contact-1.html">Contact</a></li>
