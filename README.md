@@ -39,7 +39,7 @@ The purpose of this system is to provide an integrated solution that supports th
 The following documents are available in the `/docs` folder:
 
 - [RDS Document](./docs/SE1878_JS(IT)_G3_RDS%20Document.docx) or [Google Doc](https://docs.google.com/document/d/1CfNBzL0LphhNT5nsKX6_Rmpe328yQX86eiCQ_GvqkZw/edit?usp=sharing)    
-- [Database Schema (SQL)](./docs/DB_Final.sql) or [Google Doc](https://drive.google.com/file/d/1YA2TvHjEratpqyruz5a3Oa_Kfax-nv4n/view?usp=sharing)  
+- [Database Schema (SQL)](./docs/DB_Final.sql) or [Google Drive](https://drive.google.com/file/d/1YA2TvHjEratpqyruz5a3Oa_Kfax-nv4n/view?usp=sharing)  
 ## 🛠️ Setup Guide
 
 #### (A) Install NetBeans 17
